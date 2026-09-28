@@ -196,8 +196,8 @@
         2,
         3
       ],
-      "status": "ACTIVE",
-      "scope": "Covers manufacture and chemical and physical requirements of 43 grade ordinary Portland cement.",
+      "status": "SUPERSEDED",
+      "scope": "Covers manufacture and chemical and physical requirements of 43 grade ordinary Portland cement. Incorporated into IS 269:2015.",
       "committee": "CED 2",
       "normative_references": [
         "IS 269",
@@ -230,8 +230,8 @@
         2,
         3
       ],
-      "status": "ACTIVE",
-      "scope": "Covers manufacture, chemical and physical requirements of 53 grade ordinary Portland cement for high-strength concrete applications.",
+      "status": "WITHDRAWN",
+      "scope": "Covers manufacture, chemical and physical requirements of 53 grade ordinary Portland cement for high-strength concrete applications. Incorporated into IS 269:2015.",
       "committee": "CED 2",
       "normative_references": [
         "IS 269",

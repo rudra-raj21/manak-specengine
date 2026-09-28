@@ -41,7 +41,7 @@ interface AudioRecorderProps {
 }
 
 export default function AudioRecorder({
-  apiBaseUrl = "http://127.0.0.1:8000",
+  apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000",
   onTranscriptionComplete,
   selectedLanguage,
   onLanguageChange,

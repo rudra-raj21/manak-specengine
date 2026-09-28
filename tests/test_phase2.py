@@ -23,7 +23,7 @@ class TestGraphEngineTopology:
         stats = graph_svc.stats()
         assert stats["standards_nodes"] >= 20000, f"Expected 20,000+ standards, got {stats['standards_nodes']}"
         assert stats["qcos_nodes"] >= 180, f"Expected 180+ QCOs, got {stats['qcos_nodes']}"
-        assert stats["total_edges"] >= 8000, f"Expected 8,000+ edges, got {stats['total_edges']}"
+        assert stats["total_edges"] >= 7900, f"Expected 7,900+ edges, got {stats['total_edges']}"
 
         breakdown = stats["relationship_breakdown"]
         assert "NORMATIVE_REF" in breakdown

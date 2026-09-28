@@ -162,13 +162,21 @@ class ConstraintSlotService:
                 })
 
         # Constraint 2: Ductile Detailing companion code
-        if "IS_13920" in sid_norm and slots.get("requires_ductility"):
-            bonus += 0.40
-            applied_rules.append({
-                "rule_name": "Ductile Detailing Code of Practice",
-                "clause_citation": "IS 13920:2016 Cl. 1.1",
-                "reason": "Mandatory companion standard for earthquake resistant reinforced concrete structures"
-            })
+        if "IS_13920" in sid_norm:
+            if slots.get("requires_ductility"):
+                bonus += 0.40
+                applied_rules.append({
+                    "rule_name": "Ductile Detailing Code of Practice",
+                    "clause_citation": "IS 13920:2016 Cl. 1.1",
+                    "reason": "Mandatory companion standard for earthquake resistant reinforced concrete structures"
+                })
+            if slots.get("seismic_zone") in ["zone iv", "zone v"] or slots.get("infrastructure_type") in ["bridge", "high_rise"]:
+                bonus += 0.25
+                applied_rules.append({
+                    "rule_name": "Critical Infrastructure & Seismic Ductile Detailing",
+                    "clause_citation": "IS 13920:2016 Cl. 1.1.1 & IRC:112",
+                    "reason": "Bridge infrastructure, high-rise buildings, and high seismic zones require mandatory ductile detailing under IS 13920"
+                })
 
         # Constraint 3: Plain and Reinforced Concrete code in severe environments
         if "IS_456" in sid_norm and (slots.get("exposure_class") or slots.get("infrastructure_type") in ["bridge", "high_rise"]):

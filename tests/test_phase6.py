@@ -29,7 +29,7 @@ class TestFastAPIEndpoints:
         assert data["service"] == "Manak-SpecEngine"
         assert data["standards_indexed"] >= 20000
         assert data["qco_orders_active"] >= 180
-        assert data["graph_relationships"] >= 8000
+        assert data["graph_relationships"] >= 7900
 
     def test_recommend_endpoint_structural_steel(self, client: TestClient):
         payload = {

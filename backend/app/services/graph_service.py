@@ -7,8 +7,9 @@ for querying BIS standards, normative citations, testing methods, and statutory 
 import os
 import re
 import csv
+from datetime import datetime, date
 from pathlib import Path
-from typing import Dict, List, Any, Optional, Set, Tuple
+from typing import Dict, List, Any, Optional, Set, Tuple, Union
 import networkx as nx
 
 # Optional Neo4j Driver
@@ -203,36 +204,30 @@ class GraphService:
                         self.qco_mandates_index.setdefault(src, []).append(qco_info)
 
                     if rel == "SUPERSEDES":
-                        # Determine verification level and provenance
+                        # Honest Provenance Derivation:
+                        # Descriptions alone are not proof that official BIS Gazette records were checked.
+                        # Edges without an inspectable authoritative primary Gazette source are labeled
+                        # as CHRONOLOGICAL_INFERRED or CURATED_UNVERIFIED.
                         desc_lower = desc.lower()
-                        if any(k in desc_lower for k in ["amalgamated", "consolidated", "split into", "separated", "adoption"]):
-                            v_level = "OFFICIALLY_VERIFIED"
-                            conf = 1.0
-                            prov = "BIS Revision & Amalgamation Catalog"
-                        elif any(k in desc_lower for k in ["supersed", "replaces", "withdrawn in favour"]):
-                            v_level = "OFFICIALLY_VERIFIED"
-                            conf = 0.95
-                            prov = "BIS Textual Supersession Notice"
-                        elif "chronologically supersedes" in desc_lower:
+                        if "chronologically supersedes" in desc_lower:
                             v_level = "CHRONOLOGICAL_INFERRED"
-                            conf = 0.85
-                            prov = "Chronological Publication Progression"
+                            prov = "Chronological Publication Progression (Inferred, unverified against Gazette)"
+                            notes = "Derived from standard publication sequence in identifier; Gazette citation pending."
                         else:
-                            v_level = "CURATED"
-                            conf = 0.90
-                            prov = "Curated Domain Standards Mapping"
+                            v_level = "CURATED_UNVERIFIED"
+                            prov = "Curated Standards Catalog Edge (Unverified against Official Gazette)"
+                            notes = "Relationship present in graph dataset; independent Gazette S.O. confirmation pending."
 
                         edge_meta = {
                             "source_id": src,
                             "target_id": tgt,
                             "description": desc,
                             "verification_level": v_level,
-                            "confidence": conf,
-                            "provenance": prov
+                            "provenance": prov,
+                            "source_notes": notes
                         }
                         self.superseded_by_edges.setdefault(tgt, []).append(edge_meta)
-                        # For scalar index, prioritize officially verified over inferred
-                        if tgt not in self.superseded_by_index or v_level == "OFFICIALLY_VERIFIED":
+                        if tgt not in self.superseded_by_index:
                             self.superseded_by_index[tgt] = src
 
     def resolve_standard_id(self, query: str) -> Optional[str]:
@@ -289,21 +284,83 @@ class GraphService:
             return dict(self.qcos_index[qid])
         return None
 
+    @staticmethod
+    def parse_qco_date(date_str: str) -> Optional[date]:
+        """
+        Parses diverse Indian Gazette date formats:
+        - ISO: YYYY-MM-DD
+        - Numeric: DD-MM-YYYY, DD/MM/YYYY, DD.MM.YYYY
+        - Worded: '17 Feb 2003', '03 July 2013', '29th August 2024', 'd 14-02-2020...'
+        Returns None for incomplete, truncated ('d 04'), or unparseable date strings.
+        """
+        if not date_str:
+            return None
+        clean_str = date_str.strip()
+
+        # 1. ISO format (YYYY-MM-DD)
+        iso_m = re.search(r"\b(\d{4})-(\d{2})-(\d{2})\b", clean_str)
+        if iso_m:
+            try:
+                return datetime(int(iso_m.group(1)), int(iso_m.group(2)), int(iso_m.group(3))).date()
+            except ValueError:
+                pass
+
+        # 2. DD-MM-YYYY, DD/MM/YYYY, DD.MM.YYYY
+        num_m = re.search(r"\b(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})\b", clean_str)
+        if num_m:
+            try:
+                return datetime(int(num_m.group(3)), int(num_m.group(2)), int(num_m.group(1))).date()
+            except ValueError:
+                pass
+
+        # 3. Worded Month: '17 Feb 2003', '29th August, 2023', '03rd October 2024'
+        months = {
+            "jan": 1, "january": 1, "feb": 2, "february": 2, "mar": 3, "march": 3,
+            "apr": 4, "april": 4, "may": 5, "jun": 6, "june": 6, "jul": 7, "july": 7,
+            "aug": 8, "august": 8, "sep": 9, "september": 9, "oct": 10, "october": 10,
+            "nov": 11, "november": 11, "dec": 12, "december": 12
+        }
+        word_m = re.search(r"\b(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]+),?\s+(\d{4})\b", clean_str)
+        if word_m:
+            mon_key = word_m.group(2).lower()[:3]
+            if mon_key in months:
+                try:
+                    return datetime(int(word_m.group(3)), months[mon_key], int(word_m.group(1))).date()
+                except ValueError:
+                    pass
+
+        return None
+
     def evaluate_qco_applicability(
         self,
         identifier: str,
-        evaluation_date_str: str = "2026-09-28"
+        evaluation_date: Optional[Union[str, date, datetime]] = None
     ) -> Optional[Dict[str, Any]]:
         """
-        Determines statutory QCO status with temporal verification against evaluation date.
-        Distinguishes active in-force mandates from future enforcement or unverified dates.
+        Determines statutory QCO status with dynamic temporal verification against an evaluation date.
+        Evaluates ALL linked orders (not just the first) and checks for order-level rescission,
+        supersession by subsequent orders, and unverified effective dates.
+        Distinguishes active in-force statutory mandates from future enforcement or unverified dates.
         """
         sid = self.resolve_standard_id(identifier)
         if not sid:
             return None
 
-        # Check direct QCO orders
-        qco_records = self.qco_mandates_index.get(sid, [])
+        # Determine reference evaluation date (runtime current date if not provided)
+        if evaluation_date is None:
+            eval_date = datetime.now().date()
+        elif isinstance(evaluation_date, datetime):
+            eval_date = evaluation_date.date()
+        elif isinstance(evaluation_date, date):
+            eval_date = evaluation_date
+        elif isinstance(evaluation_date, str):
+            parsed_eval = self.parse_qco_date(evaluation_date)
+            eval_date = parsed_eval if parsed_eval else datetime.now().date()
+        else:
+            eval_date = datetime.now().date()
+
+        # Collect all linked QCO records
+        qco_records = list(self.qco_mandates_index.get(sid, []))
         if not qco_records and self.graph.has_node(sid):
             for _, tgt, data in self.graph.out_edges(sid, data=True):
                 if data.get("relationship") == "MANDATED_BY":
@@ -312,59 +369,101 @@ class GraphService:
                     else:
                         qco_records.append(dict(self.graph.nodes[tgt]))
 
-        # Also check superseding standard if historical
+        # Also check superseding standard if this standard is historical
         if not qco_records and sid in self.superseded_by_index:
             newer = self.superseded_by_index[sid]
-            return self.evaluate_qco_applicability(newer, evaluation_date_str)
+            res = self.evaluate_qco_applicability(newer, evaluation_date=eval_date)
+            if res:
+                res = dict(res)
+                res["linked_via_successor_standard"] = newer
+                res["scope_limitations"] = (
+                    f"Statutory mandate attached to successor standard {newer}. "
+                    f"Procurement officers must cite {newer} rather than {sid} for QCO compliance."
+                )
+            return res
 
         if not qco_records:
             return None
 
-        primary = dict(qco_records[0])
-        eff_date_str = primary.get("effective_date", "").strip()
+        # Evaluate every linked order individually
+        evaluated_orders = []
+        for order in qco_records:
+            ord_dict = dict(order)
+            ord_name = ord_dict.get("order_name", "Statutory QCO")
+            eff_raw = ord_dict.get("effective_date", "").strip()
+            gaz_no = ord_dict.get("gazette_no", "")
 
-        if not eff_date_str:
-            return {
-                **primary,
-                "is_mandatory": False,
-                "temporal_status": "UNVERIFIED_EFFECTIVE_DATE",
-                "notes": "QCO record is linked in database, but effective implementation date is missing or unverified."
-            }
+            # Check for rescission indicators
+            has_rescission = bool(re.search(r"\brescind", ord_name + " " + eff_raw, re.I))
+            # Check for supersession indicators
+            has_order_superseded = bool(re.search(r"\bsuperseded by\b", ord_name + " " + eff_raw, re.I))
 
-        # Date parsing
-        is_in_force = False
-        try:
-            # Check ISO format YYYY-MM-DD
-            if re.match(r"^\d{4}-\d{2}-\d{2}$", eff_date_str):
-                is_in_force = eff_date_str <= evaluation_date_str
-            elif re.match(r"^\d{2}[-/]\d{2}[-/]\d{4}$", eff_date_str):
-                # DD-MM-YYYY
-                parts = re.split(r"[-/]", eff_date_str)
-                iso_date = f"{parts[2]}-{parts[1]}-{parts[0]}"
-                is_in_force = iso_date <= evaluation_date_str
+            parsed_eff = self.parse_qco_date(eff_raw)
+
+            if has_rescission:
+                temporal_status = "RESCINDED"
+                is_mandatory = False
+                notes = f"Order was explicitly rescinded by government notification ({eff_raw}). Not currently enforceable."
+            elif has_order_superseded:
+                temporal_status = "SUPERSEDED_BY_SUBSEQUENT_ORDER"
+                is_mandatory = False
+                notes = f"Order was superseded by subsequent QCO notification. Check latest governing revision."
+            elif parsed_eff is None:
+                temporal_status = "UNVERIFIED_EFFECTIVE_DATE"
+                is_mandatory = False
+                notes = f"QCO record linked in catalog, but effective date is missing or unverified ('{eff_raw}'). Verification against Gazette required."
+            elif parsed_eff <= eval_date:
+                temporal_status = "MANDATORY_IN_FORCE"
+                is_mandatory = True
+                notes = f"Mandatory compliance under {ord_name}. Enforcement in force since {parsed_eff.isoformat()} (evaluated at {eval_date.isoformat()})."
             else:
-                y_match = re.search(r"\b(20\d{2})\b", eff_date_str)
-                if y_match:
-                    eval_year = int(evaluation_date_str[:4])
-                    is_in_force = int(y_match.group(1)) <= eval_year
-                else:
-                    is_in_force = True
-        except Exception:
-            is_in_force = False
+                temporal_status = "PENDING_FUTURE_DATE"
+                is_mandatory = False
+                notes = f"QCO published ({ord_name}), but mandatory enforcement date is pending ({parsed_eff.isoformat()}, evaluated at {eval_date.isoformat()})."
 
-        order_name = primary.get("order_name", "Statutory QCO")
-        if is_in_force:
-            temporal_status = "MANDATORY_IN_FORCE"
-            notes = f"Mandatory compliance under {order_name}. Enforcement in force since {eff_date_str}."
-        else:
-            temporal_status = "PENDING_FUTURE_DATE"
-            notes = f"QCO published ({order_name}), but mandatory enforcement date is pending ({eff_date_str})."
+            evaluated_orders.append({
+                **ord_dict,
+                "order_id": ord_dict.get("qco_id", ord_dict.get("id")),
+                "order_name": ord_name,
+                "gazette_no": gaz_no,
+                "effective_date_raw": eff_raw,
+                "effective_date_parsed": parsed_eff.isoformat() if parsed_eff else None,
+                "evaluation_date": eval_date.isoformat(),
+                "is_mandatory": is_mandatory,
+                "temporal_status": temporal_status,
+                "product_scope_verified": False,
+                "scope_limitations": (
+                    "Product coverage derived from standard-level graph linkage. "
+                    "Specific sub-type or application coverage must be verified against the Schedule of the cited QCO Gazette notification."
+                ),
+                "notes": notes
+            })
+
+        # Rank orders to identify the primary governing order
+        # Priority order: MANDATORY_IN_FORCE > PENDING_FUTURE_DATE > UNVERIFIED_EFFECTIVE_DATE > SUPERSEDED/RESCINDED
+        def order_sort_key(o: Dict[str, Any]) -> Tuple[int, str]:
+            status_priority = {
+                "MANDATORY_IN_FORCE": 4,
+                "PENDING_FUTURE_DATE": 3,
+                "UNVERIFIED_EFFECTIVE_DATE": 2,
+                "SUPERSEDED_BY_SUBSEQUENT_ORDER": 1,
+                "RESCINDED": 0
+            }
+            p = status_priority.get(o["temporal_status"], 0)
+            d = o.get("effective_date_parsed") or ""
+            return (p, d)
+
+        evaluated_orders.sort(key=order_sort_key, reverse=True)
+        governing = evaluated_orders[0]
 
         return {
-            **primary,
-            "is_mandatory": is_in_force,
-            "temporal_status": temporal_status,
-            "notes": notes
+            **governing,
+            "evaluation_date": eval_date.isoformat(),
+            "all_linked_orders": evaluated_orders,
+            "total_orders_evaluated": len(evaluated_orders),
+            "competing_or_amendment_orders": [
+                o for o in evaluated_orders if o.get("order_name") != governing.get("order_name")
+            ]
         }
 
     def check_qco_mandate(self, identifier: str) -> Optional[Dict[str, Any]]:
@@ -377,7 +476,8 @@ class GraphService:
     def resolve_supersession(self, query_or_id: str, context_query: str = "") -> Dict[str, Any]:
         """
         Determines if a query or identifier cites an obsolete, superseded, or withdrawn standard,
-        and resolves the verified current replacement standard(s) with full provenance.
+        and resolves verified current replacement standard(s) with honest provenance labels.
+        Does not arbitrarily pick a single replacement when branching or context is ambiguous.
         """
         sid = self.resolve_standard_id(query_or_id)
         if not sid:
@@ -388,15 +488,19 @@ class GraphService:
                 return {
                     "is_cited": True,
                     "is_superseded": False,
+                    "resolution_code": "UNINDEXED_CITATION",
+                    "status": "UNVERIFIED",
                     "queried_standard": {"id": m.group(0), "is_number": m.group(0), "status": "UNVERIFIED"},
                     "current_replacements": [],
                     "alternative_branches": [],
-                    "verification_level": "UNVERIFIED",
+                    "verification_level": "UNRESOLVED",
                     "explanation": f"Standard '{m.group(0)}' was cited in query but could not be substantiated in the BIS catalog."
                 }
             return {
                 "is_cited": False,
                 "is_superseded": False,
+                "resolution_code": "NO_CITATION",
+                "status": "N/A",
                 "queried_standard": None,
                 "current_replacements": [],
                 "alternative_branches": [],
@@ -412,50 +516,62 @@ class GraphService:
             return {
                 "is_cited": True,
                 "is_superseded": False,
+                "resolution_code": "ACTIVE_STANDARD",
+                "status": "ACTIVE",
                 "queried_standard": std_info,
                 "current_replacements": [std_info],
                 "alternative_branches": [],
                 "verification_level": "OFFICIALLY_VERIFIED",
-                "explanation": f"{std_info.get('is_number', sid)} is an ACTIVE Indian Standard."
+                "explanation": f"{std_info.get('is_number', sid)} is an ACTIVE Indian Standard in the catalog."
             }
 
-        # It IS superseded / withdrawn! Trace the replacement edges
+        # It IS superseded / withdrawn! Trace replacement edges
         edges = self.superseded_by_edges.get(sid, [])
         ctx_lower = context_query.lower()
         replacements: List[Dict[str, Any]] = []
         alt_branches: List[Dict[str, Any]] = []
+        resolution_code = "RESOLVED"
+        res_status = "RESOLVED"
 
         # Domain Branching Disambiguation
         if sid in ("IS_432_Part_1", "IS_432_1", "IS_432"):
             # Branching: IS 1786 (rebar) vs IS 2062 (structural)
-            p_node = self.get_standard("IS_1786")
-            a_node = self.get_standard("IS_2062")
-            if any(k in ctx_lower for k in ["structural", "beam", "section", "plate", "tie"]):
-                p_node, a_node = a_node, p_node
-                primary_scope = "Plain structural steel ties and members"
-                alt_scope = "Concrete reinforcement / TMT rebars"
-            else:
-                primary_scope = "Concrete reinforcement / TMT rebars"
-                alt_scope = "Plain structural steel ties and members"
+            rebar_node = self.get_standard("IS_1786")
+            struct_node = self.get_standard("IS_2062")
+            has_rebar = any(k in ctx_lower for k in ["rebar", "reinforce", "concrete", "tmt", "deformed"])
+            has_struct = any(k in ctx_lower for k in ["structural", "beam", "section", "plate", "tie", "truss", "member"])
 
-            if p_node:
-                replacements.append({
-                    "standard": p_node,
-                    "relationship": "SUPERSEDES",
-                    "application_scope": primary_scope,
-                    "verification_level": "OFFICIALLY_VERIFIED",
-                    "provenance": "BIS Revision & Amalgamation Catalog",
-                    "confidence": 1.0
-                })
-            if a_node:
-                alt_branches.append({
-                    "standard": a_node,
-                    "relationship": "SUPERSEDES",
-                    "application_scope": alt_scope,
-                    "verification_level": "OFFICIALLY_VERIFIED",
-                    "provenance": "BIS Revision & Amalgamation Catalog",
-                    "confidence": 1.0
-                })
+            rebar_branch = {
+                "standard": rebar_node,
+                "relationship": "SUPERSEDES",
+                "application_scope": "Concrete reinforcement / TMT rebars",
+                "verification_level": "CURATED_UNVERIFIED",
+                "provenance": "Engineering Practice & BIS Transition (Curated, unverified against Gazette)",
+                "source_notes": "Widely adopted transition in civil engineering practice; primary Gazette notice pending verification."
+            }
+            struct_branch = {
+                "standard": struct_node,
+                "relationship": "SUPERSEDES",
+                "application_scope": "Plain structural steel ties, members, and mild steel sections",
+                "verification_level": "CURATED_UNVERIFIED",
+                "provenance": "Engineering Practice & BIS Transition (Curated, unverified against Gazette)",
+                "source_notes": "Adopted for structural steel framing applications; primary Gazette notice pending verification."
+            }
+
+            if has_rebar and not has_struct:
+                replacements.append(rebar_branch)
+                alt_branches.append(struct_branch)
+                resolution_code = "CONTEXTUAL_BRANCH_SELECTED"
+            elif has_struct and not has_rebar:
+                replacements.append(struct_branch)
+                alt_branches.append(rebar_branch)
+                resolution_code = "CONTEXTUAL_BRANCH_SELECTED"
+            else:
+                # Ambiguous! Both or neither context present. Do NOT choose arbitrarily!
+                resolution_code = "AMBIGUOUS_BRANCHING"
+                res_status = "NEEDS_CONTEXT"
+                alt_branches = [rebar_branch, struct_branch]
+
         elif sid == "IS_226":
             p_node = self.get_standard("IS_2062")
             if p_node:
@@ -463,9 +579,9 @@ class GraphService:
                     "standard": p_node,
                     "relationship": "SUPERSEDES",
                     "application_scope": "Standard quality structural steel (plates, sections, beams)",
-                    "verification_level": "OFFICIALLY_VERIFIED",
-                    "provenance": "BIS Revision & Amalgamation Catalog (Amalgamated into IS 2062)",
-                    "confidence": 1.0
+                    "verification_level": "CURATED_UNVERIFIED",
+                    "provenance": "BIS Revision Catalog (Amalgamated into IS 2062, unverified against Gazette)",
+                    "source_notes": "IS 226 was amalgamated into IS 2062:1992 / IS 2062:2011; Gazette S.O. pending verification."
                 })
         elif sid in ("IS_8112", "IS_12269"):
             p_node = self.get_standard("IS_269")
@@ -475,43 +591,73 @@ class GraphService:
                     "standard": p_node,
                     "relationship": "SUPERSEDES",
                     "application_scope": f"{grade_name} Ordinary Portland Cement (consolidated into IS 269:2015)",
-                    "verification_level": "OFFICIALLY_VERIFIED",
-                    "provenance": "Gazette of India & BIS Revision 2015",
-                    "confidence": 1.0
+                    "verification_level": "CURATED_UNVERIFIED",
+                    "provenance": "BIS Cement Revision Notice (Curated, unverified against Gazette)",
+                    "source_notes": f"{grade_name} specifications were incorporated into IS 269:2015; Gazette S.O. pending verification."
                 })
         elif sid.startswith("IS_16046") and "2015" in sid:
             p_node1 = self.get_standard("IS_16046_Part_1") or self.get_standard("IS_16046_1")
             p_node2 = self.get_standard("IS_16046_Part_2") or self.get_standard("IS_16046_2")
-            if "lithium" in ctx_lower and p_node2:
-                replacements.append({
-                    "standard": p_node2,
-                    "relationship": "SUPERSEDES",
-                    "application_scope": "Secondary lithium cells and batteries (Part 2)",
-                    "verification_level": "OFFICIALLY_VERIFIED",
-                    "provenance": "BIS Amendment & Part Separation Notice",
-                    "confidence": 1.0
-                })
-            elif p_node1:
-                replacements.append({
-                    "standard": p_node1,
-                    "relationship": "SUPERSEDES",
-                    "application_scope": "Secondary nickel cells and batteries (Part 1)",
-                    "verification_level": "OFFICIALLY_VERIFIED",
-                    "provenance": "BIS Amendment & Part Separation Notice",
-                    "confidence": 1.0
-                })
+            has_lithium = "lithium" in ctx_lower
+            has_nickel = "nickel" in ctx_lower
+            part1_branch = {
+                "standard": p_node1,
+                "relationship": "SUPERSEDES",
+                "application_scope": "Secondary nickel cells and batteries (Part 1)",
+                "verification_level": "CURATED_UNVERIFIED",
+                "provenance": "BIS Part Harmonization Notice (Curated, unverified against Gazette)",
+                "source_notes": "Separated into Part 1 for nickel chemistry; Gazette S.O. pending verification."
+            }
+            part2_branch = {
+                "standard": p_node2,
+                "relationship": "SUPERSEDES",
+                "application_scope": "Secondary lithium cells and batteries (Part 2)",
+                "verification_level": "CURATED_UNVERIFIED",
+                "provenance": "BIS Part Harmonization Notice (Curated, unverified against Gazette)",
+                "source_notes": "Separated into Part 2 for lithium chemistry; Gazette S.O. pending verification."
+            }
+            if has_lithium and not has_nickel:
+                replacements.append(part2_branch)
+                alt_branches.append(part1_branch)
+                resolution_code = "CONTEXTUAL_BRANCH_SELECTED"
+            elif has_nickel and not has_lithium:
+                replacements.append(part1_branch)
+                alt_branches.append(part2_branch)
+                resolution_code = "CONTEXTUAL_BRANCH_SELECTED"
+            else:
+                resolution_code = "AMBIGUOUS_BRANCHING"
+                res_status = "NEEDS_CONTEXT"
+                alt_branches = [part1_branch, part2_branch]
+
         elif edges:
+            distinct_targets = {}
             for e in edges:
-                target_node = self.get_standard(e["source_id"])
-                if target_node:
-                    replacements.append({
-                        "standard": target_node,
+                tgt_node = self.get_standard(e["source_id"])
+                if tgt_node:
+                    distinct_targets[tgt_node["id"]] = (tgt_node, e)
+
+            if len(distinct_targets) > 1:
+                resolution_code = "AMBIGUOUS_BRANCHING"
+                res_status = "NEEDS_CONTEXT"
+                for t_id, (node, edge_data) in distinct_targets.items():
+                    alt_branches.append({
+                        "standard": node,
                         "relationship": "SUPERSEDES",
-                        "application_scope": e.get("description", "Direct supersession replacement"),
-                        "verification_level": e.get("verification_level", "OFFICIALLY_VERIFIED"),
-                        "provenance": e.get("provenance", "BIS Knowledge Graph"),
-                        "confidence": e.get("confidence", 0.95)
+                        "application_scope": edge_data.get("description", "Alternative replacement standard"),
+                        "verification_level": edge_data.get("verification_level", "CURATED_UNVERIFIED"),
+                        "provenance": edge_data.get("provenance", "Curated Standards Catalog Edge"),
+                        "source_notes": edge_data.get("source_notes", "Unverified against Gazette")
                     })
+            elif len(distinct_targets) == 1:
+                node, edge_data = next(iter(distinct_targets.values()))
+                replacements.append({
+                    "standard": node,
+                    "relationship": "SUPERSEDES",
+                    "application_scope": edge_data.get("description", "Direct replacement standard"),
+                    "verification_level": edge_data.get("verification_level", "CURATED_UNVERIFIED"),
+                    "provenance": edge_data.get("provenance", "Curated Standards Catalog Edge"),
+                    "source_notes": edge_data.get("source_notes", "Unverified against Gazette")
+                })
         else:
             chain = self.find_superseding_chain(sid)
             if len(chain) > 1:
@@ -521,23 +667,38 @@ class GraphService:
                     "relationship": "SUPERSEDES",
                     "application_scope": "Chronological successor standard",
                     "verification_level": "CHRONOLOGICAL_INFERRED",
-                    "provenance": "Chronological Publication Year Progression",
-                    "confidence": 0.85
+                    "provenance": "Chronological Publication Year Progression (Inferred, unverified against Gazette)",
+                    "source_notes": "Derived from publication sequence in identifier; Gazette citation pending."
                 })
 
-        p_std_name = replacements[0]["standard"].get("is_number") if replacements else "None"
-        explanation = (
-            f"Query explicitly cited '{std_info.get('is_number', sid)}' which is {status}. "
-            f"Verified current applicable standard is '{p_std_name}'."
-        )
+        if resolution_code == "AMBIGUOUS_BRANCHING":
+            branch_names = ", ".join(b["standard"].get("is_number", "Unknown") for b in alt_branches if b.get("standard"))
+            explanation = (
+                f"Query explicitly cited '{std_info.get('is_number', sid)}' which is {status}. "
+                f"Replacement is ambiguous because multiple candidate successors exist depending on scope ({branch_names}). "
+                f"Clarification of application context is required; no arbitrary standard selected."
+            )
+            v_level = "UNRESOLVED"
+        elif replacements:
+            p_std_name = replacements[0]["standard"].get("is_number", sid)
+            explanation = (
+                f"Query explicitly cited '{std_info.get('is_number', sid)}' which is {status}. "
+                f"Curated replacement standard is '{p_std_name}' ({replacements[0]['verification_level']})."
+            )
+            v_level = replacements[0]["verification_level"]
+        else:
+            explanation = f"Query cited '{std_info.get('is_number', sid)}' which is {status}, but no verified replacement could be resolved."
+            v_level = "UNRESOLVED"
 
         return {
             "is_cited": True,
             "is_superseded": True,
+            "resolution_code": resolution_code,
+            "status": res_status,
             "queried_standard": std_info,
             "current_replacements": replacements,
             "alternative_branches": alt_branches,
-            "verification_level": replacements[0]["verification_level"] if replacements else "UNRESOLVED",
+            "verification_level": v_level,
             "explanation": explanation
         }
 

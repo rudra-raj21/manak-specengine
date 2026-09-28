@@ -85,13 +85,30 @@ class DomainReranker:
             if slots.get("requires_ductility") and "IS_13920" in sid:
                 score += 0.15
 
-            # 4. Mandatory QCO Weight
-            if item.get("is_mandatory_qco"):
-                score += 0.08
+            # 4. Mandatory QCO check (avoid duplicate addition if already boosted in retrieval)
+            if item.get("is_mandatory_qco") and score < 0.25 and (slots or any(g in q_lower for g in cls.GRADE_HIERARCHIES)):
+                score += 0.05
 
-            item["score"] = round(min(0.99, max(0.01, score)), 4)
+            final_score = round(min(0.99, max(0.01, score)), 4)
+            item["score"] = final_score
+            item["ranking_score"] = final_score
+            if final_score >= 0.65:
+                rel_rel = "STRONG"
+                has_conf = True
+            elif final_score >= 0.40:
+                rel_rel = "MODERATE"
+                has_conf = True
+            elif final_score >= 0.25:
+                rel_rel = "LOW"
+                has_conf = False
+            else:
+                rel_rel = "INSUFFICIENT"
+                has_conf = False
+            item["relative_relevance"] = rel_rel
+            item["confidence_level"] = rel_rel
+            item["has_sufficient_confidence"] = has_conf
 
-        # Sort descending by calibrated re-ranked score
+        # Sort descending by re-ranked score
         candidates.sort(key=lambda x: x["score"], reverse=True)
 
         return candidates

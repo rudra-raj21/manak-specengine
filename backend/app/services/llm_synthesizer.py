@@ -216,12 +216,14 @@ class LLMSynthesizer:
             "normative_references": normative_references[:6],
             "mandatory_testing_standards": test_standards[:4],
             "statutory_qco_compliance": {
-                "is_mandatory": has_qco,
+                "is_mandatory": is_qco_active,
                 "qco_order_name": qco_name,
                 "ministry": qco_ministry,
                 "mandatory_scheme": qco_scheme,
                 "effective_date": qco_date,
-                "penal_provision": "Conformity to Indian Standard and BIS Mark is mandatory under Section 16 & Section 29 of the BIS Act, 2016." if has_qco else None
+                "temporal_status": qco_temp_status,
+                "product_scope_verified": bool(qco_mandate and qco_mandate.get("product_scope_verified")),
+                "penal_provision": "Conformity to Indian Standard and BIS Mark is mandatory under Section 16 & Section 29 of the BIS Act, 2016." if (has_qco and is_qco_active) else None
             },
             "inspection_protocol": {
                 "type": "Pre-dispatch & On-site Verification",
@@ -282,18 +284,28 @@ Format the output cleanly in four numbered sections:
             qco_legal_text = (
                 f"The offered product is subject to mandatory statutory quality control under '{qco_name}' issued by {qco_ministry} "
                 f"(enforcement in force since {qco_date}). Bidders MUST hold a valid BIS certification license under {qco_scheme} "
-                f"bearing the standard mark (ISI Mark/CRS Registration). Any supply without valid BIS marking constitutes a cognizable "
-                f"offense punishable under Section 29 of the Bureau of Indian Standards Act, 2016."
+                f"bearing the standard mark (ISI Mark/CRS Registration) for items covered in the Schedule of the Order. Any supply without "
+                f"valid BIS marking constitutes a cognizable offense punishable under Section 29 of the Bureau of Indian Standards Act, 2016."
             )
         elif has_qco and qco_temp_status == "PENDING_FUTURE_DATE":
             qco_legal_text = (
                 f"A statutory Quality Control Order ('{qco_name}') has been published by {qco_ministry}, with mandatory enforcement "
                 f"scheduled to take effect on {qco_date}. Prior to that date, voluntary conformity with {is_num}:{year} is recommended."
             )
+        elif has_qco and qco_temp_status == "RESCINDED":
+            qco_legal_text = (
+                f"The historical Quality Control Order ('{qco_name}') was rescinded by official notification. "
+                f"No mandatory licensing condition is currently in effect under this order."
+            )
+        elif has_qco and qco_temp_status == "SUPERSEDED_BY_SUBSEQUENT_ORDER":
+            qco_legal_text = (
+                f"Statutory Order ('{qco_name}') was superseded by subsequent notifications. Procurement officers must verify "
+                f"the latest active Gazette order before stipulating mandatory licensing clauses."
+            )
         elif has_qco:
             qco_legal_text = (
-                f"A statutory QCO reference ('{qco_name}') exists in the regulatory catalog, but effective date must be confirmed "
-                f"against the Official Gazette prior to enforcing mandatory licensing conditions."
+                f"A statutory QCO reference ('{qco_name}') is linked to this standard, but effective enforcement date is unverified "
+                f"in project data. Mandatory licensing conditions must be confirmed against the Official Gazette prior to tender enforcement."
             )
         else:
             qco_legal_text = f"Materials shall conform strictly to {is_num}:{year} with valid factory test certificates."

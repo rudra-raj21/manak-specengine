@@ -78,6 +78,7 @@ class RecommendRequest(BaseModel):
     tender_type: Optional[str] = Field(default="GeM", description="'GeM', 'CPWD', 'Railways', 'NHAI'")
     top_k: Optional[int] = Field(default=5, ge=1, le=20)
     language_code: Optional[str] = Field(default=None, description="Optional ISO/BCP-47 language code e.g. hi-IN, ta-IN")
+    evaluation_date: Optional[str] = Field(default=None, description="Optional ISO date YYYY-MM-DD to evaluate statutory QCO applicability against (defaults to runtime current date)")
 
 
 class AuditRequest(BaseModel):
@@ -158,6 +159,51 @@ async def recommend_standards(req: RecommendRequest) -> Dict[str, Any]:
         context_query=f"{req.query} {translated_en} {search_query}"
     )
 
+    # Ambiguous Branching Safety Check:
+    # If the cited standard branches into multiple divergent standards and context does not disambiguate,
+    # do NOT arbitrarily pick one replacement standard! Return NEEDS_CONTEXT.
+    if supersession_info.get("resolution_code") == "AMBIGUOUS_BRANCHING":
+        q_std = supersession_info.get("queried_standard", {}) or {}
+        std_num = q_std.get("is_number", req.query)
+        alt_branches = supersession_info.get("alternative_branches", [])
+        return {
+            "input_query": req.query,
+            "indic_info": indic_info,
+            "language_metadata": language_metadata,
+            "recommendation_status": "NEEDS_CONTEXT",
+            "total_matches": 0,
+            "primary_match": None,
+            "candidate_standards": [],
+            "historical_reference_candidates": [],
+            "supersession_resolution": supersession_info,
+            "alternative_branches": alt_branches,
+            "clarification_prompt": supersession_info.get("explanation"),
+            "governing_qco": None,
+            "synthesis": {
+                "tender_clause": (
+                    f"### TENDER SPECIFICATION PENDING CONTEXT\n\n"
+                    f"The cited standard **{std_num}** has multiple divergent replacement standards "
+                    f"depending on application scope. Please specify whether your requirement is for "
+                    f"{' or '.join(b.get('application_scope', 'alternative scope') for b in alt_branches)} "
+                    f"before a compliant tender clause can be generated."
+                )
+            },
+            "evidence_explanation": {
+                "match_rationale": "Ambiguous supersession branch detected. User context clarification required.",
+                "supersession_details": supersession_info,
+                "confidence": {
+                    "score": 0.0,
+                    "score_type": "HEURISTIC_RANKING",
+                    "relative_relevance": "UNRESOLVED",
+                    "confidence_level": "UNRESOLVED",
+                    "is_calibrated": False,
+                    "calibration_notice": "No score computed because replacement branch is unresolved.",
+                    "has_sufficient_confidence": False,
+                    "abstention_notice": supersession_info.get("explanation")
+                }
+            }
+        }
+
     # If query cited an obsolete standard, route retrieval to the verified active replacement!
     active_search_query = search_query
     if supersession_info.get("is_superseded") and supersession_info.get("current_replacements"):
@@ -172,7 +218,8 @@ async def recommend_standards(req: RecommendRequest) -> Dict[str, Any]:
         top_k=req.top_k,
         department_filter=req.department,
         allow_superseded=False,  # Enforce active standards for recommendations
-        apply_qco_boost=True
+        apply_qco_boost=True,
+        evaluation_date=req.evaluation_date
     )
 
     if not results:
@@ -180,11 +227,95 @@ async def recommend_standards(req: RecommendRequest) -> Dict[str, Any]:
         results = retriever_svc.search(
             query=translated_en or req.query,
             top_k=req.top_k,
-            allow_superseded=False
+            allow_superseded=False,
+            evaluation_date=req.evaluation_date
         )
 
+    # If query cited an obsolete standard, strictly purge the cited standard and prioritize verified replacement
+    if supersession_info.get("is_superseded"):
+        q_sid = (supersession_info.get("queried_standard") or {}).get("id")
+        q_num = (supersession_info.get("queried_standard") or {}).get("is_number", "").upper()
+        # Strictly ensure the cited superseded standard is never returned in active candidate recommendations
+        results = [r for r in results if r.get("standard_id") != q_sid and r.get("is_number", "").upper() != q_num]
+
+        # Prioritize the verified replacement standard as primary recommendation
+        current_reps = supersession_info.get("current_replacements", [])
+        if current_reps:
+            rep_std = current_reps[0].get("standard")
+            if rep_std:
+                rep_sid = rep_std.get("id")
+                rep_idx = next((i for i, r in enumerate(results) if r.get("standard_id") == rep_sid), None)
+                if rep_idx is not None:
+                    rep_candidate = results.pop(rep_idx)
+                    rep_candidate["score"] = 0.99
+                    rep_candidate["ranking_score"] = 0.99
+                    rep_candidate["relative_relevance"] = "STRONG"
+                    rep_candidate["confidence_level"] = "STRONG"
+                    rep_candidate["has_sufficient_confidence"] = True
+                    results.insert(0, rep_candidate)
+                else:
+                    rep_candidate = {
+                        "standard_id": rep_sid,
+                        "is_number": rep_std.get("is_number"),
+                        "title": rep_std.get("title", ""),
+                        "year": rep_std.get("year"),
+                        "department": rep_std.get("department", "Civil Engineering"),
+                        "status": "ACTIVE",
+                        "score": 0.99,
+                        "ranking_score": 0.99,
+                        "score_type": "HEURISTIC_RANKING",
+                        "relative_relevance": "STRONG",
+                        "confidence_level": "STRONG",
+                        "has_sufficient_confidence": True,
+                        "applied_constraints": [f"Supersession Replacement for {q_num}"]
+                    }
+                    results.insert(0, rep_candidate)
+
+    # If no active standards matched, check for historical records for audit partition
     if not results:
-        raise HTTPException(status_code=404, detail="No matching Indian Standards found for this specification.")
+        hist_candidates = retriever_svc.search_historical_reference(
+            query=translated_en or req.query,
+            top_k=req.top_k
+        )
+        if hist_candidates:
+            return {
+                "input_query": req.query,
+                "indic_info": indic_info,
+                "language_metadata": language_metadata,
+                "recommendation_status": "NO_ACTIVE_STANDARD_FOUND",
+                "total_matches": 0,
+                "primary_match": None,
+                "candidate_standards": [],
+                "historical_reference_candidates": hist_candidates,
+                "supersession_resolution": supersession_info,
+                "governing_qco": None,
+                "clarification_prompt": (
+                    "No active Indian Standard was found matching your requirement. The retrieved records are obsolete, "
+                    "superseded, or withdrawn and are provided for audit and reference only. Do not cite them as current specifications."
+                ),
+                "synthesis": {
+                    "tender_clause": (
+                        "### NO ACTIVE INDIAN STANDARD IDENTIFIED\n\n"
+                        "No currently active Indian Standard could be verified for this specification. "
+                        "Procurement officers must not cite superseded or withdrawn standards as current specifications."
+                    )
+                },
+                "evidence_explanation": {
+                    "match_rationale": "No active standard found in catalog. Obsolete standards partitioned for audit reference.",
+                    "confidence": {
+                        "score": 0.0,
+                        "score_type": "HEURISTIC_RANKING",
+                        "relative_relevance": "INSUFFICIENT",
+                        "confidence_level": "INSUFFICIENT",
+                        "is_calibrated": False,
+                        "calibration_notice": "Confidence scores are heuristic ranking values, not calibrated probabilities.",
+                        "has_sufficient_confidence": False,
+                        "abstention_notice": "No active Indian Standard found in catalog."
+                    }
+                }
+            }
+        else:
+            raise HTTPException(status_code=404, detail="No matching Indian Standards found for this specification.")
 
     # 4. Graph Enrichment for Primary Standard
     top_match = results[0]
@@ -200,7 +331,7 @@ async def recommend_standards(req: RecommendRequest) -> Dict[str, Any]:
     neighbors_1hop = graph_svc.get_1hop_neighbors(sid)
     normative_refs = [n["is_number"] for n in neighbors_1hop.get("normative_references", [])]
     test_methods = [n["is_number"] for n in neighbors_1hop.get("test_methods", [])]
-    qco_mandate = graph_svc.evaluate_qco_applicability(sid)
+    qco_mandate = graph_svc.evaluate_qco_applicability(sid, evaluation_date=req.evaluation_date)
 
     # 5. Synthesize Legal Tender Clause
     clause_payload = synthesizer_svc.synthesize_tender_clause(
@@ -216,7 +347,6 @@ async def recommend_standards(req: RecommendRequest) -> Dict[str, Any]:
     graph_viz = graph_svc.get_2hop_neighborhood(sid, max_nodes=35)
 
     # 7. Enterprise Recommender Intelligence Layer
-    # Use multilingual and translated text for accurate engineering slot extraction
     combined_query_for_slots = f"{req.query} {translated_en} {search_query}"
     slots = ConstraintSlotService.extract_slots(combined_query_for_slots)
     standard_bom = StandardBOMService.generate_bom(sid, graph_service=graph_svc)
@@ -228,10 +358,29 @@ async def recommend_standards(req: RecommendRequest) -> Dict[str, Any]:
     )
 
     top_score = top_match.get("score", 0.0)
-    has_sufficient_confidence = top_match.get("has_sufficient_confidence", top_score >= 0.20)
+    has_sufficient_confidence = bool(top_match.get("has_sufficient_confidence", False) and top_score >= 0.40)
+    rec_status = "RECOMMENDED" if has_sufficient_confidence else "NEEDS_CLARIFICATION"
+
+    if not has_sufficient_confidence:
+        clause_payload = {
+            "raw_clause_text": "",
+            "tender_clause": (
+                "### SPECIFICATION REQUIRES TECHNICAL CLARIFICATION\n\n"
+                "The input requirement is too ambiguous or ungrounded to recommend an authoritative Indian Standard with confidence. "
+                "Please clarify technical parameters (grade, nominal size, environmental exposure) before generating a tender clause."
+            )
+        }
+
     confidence_assessment = {
         "score": top_score,
-        "confidence_level": top_match.get("confidence_level", "MEDIUM"),
+        "score_type": "HEURISTIC_RANKING",
+        "relative_relevance": top_match.get("relative_relevance", "MODERATE"),
+        "confidence_level": top_match.get("confidence_level", "MODERATE"),
+        "is_calibrated": False,
+        "calibration_notice": (
+            "Scores are heuristic ranking values combining keyword, vector, and constraint matching. "
+            "They are not calibrated statistical probabilities."
+        ),
         "has_sufficient_confidence": has_sufficient_confidence,
         "abstention_notice": None if has_sufficient_confidence else (
             "The query does not contain sufficient technical specifications or product details to make an authoritative recommendation with high confidence. Please provide additional constraints (e.g. grade, exposure class, application, dimensions)."
@@ -239,7 +388,7 @@ async def recommend_standards(req: RecommendRequest) -> Dict[str, Any]:
     }
 
     evidence_explanation = {
-        "match_rationale": f"Selected as the most relevant Indian Standard matching product type and application context.",
+        "match_rationale": "Selected as the most relevant active Indian Standard matching product type and application context." if has_sufficient_confidence else "Insufficient technical fit; abstained from authoritative recommendation.",
         "matched_constraints": top_match.get("applied_constraints", []),
         "grade_selection": slots.get("grade_hint") or "Standard default grade",
         "standard_status": primary_std.get("status", "ACTIVE"),
@@ -252,9 +401,14 @@ async def recommend_standards(req: RecommendRequest) -> Dict[str, Any]:
         "input_query": req.query,
         "indic_info": indic_info,
         "language_metadata": language_metadata,
+        "recommendation_status": rec_status,
         "total_matches": len(results),
-        "primary_match": top_match,
+        "primary_match": top_match if has_sufficient_confidence else None,
         "candidate_standards": results,
+        "historical_reference_candidates": [],
+        "clarification_prompt": None if has_sufficient_confidence else (
+            "The query does not contain sufficient technical specifications or product details to make an authoritative recommendation with high confidence. Please provide additional constraints (e.g. grade, exposure class, application, dimensions)."
+        ),
         "normative_references": normative_refs,
         "test_standards": test_methods,
         "governing_qco": qco_mandate,

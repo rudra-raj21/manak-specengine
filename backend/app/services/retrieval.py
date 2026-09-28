@@ -90,12 +90,15 @@ class HybridRetriever:
                         is_num = item.get("is_number", "")
                         sid = self.graph_service.resolve_standard_id(is_num) or is_num.replace(" ", "_")
                         seen_sids.add(sid)
+                        # Synchronize authoritative status from graph catalog if known
+                        graph_std = self.graph_service.get_standard(sid)
+                        status_val = (graph_std.get("status") if graph_std else None) or item.get("status", "ACTIVE")
                         doc = {
                             "id": sid,
                             "is_number": is_num,
                             "title": item.get("title", ""),
                             "year": item.get("year"),
-                            "status": item.get("status", "ACTIVE"),
+                            "status": status_val.strip().upper(),
                             "department": item.get("department", ""),
                             "committee": item.get("committee", ""),
                             "scope": item.get("scope", ""),
@@ -181,7 +184,8 @@ class HybridRetriever:
         status_filter: Optional[str] = None,
         allow_superseded: bool = False,
         rrf_k: int = 60,
-        apply_qco_boost: bool = True
+        apply_qco_boost: bool = True,
+        evaluation_date: Optional[Any] = None
     ) -> List[Dict[str, Any]]:
         """
         Executes hybrid search pipeline:
@@ -191,6 +195,7 @@ class HybridRetriever:
         4. Exact Standard Number / Grade Match Boost
         5. Temporal Statutory QCO Regulatory Prioritization
         By default (allow_superseded=False), filters out superseded and withdrawn records.
+        Does NOT silently fall back to superseded records as current recommendations.
         """
         if not query.strip():
             return []
@@ -200,6 +205,8 @@ class HybridRetriever:
 
         sparse_ranks: Dict[int, int] = {idx: rank + 1 for rank, (idx, _) in enumerate(sparse_candidates)}
         dense_ranks: Dict[int, int] = {idx: rank + 1 for rank, (idx, _) in enumerate(dense_candidates)}
+        sparse_scores: Dict[int, float] = {idx: s for idx, s in sparse_candidates}
+        dense_scores: Dict[int, float] = {idx: s for idx, s in dense_candidates}
 
         all_candidate_indices = set(sparse_ranks.keys()).union(set(dense_ranks.keys()))
         if not all_candidate_indices:
@@ -225,39 +232,52 @@ class HybridRetriever:
 
             r_sparse = sparse_ranks.get(idx, 999)
             r_dense = dense_ranks.get(idx, 999)
+            s_raw = sparse_scores.get(idx, 0.0)
+            d_raw = dense_scores.get(idx, 0.0)
 
             # RRF formula: 1 / (k + rank)
             rrf_sparse = 1.0 / (rrf_k + r_sparse) if r_sparse <= 100 else 0.0
             rrf_dense = 1.0 / (rrf_k + r_dense) if r_dense <= 100 else 0.0
             base_rrf_score = rrf_sparse + rrf_dense
 
-            # 1. Base Retrieval Component (Scaled RRF: max ~0.033 scaled by 12 gives ~0.40)
-            score = min(0.40, base_rrf_score * 12.0)
-
-            # 2. Exact standard code match (e.g., user entered 'IS 2062' or 'IS 1786')
+            # Check for exact code, grade, or constraint grounding
             sid = doc["id"]
             doc_is_num = doc.get("is_number", "").upper()
+            is_exact_code = bool((exact_is_match_id and sid == exact_is_match_id) or (doc_is_num and (doc_is_num in q_clean or sid in q_clean)))
+            has_grade_kw = any(len(kw) >= 3 and kw.upper() in q_clean for kw in doc.get("keywords", []))
+
+            c_bonus, applied_rules = ConstraintSlotService.evaluate_constraint_bonus_with_rules(
+                sid, doc.get("title", ""), doc.get("scope", ""), slots
+            )
+
+            has_technical_grounding = is_exact_code or has_grade_kw or (c_bonus > 0) or (d_raw >= 0.20 or s_raw >= 18.0)
+
+            if has_technical_grounding:
+                grounding_factor = 1.0
+            else:
+                grounding_factor = max(0.10, min(0.60, max(d_raw / 0.30, s_raw / 25.0)))
+
+            # 1. Base Retrieval Component (Scaled RRF modulated by grounding factor)
+            score = min(0.40, base_rrf_score * 12.0 * grounding_factor)
+
+            # 2. Exact standard code match (e.g., user entered 'IS 2062' or 'IS 1786')
             if exact_is_match_id and sid == exact_is_match_id:
                 score += 0.35
             elif doc_is_num and (doc_is_num in q_clean or sid in q_clean):
                 score += 0.25
 
             # 3. Material grade matches: e.g. 'Fe 500D' in IS 1786, 'E250' in IS 2062
-            for kw in doc.get("keywords", []):
-                if len(kw) >= 3 and kw.upper() in q_clean:
-                    score += 0.08
+            if has_grade_kw:
+                score += 0.08
 
             # 4. Constraint & Environmental slot bonus with verified clause citations
-            c_bonus, applied_rules = ConstraintSlotService.evaluate_constraint_bonus_with_rules(
-                sid, doc.get("title", ""), doc.get("scope", ""), slots
-            )
             score += min(0.20, c_bonus * 0.30)
 
-            # 5. Regulatory QCO Mandate Check & Boost (only for active in-force QCOs)
-            qco_eval = self.graph_service.evaluate_qco_applicability(sid)
+            # 5. Regulatory QCO Mandate Check & Boost (only for active in-force QCOs AND grounded candidate)
+            qco_eval = self.graph_service.evaluate_qco_applicability(sid, evaluation_date=evaluation_date)
             is_mandatory = bool(qco_eval and qco_eval.get("is_mandatory"))
 
-            if apply_qco_boost and is_mandatory:
+            if apply_qco_boost and is_mandatory and has_technical_grounding:
                 score += 0.08
 
             scored_results.append({
@@ -272,21 +292,10 @@ class HybridRetriever:
                 "applied_rules": applied_rules
             })
 
-        # If no active standards matched and allow_superseded is False, fallback to all records
-        if not scored_results and not allow_superseded:
-            fallback_results = self.search(
-                query=query,
-                top_k=top_k,
-                department_filter=department_filter,
-                status_filter=status_filter,
-                allow_superseded=True,
-                rrf_k=rrf_k,
-                apply_qco_boost=apply_qco_boost
-            )
-            for res in fallback_results:
-                res["is_historical_fallback"] = True
-                res["warning"] = "No active Indian Standard matched. Returning historical record for audit/reference."
-            return fallback_results
+        # If no active standards matched, return empty list!
+        # Do NOT silently fallback to historical/withdrawn standards as current recommendations.
+        if not scored_results:
+            return []
 
         # Sort by final fused score descending
         scored_results.sort(key=lambda x: x["score"], reverse=True)
@@ -300,18 +309,18 @@ class HybridRetriever:
 
         for res in top_results:
             d = res["doc"]
-            # Calibrated score without artificial 1.0 inflation
-            calibrated_score = round(min(0.99, max(0.01, res["score"])), 4)
+            # Heuristic ranking score
+            ranking_score = round(min(0.99, max(0.01, res["score"])), 4)
 
-            # Calibrated confidence rating
-            if calibrated_score >= 0.65:
-                confidence_level = "HIGH"
-            elif calibrated_score >= 0.40:
-                confidence_level = "MEDIUM"
-            elif calibrated_score >= 0.20:
-                confidence_level = "LOW"
+            # Relative relevance rating (heuristic ranking score, not a calibrated probability)
+            if ranking_score >= 0.65:
+                rel_relevance = "STRONG"
+            elif ranking_score >= 0.40:
+                rel_relevance = "MODERATE"
+            elif ranking_score >= 0.20:
+                rel_relevance = "LOW"
             else:
-                confidence_level = "INSUFFICIENT"
+                rel_relevance = "INSUFFICIENT"
 
             # Find matching terms
             doc_tokens = set(self.tokenized_corpus[res["doc_idx"]])
@@ -327,17 +336,21 @@ class HybridRetriever:
                 "status": d.get("status", "ACTIVE"),
                 "department": d.get("department", ""),
                 "committee": d.get("committee", ""),
-                "score": calibrated_score,
-                "confidence_level": confidence_level,
-                "has_sufficient_confidence": calibrated_score >= 0.20,
+                "score": ranking_score,
+                "score_type": "HEURISTIC_RANKING",
+                "ranking_score": ranking_score,
+                "relative_relevance": rel_relevance,
+                "confidence_level": rel_relevance,  # Backwards-compatible alias
+                "has_sufficient_confidence": ranking_score >= 0.20,
                 "sparse_rank": res["sparse_rank"],
                 "dense_rank": res["dense_rank"],
                 "is_mandatory_qco": res["is_mandatory_qco"],
                 "mandatory_scheme": qco_mandate["mandatory_scheme"] if qco_mandate else None,
                 "qco_order_name": qco_mandate["order_name"] if qco_mandate else None,
-                "qco_effective_date": qco_mandate.get("effective_date") if qco_mandate else None,
+                "qco_effective_date": qco_mandate.get("effective_date_parsed") or qco_mandate.get("effective_date") if qco_mandate else None,
                 "qco_temporal_status": qco_mandate.get("temporal_status") if qco_mandate else None,
                 "qco_notes": qco_mandate.get("notes") if qco_mandate else None,
+                "product_scope_verified": qco_mandate.get("product_scope_verified", False) if qco_mandate else False,
                 "applied_constraints": res["applied_rules"],
                 "matched_terms": matched_terms
             }
@@ -346,6 +359,32 @@ class HybridRetriever:
         # Apply Domain Contrastive Reranking & Grade Matching
         reranked_matches = DomainReranker.rerank(query, formatted_matches, slots)
         return reranked_matches
+
+    def search_historical_reference(
+        self,
+        query: str,
+        top_k: int = 5
+    ) -> List[Dict[str, Any]]:
+        """
+        Explicitly searches superseded and withdrawn standards for historical audit and reference.
+        Never to be returned as current/active recommendations.
+        """
+        results = self.search(
+            query=query,
+            top_k=top_k * 2,
+            allow_superseded=True,
+            status_filter=None,
+            apply_qco_boost=False
+        )
+        historical = [r for r in results if r.get("status") in ("SUPERSEDED", "WITHDRAWN")]
+        for r in historical:
+            r["is_historical_reference_only"] = True
+            r["audit_warning"] = (
+                "This standard is SUPERSEDED or WITHDRAWN in the official BIS catalog. "
+                "It is provided strictly for historical audit or contract verification and "
+                "must NOT be cited as a current specification in new procurement tenders."
+            )
+        return historical[:top_k]
 
 
 # Global singleton instance cache
