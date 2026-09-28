@@ -1,0 +1,73 @@
+2  REFERENCES 
+
+The  standards  given  below  contain  provisions  which, 
+through  reference  in  this  text,  constitute  provisions  of 
+this  standard.  At  the  time  of  publication,  the  editions 
+indicated  were  valid.  All  standards  are  subject  to 
+revision,  and  parties  to  agreements  based  on  this 
+standard  are  encouraged  to  investigate  the  possibility 
+of  applying  the  most  recent  editions  of  the  standard 
+indicated  below: 
+
+IS  No.  Title 
+
+1885  (Part  32)  :    Electrotechnical  vocabulary:  Part  32 
+1993/IEC  50-   Electric  cables 
+461  :  1984 
+4905  :  1968  Methods  for  random  sampling 
+
+5831  :  1984  PVC  insulation  and  sheath  of  electric 
+
+cables 
+8130  :  1984  Conductors  for  insulated  electric 
+
+cables  and  flexible  cords 
+10418  :  1982  Drums  for  electric  cables 
+10810  Methods  of  test  for  cables: 
+
+(Part0):1984    General 
+(Part  1)  :  1984    Annealing  test  for  wires  used  in 
+
+conductors 
+(Part  2)  :  1984    Tensile  test  for  aluminium  wires 
+
+
+IS  694  :  2010 
+
+
+IS  No.  Title 
+
+(Part  3) :  1984    Wrapping  test  for  aluminium  wires 
+(Part  4) :  1984    Persulphate  test  of  conductor 
+(Part  5) :  1984    Conductor  resistance  test 
+(Part  6) :  1984    Thickness  of  thermoplastic  and 
+
+elastomeric  insulation  and  sheath 
+(Part  7) :  1984    Tensile  strength  and  elongation  at 
+
+break     of     thermoplastic     and 
+
+elastomeric  insulation  and  sheath 
+(Part  10) :  1984  Loss  of  mass  test 
+(Part  11) :  1984  Thermal  ageing  in  air 
+(Part  12) :  1984  Shrinkage  test 
+(Part  14) :  1984  Heat  shock  test 
+(Part  15) :  1984  Hot  deformation  test 
+(Part  20) :  1984  Cold  bend  test 
+(Part  21) :  1984  Cold  impact  test 
+(Part  43) :  1984   Insulation  resistance 
+(Part  44):  1984   Spark  test 
+(Part  45) :  1984  High  voltage  test 
+(Part  53) :  1984  Flammability  test 
+(Part  58) :  1998  Oxygen  index  test 
+(Part  59) :  1988  Determination  of  the  amount  of 
+
+halogen  acid  gas  evolved  during 
+
+combustion  of  polymeric  materials 
+
+taken  from  cables 
+(Part  60)  :  1988  Thermal  stability  of  PVC  insulation 
+
+and  sheath 
+(Part  64) :  2003  Measurement  of  temperature  index

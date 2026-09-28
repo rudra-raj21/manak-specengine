@@ -1,0 +1,24 @@
+{
+  "total_records": 762,
+  "scheme1_count": 706,
+  "crs_count": 49,
+  "ministries_covered": [
+    "Ministry of Consumer Affairs, Food and Public Distribution",
+    "Ministry of Textiles",
+    "Ministry of Petroleum and Natural Gas",
+    "Ministry of Road Transport and Highways (MoRTH)",
+    "Ministry of Chemicals and Petrochemicals",
+    "Ministry of Electronics and Information Technology (MeitY)",
+    "Ministry of New and Renewable Energy (MNRE)",
+    "Ministry of Heavy Industries",
+    "Department for Promotion of Industry and Internal Trade (DPIIT)",
+    "Ministry of Steel"
+  ],
+  "schemes_covered": [
+    "Scheme-I",
+    "Scheme-II (CRS)",
+    "Hallmarking"
+  ],
+  "timestamp": "2026-09-27 18:14:09",
+  "is_complete": true
+}

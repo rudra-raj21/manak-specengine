@@ -1,0 +1,13 @@
+TENDER SPECIFICATION: HIGH STRENGTH DEFORMED TMT BARS FOR SUB-STRUCTURE AND FOUNDATION
+1. SCOPE: Supply of Thermo-Mechanically Treated (TMT) steel reinforcement bars for pier and pile cap foundation work.
+2. TECHNICAL SPECIFICATIONS:
+   - Grade: Fe 500D conforming strictly to IS 1786 (latest edition).
+   - Nominal Diameters: 16mm, 20mm, 25mm, and 32mm.
+   - Proof Stress (0.2%): Minimum 500.0 N/mm2.
+   - Tensile Strength (TS): Minimum 565.0 N/mm2; TS/YS ratio not less than 1.10.
+   - Total Elongation at maximum force: Minimum 5.0%.
+   - Chemical Composition: Carbon <= 0.25%, Sulphur <= 0.040%, Phosphorus <= 0.040%, (S+P) <= 0.075%.
+3. QUALITY ASSURANCE & MANDATORY CERTIFICATION:
+   - Manufacturer must hold a valid BIS License for marking with the Standard Mark (ISI Mark) under Scheme-I in accordance with the Steel and Steel Products (Quality Control) Order.
+   - Routine testing must include tensile test per IS 1608 (Part 1) and bend/rebend test per IS 1599 from NABL accredited lab.
+   - Every consignment must be accompanied by Manufacturer Test Certificate (MTC) with heat numbers matching physical bar embossings.

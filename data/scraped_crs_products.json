@@ -1,0 +1,394 @@
+[
+  {
+    "sl_no": 1,
+    "product_name": "AMPLIFIERS WITH INPUT POWER 2000W AND ABOVE",
+    "is_number": "IS 616:2010",
+    "implementation_date": "03 July 2013",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 2,
+    "product_name": "AUTOMATIC DATA PROCESSING MACHINE",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "03 July 2013",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 3,
+    "product_name": "ELECTRONIC CLOCKS WITH MAINS POWER",
+    "is_number": "IS 302-2-26:2014",
+    "implementation_date": "03 July 2013",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 4,
+    "product_name": "ELECTRONIC GAMES (VIDEO)",
+    "is_number": "IS 616:2010",
+    "implementation_date": "03 July 2013",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 5,
+    "product_name": "ELECTRONIC MUSICAL SYSTEMS WITH INPUT POWER 200W AND ABOVE",
+    "is_number": "IS 616:2010",
+    "implementation_date": "03 July 2013",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 6,
+    "product_name": "LAPTOP/NOTEBOOK/TABLET",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "03 July 2013",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 7,
+    "product_name": "MICROWAVE OVENS",
+    "is_number": "IS 302-2-25:2014",
+    "implementation_date": "03 July 2013",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 8,
+    "product_name": "OPTICAL DISC PLAYERS WITH BUILT IN AMPLIFIERS OF INPUT POWER 200W AND ABOVE",
+    "is_number": "IS 616:2010",
+    "implementation_date": "03 July 2013",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 9,
+    "product_name": "PLASMA/LCD/LED TELEVISIONS OF SCREEN SIZE 32\"; AND ABOVE",
+    "is_number": "IS 616:2010",
+    "implementation_date": "03 July 2013",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 10,
+    "product_name": "PRINTERS, PLOTTERS",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "03 July 2013",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 11,
+    "product_name": "SCANNERS",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "03 July 2013",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 12,
+    "product_name": "SET TOP BOX",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "03 July 2013",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 13,
+    "product_name": "TELEPHONE ANSWERING MACHINES",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "03 July 2013",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 14,
+    "product_name": "VISUAL DISPLAY UNITS, VIDEOS MONITORS OF SCREEN SIZE 32\" AND ABOVE",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "03 July 2013",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 15,
+    "product_name": "WIRELESS KEYBOARDS",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "03 July 2013",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 16,
+    "product_name": "CASH REGISTERS",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "13 May 2015",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 17,
+    "product_name": "COPYING MACHINES/DUPLICATORS",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "13 May 2015",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 18,
+    "product_name": "PASSPORT READER",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "13 May 2015",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 19,
+    "product_name": "POINT OF SALE TERMINALS",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "13 May 2015",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 20,
+    "product_name": "MAIL PROCESSING MACHINES/POSTAGE MACHINES/FRANKING MACHINES",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "13 May 2015",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 21,
+    "product_name": "POWER BANKS FOR USE IN PORTABLE APPLICATIONS",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "13 May 2015",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 22,
+    "product_name": "SMART CARD READER",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "13 May 2015",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 23,
+    "product_name": "MOBILE PHONES",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "13 September 2015",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 24,
+    "product_name": "SELF-BALLASTED LED LAMPS FOR GENERAL LIGHTING SERVICES",
+    "is_number": "IS 16102(Part 1):2012",
+    "implementation_date": "13 September 2015",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 25,
+    "product_name": "DC OR AC SUPPLIED ELECTRONIC CONTROLGEAR FOR LED MODULES",
+    "is_number": "IS 15885(Part 2/Sec 13):2012",
+    "implementation_date": "01 Decmeber 2015",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 26,
+    "product_name": "POWER ADAPTORS FOR AUDIO,VIDEO & SIMILAR ELECTRONIC APPARATUS",
+    "is_number": "IS 616:2010",
+    "implementation_date": "01 Decmeber 2015",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 27,
+    "product_name": "POWER ADAPTORS FOR IT EQUIPMENTS",
+    "is_number": "IS 13252(Part 1):2010",
+    "implementation_date": "01 Decmeber 2015",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 28,
+    "product_name": "FIXED GENERAL PURPOSE LED LUMINAIRES",
+    "is_number": "IS 10322(Part 5/Sec 1):2012",
+    "implementation_date": "01 March 2016",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 29,
+    "product_name": "UPS/INVERTORS OF RATING <= 5KVA",
+    "is_number": "IS 16242(Part 1):2014",
+    "implementation_date": "01 March 2016",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 30,
+    "product_name": "SEALED SECONDARY CELLS/BATTERIES CONTAINING ALKALINE OR OTHER NON-ACID ELECTROLYTES FOR USE IN PORTABLE \n\t\t\t\tAPPLICATIONS",
+    "is_number": "IS 16046:2015",
+    "implementation_date": "01 June 2016",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 31,
+    "product_name": "INDIAN LANGUAGE SUPPORT FOR MOBILE PHONE HANDSETS",
+    "is_number": "IS 16333 (Part 3) : 2016",
+    "implementation_date": "01 May 2018",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 32,
+    "product_name": "Recessed LED Luminaries",
+    "is_number": "IS 10322 (Part 5/Section 2) : 2012",
+    "implementation_date": "23 May 2018",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 33,
+    "product_name": "LED Luminaires for Road and Street lighting",
+    "is_number": "IS 10322 (Part 5/Section 3) : 2012",
+    "implementation_date": "23 May 2018",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 34,
+    "product_name": "LED Flood Lights",
+    "is_number": "IS 10322 (Part 5/Section 5) : 2013",
+    "implementation_date": "23 May 2018",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 35,
+    "product_name": "LED Hand lamps",
+    "is_number": "IS 10322 (Part 5/Section 6) : 2013",
+    "implementation_date": "23 May 2018",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 36,
+    "product_name": "LED Lighting Chains",
+    "is_number": "IS 10322 (Part 5/Section 7) : 2013",
+    "implementation_date": "23 May 2018",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 37,
+    "product_name": "LED Luminaires for Emergency Lighting",
+    "is_number": "IS 10322 (Part 5/Section 8) : 2013",
+    "implementation_date": "23 May 2018",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 38,
+    "product_name": "UPS/Inverters of rating <= 10kVA",
+    "is_number": "IS 16242 (Part 1) : 2014",
+    "implementation_date": "23 May 2018",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 39,
+    "product_name": "Plasma/ LCD/LED Television of screen size up-to 32",
+    "is_number": "IS 616 : 2010",
+    "implementation_date": "23 May 2018",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 40,
+    "product_name": "Visual Display Units, Video Monitors of screen size upto 32",
+    "is_number": "IS 13252 (Part 1) : 2010",
+    "implementation_date": "23 May 2018",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 41,
+    "product_name": "CCTV Cameras/CCTV Recorders",
+    "is_number": "IS 13252 (Part 1) : 2010",
+    "implementation_date": "23 May 2018",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 42,
+    "product_name": "Adapters for household and similar electrical appliances",
+    "is_number": "IS 302 (Part 1) : 2008",
+    "implementation_date": "23 May 2018",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 43,
+    "product_name": "USB driven Barcode readers, barcode scanners, Iris scanners, Optical fingerprint scanners",
+    "is_number": "IS 13252 (Part 1) : 2010",
+    "implementation_date": "23 May 2018",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 44,
+    "product_name": "Smart watches",
+    "is_number": "IS 13252 (Part 1) : 2010",
+    "implementation_date": "23 May 2018",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 45,
+    "product_name": "Crystalline Silicon Terrestrial Photovoltaic (PV) modules (Si wafer based)",
+    "is_number": "IS 14286 : 2010/ IEC 61215 : 2005, IS/IEC 61730 (Part 1) : 2004 & IS/IEC 61730 (Part 2) : 2004",
+    "implementation_date": "01 January 2019",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 46,
+    "product_name": "Thin-Film Terrestrial Photovoltaic (PV) Modules (a-Si, CiGs and CdTe)",
+    "is_number": "IS 16077 : 2013/ IEC 61646 : 2008, IS/IEC 61730 (Part 1) : 2004 & IS/IEC 61730 (Part 2) : 2004",
+    "implementation_date": "01 January 2019",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 47,
+    "product_name": "Power Invertors for use in photovoltaic power system",
+    "is_number": "IS 16221 (Part 2) : 2015",
+    "implementation_date": "30 June 2019",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 48,
+    "product_name": "Utility-Interconnected Photovoltaic inverters",
+    "is_number": "IS 16169 : 2014",
+    "implementation_date": "30 June 2019",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  },
+  {
+    "sl_no": 49,
+    "product_name": "Storage battery",
+    "is_number": "IS 16270 : 2014",
+    "implementation_date": "01 January 2019",
+    "scheme": "Scheme-II (CRS)",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)"
+  }
+]

@@ -1,0 +1,5 @@
+TENDER FOR L.T. AIR CIRCUIT BREAKERS AND PLUGS
+1. Power cords with plugs must conform to old IS 1293:1988 standard.
+2. Plugs may have unsheathed live pins.
+3. Breakers shall conform to IS 13947 (superseded standard).
+4. No BIS certification certificate is required if foreign CE certificate is attached.

@@ -1,0 +1,7 @@
+TENDER SPECIFICATION: READY MIX CONCRETE (RMC) M-30 GRADE
+1. Concrete shall be designed in accordance with IS 10262:2019 and IS 456:2000.
+2. Cement used shall be Ordinary Portland Cement 43 Grade conforming to IS 269:2015.
+3. Coarse and fine aggregates shall strictly adhere to IS 383:2016 (Zone-II for sand).
+4. Concrete workability shall be tested at batching plant and site per IS 1199 (Part 1).
+5. Compressive strength shall be determined from 150mm cubes tested at 7 days and 28 days in accordance with IS 516 (Part 1/Sec 1).
+6. Ductile detailing of all beams and columns shall follow IS 13920:2016 for Seismic Zone IV.

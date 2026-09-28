@@ -1,0 +1,5 @@
+SPECIFICATION FOR MONOCRYSTALLINE SOLAR PHOTOVOLTAIC MODULES
+1. PV Modules must conform to IS 14286 (Design qualification and type approval).
+2. Construction safety must conform to IS/IEC 61730 (Part 1) and Part 2.
+3. Mandatory MNRE Order: All modules must be registered under BIS Compulsory Registration Scheme (CRS) and enlisted in the Approved List of Models and Manufacturers (ALMM).
+4. Power output warranty: 90% at the end of 10 years, 80% at 25 years.

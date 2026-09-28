@@ -1,0 +1,6 @@
+TECHNICAL SPECIFICATION FOR 500 kVA, 11/0.433 kV OUTDOOR DISTRIBUTION TRANSFORMERS
+1. APPLICABLE STANDARDS: The transformer shall conform to IS 1180 (Part 1):2014 with Energy Efficiency Level-2.
+2. Insulating oil shall conform to IS 335.
+3. CERTIFICATION: The unit must bear the mandatory BIS Standard Mark (ISI Mark) under Scheme-I per the Electric Transformers (Quality Control) Order.
+4. Transformer must also hold BEE 3-Star or higher energy conservation label.
+5. Routine tests shall be witnessed by third-party inspection agency (RITES / CPRI).

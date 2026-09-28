@@ -1,0 +1,191 @@
+source_id,source_is,source_type,target_id,target_is,target_type,relationship,clause,description
+IS_2062,IS 2062,Standard,IS_228,IS 228,TestStandard,TESTED_BY,Clause 2 Normative References Table,(in various Methods for chemical analysis of
+IS_2062,IS 2062,Standard,IS_808,IS 808,TestStandard,TESTED_BY,Clause 2 Normative References Table,Dimensions for hot rolled steel
+IS_2062,IS 2062,Standard,IS_1173,IS 1173,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Hot rolled slit steel tee bars
+IS_2062,IS 2062,Standard,IS_1252,IS 1252,TestStandard,TESTED_BY,Clause 2 Normative References Table,Dimensions of hot rolled steel
+IS_2062,IS 2062,Standard,IS_1599,IS 1599,TestStandard,TESTED_BY,Clause 2 Normative References Table,Method for bend test (second
+IS_2062,IS 2062,Standard,IS_1608,IS 1608,TestStandard,TESTED_BY,Clause 2 Normative References Table,Metallic materials — Tensile
+IS_2062,IS 2062,Standard,IS_1730,IS 1730,TestStandard,TESTED_BY,Clause 2 Normative References Table,Dimensions for steel plates
+IS_2062,IS 2062,Standard,IS_1956,IS 1956,Standard,NORMATIVE_REF,Clause 2 Normative References Table,(in various
+IS_2062,IS 2062,Standard,IS_3803_Part_1,IS 3803 ((Part 1)),Standard,NORMATIVE_REF,Clause 2 Normative References Table,:
+IS_2062,IS 2062,Standard,IS_12779,IS 12779,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1989
+IS_808,IS 808,Standard,IS_1852,IS 1852,Standard,NORMATIVE_REF,Clause 2 Normative References,The Indian Standard : 1985 'Rolled and
+IS_800,IS 800,Standard,IS_8,IS 8,Standard,NORMATIVE_REF,Clause 2 Normative References,Q0 : 2007
+IS_1852,IS 1852,Standard,IS_1852_1985,IS 1852 (1985),TestStandard,TESTED_BY,Clause 2 Normative References,Rolling and cutting tolerances for hot
+IS_228_Part_1,IS 228 (Part 1),Standard,IS_228,IS 228,TestStandard,TESTED_BY,Clause 2 Normative References,"1  (1987)  :  Methods  of  chemical  analysis  of  steels,"
+IS_228_Part_1,IS 228 (Part 1),Standard,IS_228_Part_1,IS 228 ((Part 1)),TestStandard,TESTED_BY,Clause 2 Normative References,1987  METHODS  FOR  CHEMICAL  ANALYSIS  OF  STEELS
+IS_228_Part_1,IS 228 (Part 1),Standard,IS_228_Parti,IS 228 (Parti ),Standard,NORMATIVE_REF,Clause 2 Normative References,»1987
+IS_1730,IS 1730,Standard,IS_1852,IS 1852,Standard,NORMATIVE_REF,Clause 2 Normative References,1985
+IS_1252,IS 1252,Standard,IS_1852,IS 1852,Standard,NORMATIVE_REF,Clause 2 Normative References,2.1 The Indian Standard  : 1985 'Speci-
+IS_1757_Part_1,IS 1757 (Part 1),Standard,IS_1757_1988,IS 1757 (1988),TestStandard,TESTED_BY,Clause 2 Normative References,Method  for  charpy  impact  test  (V  notch)  for
+IS_1757_Part_1,IS 1757 (Part 1),Standard,IS_is_300,IS is 300,TestStandard,TESTED_BY,Clause 2 Normative References,±  10J  and  where  the  test  piece  is  of  standard  dimensions.  Absorbed  energies  reported  under
+IS_2830,IS 2830,Standard,IS_228,IS 228,Standard,NORMATIVE_REF,Clause 2 Normative References Table,(All parts)
+IS_2830,IS 2830,Standard,IS_1956_All_parts,IS 1956 (All parts),Standard,NORMATIVE_REF,Clause 2 Normative References Table,Glossary of terms relating to iron and
+IS_2830,IS 2830,Standard,IS_8910,IS 8910,Standard,NORMATIVE_REF,Clause 2 Normative References Table,General technical delivery
+IS_2830,IS 2830,Standard,IS_11371,IS 11371,TestStandard,TESTED_BY,Clause 2 Normative References Table,Method for macroetch test of
+IS_2830,IS 2830,Standard,IS_12037,IS 12037,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Macrographic examination by
+IS_1173,IS 1173,Standard,IS_1173_1978,IS 1173 (1978),Standard,NORMATIVE_REF,Clause 2 Normative References,Hot  rolled  and  slit  steel  tee  bars  [CED  7:
+IS_1173,IS 1173,Standard,IS_1,IS 1,Standard,NORMATIVE_REF,Clause 2 Normative References,1173- 1978
+IS_1367_Part_1,IS 1367 (Part 1),Standard,IS_1367_Part_1,IS 1367 ((Part 1)),Standard,NORMATIVE_REF,Clause 2 Normative References,2002
+IS_816,IS 816,Standard,IS_816_1969,IS 816 (1969),Standard,NORMATIVE_REF,Clause 2 Normative References,Code  of  practice  for  use  of  metal  arc
+IS_4923,IS 4923,Standard,IS_1387,IS 1387,Standard,NORMATIVE_REF,Clause 2 Normative References Table,General requirements for the
+IS_4923,IS 4923,Standard,IS_1608,IS 1608,TestStandard,TESTED_BY,Clause 2 Normative References Table,Mechanical testing of metals —
+IS_432_Part_1,IS 432 (Part 1),Standard,IS_432,IS 432,TestStandard,TESTED_BY,Clause 2 Normative References,1  (1982) :  Mild  Steel  and  Medium  Tensile  Steel  Bars
+IS_432_Part_1,IS 432 (Part 1),Standard,IS_432_Part_1,IS 432 ((Part 1)),Standard,NORMATIVE_REF,Clause 2 Normative References,1982    SPECIFICATION  FOR
+IS_432_Part_1,IS 432 (Part 1),Standard,IS_is_1,IS is 1,Standard,NORMATIVE_REF,Clause 2 Normative References,at  which  the  observed  increase  in  the  gauge  length  /200  of  the  gauge
+IS_2831,IS 2831,Standard,IS_228_All_parts,IS 228 (All parts),TestStandard,TESTED_BY,Clause 2 Normative References Table,Methods of chemical analysis of steel
+IS_2831,IS 2831,Standard,IS_1956_All_parts,IS 1956 (All parts),Standard,NORMATIVE_REF,Clause 2 Normative References Table,Glossary of terms relating to iron and
+IS_2831,IS 2831,Standard,IS_8910,IS 8910,Standard,NORMATIVE_REF,Clause 2 Normative References Table,General technical delivery
+IS_2831,IS 2831,Standard,IS_11371,IS 11371,TestStandard,TESTED_BY,Clause 2 Normative References Table,Method for macroetch test of
+IS_2831,IS 2831,Standard,IS_12037,IS 12037,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Macrographic examination by
+IS_513,IS 513,Standard,IS_228,IS 228,Standard,NORMATIVE_REF,Clause 2 Normative References Table,(Relevant
+IS_513,IS 513,Standard,IS_1501,IS 1501,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 2000/
+IS_513,IS 513,Standard,IS_1599,IS 1599,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1985
+IS_513,IS 513,Standard,IS_10175_Part_1,IS 10175 ((Part 1)),Standard,NORMATIVE_REF,Clause 2 Normative References Table,:
+IS_1079,IS 1079,Standard,IS_228,IS 228,Standard,NORMATIVE_REF,Clause 2 Normative References Table,(In- various parts)
+IS_1079,IS 1079,Standard,IS_1599,IS 1599,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1985
+IS_1079,IS 1079,Standard,IS_1608,IS 1608,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 2005
+IS_1079,IS 1079,Standard,IS_1730,IS 1730,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1989
+IS_1079,IS 1079,Standard,IS_8910,IS 8910,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1978
+IS_1079,IS 1079,Standard,IS_10175_Part_1,IS 10175 ((Part 1)),Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1993
+IS_1161,IS 1161,Standard,IS_228,IS 228,TestStandard,TESTED_BY,Clause 2 Normative References Table,Method of chemical analysis of
+IS_1161,IS 1161,Standard,IS_1387,IS 1387,Standard,NORMATIVE_REF,Clause 2 Normative References Table,General requirements for the
+IS_1161,IS 1161,Standard,IS_1608,IS 1608,TestStandard,TESTED_BY,Clause 2 Normative References Table,Mechanical testing of metals —
+IS_1161,IS 1161,Standard,IS_2328,IS 2328,TestStandard,TESTED_BY,Clause 2 Normative References Table,Method for flattening test on
+IS_1161,IS 1161,Standard,IS_2329,IS 2329,TestStandard,TESTED_BY,Clause 2 Normative References Table,Method for bend test on metallic
+IS_1161,IS 1161,Standard,IS_4711,IS 4711,TestStandard,TESTED_BY,Clause 2 Normative References Table,Methods for sampling of steel
+IS_1161,IS 1161,Standard,IS_4736,IS 4736,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Hot-dip zinc coatings on mild steel
+IS_1161,IS 1161,Standard,IS_4740,IS 4740,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Code of practice for packaging of
+IS_1161,IS 1161,Standard,IS_10748,IS 10748,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Hot-rolled steel strip for welded
+IS_383,IS 383,Standard,IS_383_1970,IS 383 (1970),Standard,NORMATIVE_REF,Clause 2 Normative References,Specification for Coarse and Fine Aggregates
+IS_4031_Part_5,IS 4031 (Part 5),Standard,IS_4031,IS 4031,TestStandard,TESTED_BY,Clause 2 Normative References,5  (1988) :  Methods  of  physical  tests  for  hydraulic
+IS_2386_Part_1,IS 2386 (Part 1),Standard,IS_2386,IS 2386,TestStandard,TESTED_BY,Clause 2 Normative References,1 (1963) : Methods of Test for Aggregates for
+IS_2386_Part_2,IS 2386 (Part 2),Standard,IS_2386,IS 2386,TestStandard,TESTED_BY,Clause 2 Normative References,2 (1963) : Methods of test for aggregates for
+IS_2386_Part_2,IS 2386 (Part 2),Standard,IS_is_100,IS is 100,Standard,NORMATIVE_REF,Clause 2 Normative References,distilled water to one tenth ( that  ml diluted with distilled water to
+IS_2386_Part_3,IS 2386 (Part 3),Standard,IS_2386,IS 2386,TestStandard,TESTED_BY,Clause 2 Normative References,3  (1963)  :  Methods  of  test  for  aggregates  for
+IS_516_Part_1_Sec_1,IS 516 (Part 1/Sec 1),Standard,IS_516_1959,IS 516 (1959),TestStandard,TESTED_BY,Clause 2 Normative References,Method of Tests for Strength of Concrete
+IS_516_Part_1_Sec_1,IS 516 (Part 1/Sec 1),Standard,IS_516,IS 516,TestStandard,TESTED_BY,Clause 2 Normative References,1959 METHODS OF TESTS FOR
+IS_516_Part_1_Sec_1,IS 516 (Part 1/Sec 1),Standard,IS_10086,IS 10086,Standard,NORMATIVE_REF,Clause 2 Normative References,to  : 1982*. *
+IS_2386_Part_4,IS 2386 (Part 4),Standard,IS_2386,IS 2386,TestStandard,TESTED_BY,Clause 2 Normative References,4 (1963) : Methods of test for aggregates for
+IS_1199_Part_1,IS 1199 (Part 1),Standard,IS_1199_1959,IS 1199 (1959),TestStandard,TESTED_BY,Clause 2 Normative References,Methods of sampling and analysis of
+IS_1199_Part_1,IS 1199 (Part 1),Standard,IS_1,IS 1,Standard,NORMATIVE_REF,Clause 2 Normative References,1199 -1959
+IS_13920,IS 13920,Standard,IS_456,IS 456,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Code of practice for plain and
+IS_13920,IS 13920,Standard,IS_1786,IS 1786,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Specification for high strength
+IS_13920,IS 13920,Standard,IS_1893,IS 1893,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Criteria for earthquake design
+IS_4032,IS 4032,Standard,IS_4032_1985,IS 4032 (1985),TestStandard,TESTED_BY,Clause 2 Normative References,Method of chemical analysis of hydraulic
+IS_4031_Part_6,IS 4031 (Part 6),Standard,IS_4031,IS 4031,TestStandard,TESTED_BY,Clause 2 Normative References,6  (1988) :  Methods  of  physical  tests  for  hydraulic
+IS_4031_Part_6,IS 4031 (Part 6),Standard,IS_4031_Parte,IS 4031 (Parte),TestStandard,TESTED_BY,Clause 2 Normative References,1988  METHODS  OF  PHYSICAL
+IS_4031_Part_6,IS 4031 (Part 6),Standard,IS_10086,IS 10086,Standard,NORMATIVE_REF,Clause 2 Normative References,'5.4  Gauging  Trowel  —  Gauging  trowel  conforming  to    :  1982t.'
+IS_4031_Part_6,IS 4031 (Part 6),Standard,IS_4031_Part_6,IS 4031 ( (Part 6) ),TestStandard,TESTED_BY,Clause 2 Normative References,1988  METHODS  OF  PHYSICAL  TESTS
+IS_1893_Part_1,IS 1893 (Part 1),Standard,IS_456,IS 456,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Code of practice for plain and
+IS_1893_Part_1,IS 1893 (Part 1),Standard,IS_800,IS 800,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Code of practice for general
+IS_1893_Part_1,IS 1893 (Part 1),Standard,IS_875,IS 875,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Code of practice for design loads
+IS_1893_Part_1,IS 1893 (Part 1),Standard,IS_1343,IS 1343,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Code of practice for pre-stressed
+IS_1893_Part_1,IS 1893 (Part 1),Standard,IS_1498,IS 1498,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Classification and identification of
+IS_1893_Part_1,IS 1893 (Part 1),Standard,IS_1893_Part_4,IS 1893 ((Part 4)),Standard,NORMATIVE_REF,Clause 2 Normative References Table,Criteria for earthquake resistant
+IS_1893_Part_1,IS 1893 (Part 1),Standard,IS_2131,IS 2131,TestStandard,TESTED_BY,Clause 2 Normative References Table,Method of standard penetration test
+IS_1893_Part_1,IS 1893 (Part 1),Standard,IS_2809,IS 2809,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Glossary of terms and symbols
+IS_1893_Part_1,IS 1893 (Part 1),Standard,IS_2810,IS 2810,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Glossary of terms relating to soil
+IS_1893_Part_1,IS 1893 (Part 1),Standard,IS_4326,IS 4326,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Earthquake resistant design and
+IS_1893_Part_1,IS 1893 (Part 1),Standard,IS_6403,IS 6403,TestStandard,TESTED_BY,Clause 2 Normative References Table,Code of practice for determination
+IS_1893_Part_1,IS 1893 (Part 1),Standard,IS_13920,IS 13920,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Ductile detailing of reinforced
+IS_1893_Part_1,IS 1893 (Part 1),Standard,IS_13935,IS 13935,Standard,NORMATIVE_REF,Clause 2 Normative References Table,; 1993 Repair and seismic strengthening of
+IS_1200_Part_2,IS 1200 (Part 2),Standard,IS_1200,IS 1200,TestStandard,TESTED_BY,Clause 2 Normative References,2 (1974) : Method of measurement of building and
+IS_1200_Part_2,IS 1200 (Part 2),Standard,IS_1,IS 1,TestStandard,TESTED_BY,Clause 2 Normative References,1200 ( Part II )-1974 METHOD OF
+IS_3370_Part_2,IS 3370 (Part 2),Standard,IS_456,IS 456,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 2000
+IS_3370_Part_2,IS 3370 (Part 2),Standard,IS_1786,IS 1786,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 2008
+IS_1200_Part_3,IS 1200 (Part 3),Standard,IS_1200,IS 1200,TestStandard,TESTED_BY,Clause 2 Normative References,3 (1976) : Method of Measurement of Building and
+IS_1554_Part_1,IS 1554 (Part 1),Standard,IS_1554,IS 1554,Standard,NORMATIVE_REF,Clause 2 Normative References,1  (1988)  :  PVC  insulated  (heavy  duty)  electric
+IS_1554_Part_1,IS 1554 (Part 1),Standard,IS_1,IS 1,Standard,NORMATIVE_REF,Clause 2 Normative References,1554  (  Part  I  )- 1988
+IS_7098_Part_1,IS 7098 (Part 1),Standard,IS_7098,IS 7098,Standard,NORMATIVE_REF,Clause 2 Normative References,1  (1988) :  Crosslinked  polyethylene  insulated  PVC
+IS_7098_Part_1,IS 7098 (Part 1),Standard,IS_7098_Part_1,IS 7098 ((Part 1)),Standard,NORMATIVE_REF,Clause 2 Normative References,1988    CROSSLINKED
+IS_7098_Part_1,IS 7098 (Part 1),Standard,IS_3975,IS 3975,Standard,NORMATIVE_REF,Clause 2 Normative References,"requirements  of  : 1988,  excq>t  that  3.3.1  and  3.2JI,  shall  not  apply.'"
+IS_7098_Part_1,IS 7098 (Part 1),Standard,IS_10810,IS 10810,Standard,NORMATIVE_REF,Clause 2 Normative References,Referenced in IS 7098 (Part 1) Clause 2
+IS_7098_Part_1,IS 7098 (Part 1),Standard,IS_10810_Part_62,IS 10810 ( (Part 62) ),TestStandard,TESTED_BY,Clause 2 Normative References,"described  in   .  For  the  purpose  of  this  standard,  category  B  and  C  test"
+IS_7098_Part_1,IS 7098 (Part 1),Standard,IS_108,IS 108,Standard,NORMATIVE_REF,Clause 2 Normative References,Part  No.  of    JO.
+IS_7098_Part_1,IS 7098 (Part 1),Standard,IS_10810,IS 10810,TestStandard,TESTED_BY,Clause 2 Normative References,Method  Refer  Part  No.  of  .
+IS_7098_Part_1,IS 7098 (Part 1),Standard,IS_397,IS 397,Standard,NORMATIVE_REF,Clause 2 Normative References,"**The  tolerance  on  nominal  dimensicms  shall  be  as  per  S :  1999.  However,"
+IS_7098_Part_1,IS 7098 (Part 1),Standard,IS_4826,IS 4826,Standard,NORMATIVE_REF,Clause 2 Normative References,percent  of  the  mass  specified  in  Table  2  of    :  1979.
+IS_7098_Part_1,IS 7098 (Part 1),Standard,IS_7098_Parti,IS 7098 (Parti),Standard,NORMATIVE_REF,Clause 2 Normative References,Referenced in IS 7098 (Part 1) Clause 2
+IS_5831,IS 5831,Standard,IS_5831_1984,IS 5831 (1984),Standard,NORMATIVE_REF,Clause 2 Normative References,PVC insulation and sheath of electric
+IS_10810_Part_43,IS 10810 (Part 43),Standard,IS_10810,IS 10810,TestStandard,TESTED_BY,Clause 2 Normative References,"43 (1984): Methods of Test for Cables, Part 43:"
+IS_10810_Part_45,IS 10810 (Part 45),Standard,IS_10810,IS 10810,TestStandard,TESTED_BY,Clause 2 Normative References,"45  (1984):  Methods  of  Test  for  Cables,  Part  45:"
+IS_1200_Part_1,IS 1200 (Part 1),Standard,IS_1200,IS 1200,TestStandard,TESTED_BY,Clause 2 Normative References,1  (1992) :  Methods  of  measurement  of  building  and
+IS_1200_Part_1,IS 1200 (Part 1),Standard,IS_1200_Part_1,IS 1200 ( (Part 1) ),Standard,NORMATIVE_REF,Clause 2 Normative References,1992
+IS_1200_Part_1,IS 1200 (Part 1),Standard,IS_2,IS 2,Standard,NORMATIVE_REF,Clause 2 Normative References,in  accordance  with    :  I960  'Rules  for  rounding  off  numerical  values  {revised)'.  The  number  of
+IS_1200_Part_1,IS 1200 (Part 1),Standard,IS_1200_Pari_1,IS 1200 ( Pari 1 ),Standard,NORMATIVE_REF,Clause 2 Normative References,1992
+IS_1293,IS 1293,Standard,IS_12063,IS 12063,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Classification of degree of
+IS_1293,IS 1293,Standard,IS_14340,IS 14340,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Brass for current-carrying parts
+IS_1293,IS 1293,Standard,IS_14772,IS 14772,Standard,NORMATIVE_REF,Clause 2 Normative References Table,General requirements for
+IS_398_Part_1,IS 398 (Part 1),Standard,IS_398,IS 398,Standard,NORMATIVE_REF,Clause 2 Normative References,1 (1996) : Aluminium conductors for overhead
+IS_398_Part_1,IS 398 (Part 1),Standard,IS_398_Parti,IS 398 (Parti ),Standard,NORMATIVE_REF,Clause 2 Normative References,1996
+IS_398_Part_1,IS 398 (Part 1),Standard,IS_398_PART_I,IS 398 ( PART I ),Standard,NORMATIVE_REF,Clause 2 Normative References,1996 ALUMINIUM CONDUCTORS
+IS_398_Part_1,IS 398 (Part 1),Standard,IS_2,IS 2,Standard,NORMATIVE_REF,Clause 2 Normative References,1960 'Rules lor rounding off numerical values (revisedy. 'ITie number of significant places retained
+IS_398_Part_1,IS 398 (Part 1),Standard,IS_398_Part_I,IS 398 ( Part I ),Standard,NORMATIVE_REF,Clause 2 Normative References,1996
+IS_398_Part_1,IS 398 (Part 1),Standard,IS_1778,IS 1778,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Reels and drums for bare con-
+IS_398_Part_1,IS 398 (Part 1),Standard,IS_1885,IS 1885,Standard,NORMATIVE_REF,Clause 2 Normative References,deJmilions in addition to those given in
+IS_398_Part_1,IS 398 (Part 1),Standard,IS_18,IS 18,Standard,NORMATIVE_REF,Clause 2 Normative References Table,5484:1978.
+IS_398_Part_1,IS 398 (Part 1),Standard,IS_7623,IS 7623,Standard,NORMATIVE_REF,Clause 2 Normative References,1993 having minimum drop point not less than
+IS_398_Part_1,IS 398 (Part 1),Standard,IS_11,IS 11,Standard,NORMATIVE_REF,Clause 2 Normative References Table,PACKING AND MARiQNG
+IS_398_Part_1,IS 398 (Part 1),Standard,IS_12,IS 12,TestStandard,TESTED_BY,Clause 2 Normative References Table,TESTS
+IS_398_Part_1,IS 398 (Part 1),Standard,IS_13,IS 13,TestStandard,TESTED_BY,Clause 2 Normative References Table,CLASSIFICATION OF TESTS
+IS_398_Part_1,IS 398 (Part 1),Standard,IS_14,IS 14,TestStandard,TESTED_BY,Clause 2 Normative References Table,REJECTION AND RETESTS
+IS_8130,IS 8130,Standard,IS_8130_1984,IS 8130 (1984),Standard,NORMATIVE_REF,Clause 2 Normative References,Conductors  for  insulated  electric  cables
+IS_13252_Part_1,IS 13252 (Part 1),Standard,IS_13252_Parti,IS 13252 (Parti),Standard,NORMATIVE_REF,Clause 2 Normative References,2010
+IS_302_2_25,IS 302-2-25,Standard,IS_302,IS 302,Standard,NORMATIVE_REF,Clause 2 Normative References,2-25 (1994) : Safety of household and similar
+IS_302_2_25,IS 302-2-25,Standard,IS_11676,IS 11676,Standard,NORMATIVE_REF,Clause 2 Normative References,requirement of safety and performance requirements are covered under -1986 Specifica-
+IS_302_2_25,IS 302-2-25,Standard,IS_2,IS 2,Standard,NORMATIVE_REF,Clause 2 Normative References,off in accordance with  : 1960 'Rules for rounding off numerical values (revised)*. The
+IS_302_2_25,IS 302-2-25,Standard,IS_4159,IS 4159,Standard,NORMATIVE_REF,Clause 2 Normative References,tion  : 1983 'Specification for mineral
+IS_302_2_25,IS 302-2-25,Standard,IS_is_27,IS is 27,Standard,NORMATIVE_REF,Clause 2 Normative References,of the water  ± 2°C.
+IS_302_2_25,IS 302-2-25,Standard,IS_is_90,IS is 90,Standard,NORMATIVE_REF,Clause 2 Normative References,The total time of operating period  min.
+IS_302_2_26,IS 302-2-26,Standard,IS_302,IS 302,Standard,NORMATIVE_REF,Clause 2 Normative References,2-26 (1994) : Safety of household and similar
+IS_302_2_26,IS 302-2-26,Standard,IS_302,IS 302,TestStandard,TESTED_BY,Clause 2 Normative References,"Wherever a sub-clause of -1 ( 1979 ) is to be replaced by a new test, it has been indicated as"
+IS_302_2_26,IS 302-2-26,Standard,IS_2,IS 2,Standard,NORMATIVE_REF,Clause 2 Normative References,accordance with :1960 'Rules for rounding off numerical values ( revised )'. The number of
+IS_302_2_26,IS 302-2-26,Standard,IS_is_250,IS is 250,Standard,NORMATIVE_REF,Clause 2 Normative References,The maximum rated voltage  V.
+IS_302_2_26,IS 302-2-26,Standard,IS_is_0,IS is 0,TestStandard,TESTED_BY,Clause 2 Normative References,"ment, the impact energy *25 ± 0*05 Nm."
+IS_302_2_26,IS 302-2-26,Standard,IS_694,IS 694,Standard,NORMATIVE_REF,Clause 2 Normative References,flexible cord as per  : 1990; and
+IS_302_2_26,IS 302-2-26,Standard,IS_9968_Part_1,IS 9968 ((Part 1)),Standard,NORMATIVE_REF,Clause 2 Normative References,per  : 1988.
+IS_302_2_26,IS 302-2-26,Standard,IS_84,IS 84,Standard,NORMATIVE_REF,Clause 2 Normative References Table,"99, 37 85 61"
+IS_302_2_26,IS 302-2-26,Standard,IS_86,IS 86,Standard,NORMATIVE_REF,Clause 2 Normative References Table,"26, 37 86 62"
+IS_302_2_26,IS 302-2-26,Standard,IS_1235,IS 1235,Standard,NORMATIVE_REF,Clause 2 Normative References Table,"15 19, 235 23 15"
+IS_302_2_26,IS 302-2-26,Standard,IS_1632,IS 1632,Standard,NORMATIVE_REF,Clause 2 Normative References Table,"92 95, 632 78 58"
+IS_302_1,IS 302-1,Standard,IS_302,IS 302,Standard,NORMATIVE_REF,Clause 2 Normative References,1  :  2008
+IS_302_1,IS 302-1,Standard,IS_14700_Part_4_Electromagnetic_compatibility_EMC,IS 14700 ((Part 4)/ Electromagnetic compatibility (EMC),Standard,NORMATIVE_REF,Clause 2 Normative References,Referenced in IS 302-1 Clause 2
+IS_4984,IS 4984,Standard,IS_2530,IS 2530,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1%3
+IS_4984,IS 4984,Standard,IS_4905,IS 4905,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1968
+IS_4984,IS 4984,Standard,IS_7328,IS 7328,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1992
+IS_4984,IS 4984,Standard,IS_9845,IS 9845,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1986
+IS_4984,IS 4984,Standard,IS_10141,IS 10141,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1982
+IS_4984,IS 4984,Standard,IS_10146,IS 10146,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1982
+IS_8360_Part_1,IS 8360 (Part 1),Standard,IS_8360,IS 8360,Standard,NORMATIVE_REF,Clause 2 Normative References,1 (1977) : fabricated high density polyethylene
+IS_1536,IS 1536,Standard,IS_538,IS 538,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Sheet rubber jointing and rubber
+IS_1536,IS 1536,Standard,IS_1608,IS 1608,TestStandard,TESTED_BY,Clause 2 Normative References Table,Mechanical testing of metals —
+IS_2925,IS 2925,Standard,IS_2925_1984,IS 2925 (1984),Standard,NORMATIVE_REF,Clause 2 Normative References,Specification  for  Industrial  Safety
+IS_778,IS 778,Standard,IS_778_1984,IS 778 (1984),Standard,NORMATIVE_REF,Clause 2 Normative References,"Copper  Alloy  Gate,  Globe  and  Check  Valves"
+IS_778,IS 778,Standard,IS_1264,IS 1264,Standard,NORMATIVE_REF,Clause 2 Normative References,"9)  SI  No.  (i)  and  SI  No.  (ii),  co/ 4  —  Substitute    '  :  1989^'/^'*  *"
+IS_778,IS 778,Standard,IS_6912,IS 6912,Standard,NORMATIVE_REF,Clause 2 Normative References,"b>  SI  No.  (ii)  and  SI  No.  (iii),  col  4  —  Substitute  'FLB  of    :  1985^'  for"
+IS_778,IS 778,Standard,IS_3488,IS 3488,Standard,NORMATIVE_REF,Clause 2 Normative References,'CuZn4  2Pb2  of    :  1980  '.
+IS_778,IS 778,Standard,IS_319,IS 319,Standard,NORMATIVE_REF,Clause 2 Normative References,"C)  SI  No.  (iii),  col  4  —  Substitute  'Grade  l  or  Grade  2  (  Half  hard  )  of    :  1989^'"
+IS_778,IS 778,Standard,IS_7608,IS 7608,Standard,NORMATIVE_REF,Clause 2 Normative References,"C)  SI  No.  (x),  col  4  —  Substitute  '  :  1987^^*  for  '  :  1975^^'."
+IS_1417,IS 1417,Standard,IS_1418,IS 1418,Standard,NORMATIVE_REF,Clause 2 Normative References Table,"Assaying of gold in gold bullion,"
+IS_1417,IS 1417,Standard,IS_2790,IS 2790,Standard,NORMATIVE_REF,Clause 2 Normative References Table,"Guidelines for manufacture of 23,"
+IS_1417,IS 1417,Standard,IS_3095,IS 3095,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Gold solders for use in manufacture
+IS_15748,IS 15748,Standard,IS_14453,IS 14453,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1997
+IS_15748,IS 15748,Standard,IS_15370,IS 15370,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Textiles — Domestic washing and
+IS_252,IS 252,Standard,IS_265,IS 265,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1987
+IS_252,IS 252,Standard,IS_296,IS 296,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1986
+IS_252,IS 252,Standard,IS_323,IS 323,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1959
+IS_252,IS 252,Standard,IS_1070,IS 1070,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1977
+IS_252,IS 252,Standard,IS_1260,IS 1260,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Pictorial marking for handling
+IS_252,IS 252,Standard,IS_4264,IS 4264,Standard,NORMATIVE_REF,Clause 2 Normative References Table,: 1967
+IS_1141,IS 1141,Standard,IS_287,IS 287,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Recommendations for maxi-
+IS_1141,IS 1141,Standard,IS_401,IS 401,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Code of practice for preserva-
+IS_1141,IS 1141,Standard,IS_707,IS 707,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Glossary of terms applicable
+IS_1141,IS 1141,Standard,IS_6313,IS 6313,Standard,NORMATIVE_REF,Clause 2 Normative References Table,Code of practice for anti-
+IS_1141,IS 1141,Standard,IS_7315,IS 7315,Standard,NORMATIVE_REF,Clause 2 Normative References Table,"Guidelines for design, installa-"
+IS_1141,IS 1141,Standard,IS_11215,IS 11215,TestStandard,TESTED_BY,Clause 2 Normative References Table,Methods for determination of
+IS_101_Part_1_Sec_1,IS 101 (Part 1/Sec 1),Standard,IS_101,IS 101,TestStandard,TESTED_BY,Clause 2 Normative References,"1-1 (1986) : Methods of sampling and test for paints,"
+IS_101_Part_1_Sec_1,IS 101 (Part 1/Sec 1),Standard,IS_1,IS 1,Standard,NORMATIVE_REF,Clause 2 Normative References,101 ( Part 1/Sec 1 ) - 1986
+IS_287,IS 287,Standard,IS_11215,IS 11215,TestStandard,TESTED_BY,Clause 2 Normative References,1991 'Methods for determination of
+IS_104,IS 104,Standard,IS_104_1979,IS 104 (1979),Standard,NORMATIVE_REF,Clause 2 Normative References,"Ready mixed paint, brushing, zinc chrome,"
+IS_104,IS 104,Standard,IS_1,IS 1,Standard,NORMATIVE_REF,Clause 2 Normative References,104 - 1979

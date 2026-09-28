@@ -1,0 +1,14 @@
+{
+  "nodes": {
+    "standards_count": 21934,
+    "qco_orders_count": 192,
+    "ministries_count": 11
+  },
+  "edges": {
+    "normative_ref_count": 75,
+    "tested_by_count": 25,
+    "mandated_by_count": 761,
+    "total_edges": 861
+  },
+  "export_directory": "data/graph_export"
+}

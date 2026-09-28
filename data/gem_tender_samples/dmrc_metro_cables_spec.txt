@@ -1,0 +1,5 @@
+TENDER SPECIFICATION: 1.1 kV XLPE INSULATED POWER CABLES
+1. Cables shall conform to IS 7098 (Part 1):1988 with copper conductors complying with IS 8130.
+2. Domestic wiring portions shall conform to IS 694:2010.
+3. Testing for insulation resistance shall follow IS 10810 (Part 43).
+4. All cables must bear the BIS ISI Mark under the Ministry of Heavy Industries Wires and Cables QCO.

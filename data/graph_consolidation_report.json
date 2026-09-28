@@ -1,0 +1,23 @@
+{
+  "nodes": {
+    "Standard": 21932,
+    "QCO": 192,
+    "total_nodes": 22124
+  },
+  "edges": {
+    "breakdown": {
+      "MANDATED_BY": 761,
+      "SUPERSEDES": 2115,
+      "TESTED_BY": 2210,
+      "NORMATIVE_REF": 2913,
+      "ISSUED_BY": 13,
+      "REQUIRES_SCHEME": 13
+    },
+    "total_edges": 8025
+  },
+  "files_generated": [
+    "/Users/rudrarajsingh/Desktop/antigravity/data/final_nodes_standards.csv",
+    "/Users/rudrarajsingh/Desktop/antigravity/data/final_nodes_qcos.csv",
+    "/Users/rudrarajsingh/Desktop/antigravity/data/final_edges_all.csv"
+  ]
+}

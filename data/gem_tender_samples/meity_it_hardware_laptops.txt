@@ -1,0 +1,10 @@
+TECHNICAL SPECIFICATION FOR COMMERCIAL LAPTOPS (QTY: 500 UNITS)
+Processor: Intel Core i7 13th Gen or AMD Ryzen 7 PRO series.
+RAM: 16 GB DDR5 4800MHz expandable to 64 GB.
+Storage: 512 GB PCIe NVMe M.2 SSD.
+Display: 14.0 inch Full HD IPS Anti-glare display.
+MANDATORY STATUTORY COMPLIANCE:
+1. All equipment must conform to IS 13252 (Part 1):2010 for Information Technology Equipment Safety.
+2. Secondary Lithium-ion battery packs must be certified to IS 16046 (Part 2):2018.
+3. Power adapter must comply with IS 13252 (Part 1) and possess 3-pin plug conforming to IS 1293.
+4. Bidders must upload valid BIS Compulsory Registration Scheme (CRS) R-number for both Laptop and Battery pack at the time of bid submission.

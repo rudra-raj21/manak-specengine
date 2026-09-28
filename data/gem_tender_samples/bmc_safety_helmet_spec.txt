@@ -1,0 +1,5 @@
+SPECIFICATION FOR INDUSTRIAL SAFETY HELMETS (QTY: 2,500 NOS)
+1. Helmets shall be Type-1 industrial safety helmets conforming to IS 2925:1984.
+2. Shell material: High Density Polyethylene (HDPE) with UV stabilizer.
+3. Must carry BIS ISI Mark embossed on the peak.
+4. Shock absorption test shall be certified by NABL/BIS test house.

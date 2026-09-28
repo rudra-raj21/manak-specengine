@@ -1,0 +1,26 @@
+source_standard_id,target_test_standard_id,source_is,target_is,relation,clause,description
+IS_2062,IS_1608_Part_1,IS 2062,IS 1608 (Part 1),TESTED_BY,Clause 2,Tensile testing at room temperature
+IS_2062,IS_1599,IS 2062,IS 1599,TESTED_BY,Clause 2,Bend testing for ductility
+IS_2062,IS_1757_Part_1,IS 2062,IS 1757 (Part 1),TESTED_BY,Clause 2,Charpy impact testing for notch toughness
+IS_1786,IS_1608_Part_1,IS 1786,IS 1608 (Part 1),TESTED_BY,Clause 2,Proof stress and elongation tensile testing
+IS_1786,IS_1599,IS 1786,IS 1599,TESTED_BY,Clause 2,Bend and rebend testing
+IS_456,IS_516_Part_1_Sec_1,IS 456,IS 516 (Part 1/Sec 1),TESTED_BY,Clause 2,Compressive and flexural strength of concrete
+IS_456,IS_1199_Part_1,IS 456,IS 1199 (Part 1),TESTED_BY,Clause 2,Sampling and workability slump testing
+IS_383,IS_2386_Part_1,IS 383,IS 2386 (Part 1),TESTED_BY,Clause 2,Particle size sieve analysis
+IS_269,IS_4031_Part_5,IS 269,IS 4031 (Part 5),TESTED_BY,Clause 2,Initial and final setting times
+IS_1077,IS_3495_Part_1,IS 1077,IS 3495 (Part 1),TESTED_BY,Clause 2,Compressive strength of burnt clay bricks
+IS_694,IS_10810_Part_43,IS 694,IS 10810 (Part 43),TESTED_BY,Clause 2,Insulation resistance testing of cables
+IS_4984,IS_12235_Part_1,IS 4984,IS 12235 (Part 1),TESTED_BY,Clause 2,Dimensional measurement and wall thickness
+IS_4984,IS_12235_Part_2,IS 4984,IS 12235 (Part 2),TESTED_BY,Clause 2,Density determination of polyethylene
+IS_15298_Part_2,IS_15298_Part_2,IS 15298 (Part 2),IS 15298 (Part 2),TESTED_BY,Clause 2,Toe cap 200J impact and 15kN compression tests
+IS_2062,IS_228,IS 2062,IS 228,TESTED_BY,Clause 2 Normative References Table,(in various Methods for chemical analysis of
+IS_2062,IS_808,IS 2062,IS 808,TESTED_BY,Clause 2 Normative References Table,Dimensions for hot rolled steel
+IS_2062,IS_1252,IS 2062,IS 1252,TESTED_BY,Clause 2 Normative References Table,Dimensions of hot rolled steel
+IS_2062,IS_1608,IS 2062,IS 1608,TESTED_BY,Clause 2 Normative References Table,Metallic materials — Tensile
+IS_2062,IS_1730,IS 2062,IS 1730,TESTED_BY,Clause 2 Normative References Table,Dimensions for steel plates
+IS_1893_Part_1,IS_2131,IS 1893 (Part 1),IS 2131,TESTED_BY,Clause 2 Normative References Table,Method of standard penetration test
+IS_1893_Part_1,IS_6403,IS 1893 (Part 1),IS 6403,TESTED_BY,Clause 2 Normative References Table,Code of practice for determination
+IS_1852,IS_1852_1985,IS 1852,IS 1852 (1985),TESTED_BY,Clause 2 Normative References,Rolling and cutting tolerances for hot
+IS_432_Part_1,IS_432,IS 432 (Part 1),IS 432,TESTED_BY,Clause 2 Normative References,1  (1982) :  Mild  Steel  and  Medium  Tensile  Steel  Bars
+IS_7098_Part_1,IS_10810_Part_62,IS 7098 (Part 1),IS 10810 ( (Part 62) ),TESTED_BY,Clause 2 Normative References,"described  in   .  For  the  purpose  of  this  standard,  category  B  and  C  test"
+IS_7098_Part_1,IS_10810,IS 7098 (Part 1),IS 10810,TESTED_BY,Clause 2 Normative References,Method  Refer  Part  No.  of  .

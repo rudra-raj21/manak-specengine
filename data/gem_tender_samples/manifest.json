@@ -1,0 +1,302 @@
+[
+  {
+    "tender_id": "GEM/2026/B/890123",
+    "title": "Procurement of High Strength Deformed Steel Bars for Flyover Bridge Foundation",
+    "department": "National Highways Authority of India (NHAI)",
+    "language": "en",
+    "file_name": "nhai_bridge_rebar_spec.txt",
+    "category": "Construction Materials",
+    "raw_text": "TENDER SPECIFICATION: HIGH STRENGTH DEFORMED TMT BARS FOR SUB-STRUCTURE AND FOUNDATION\n1. SCOPE: Supply of Thermo-Mechanically Treated (TMT) steel reinforcement bars for pier and pile cap foundation work.\n2. TECHNICAL SPECIFICATIONS:\n   - Grade: Fe 500D conforming strictly to IS 1786 (latest edition).\n   - Nominal Diameters: 16mm, 20mm, 25mm, and 32mm.\n   - Proof Stress (0.2%): Minimum 500.0 N/mm2.\n   - Tensile Strength (TS): Minimum 565.0 N/mm2; TS/YS ratio not less than 1.10.\n   - Total Elongation at maximum force: Minimum 5.0%.\n   - Chemical Composition: Carbon <= 0.25%, Sulphur <= 0.040%, Phosphorus <= 0.040%, (S+P) <= 0.075%.\n3. QUALITY ASSURANCE & MANDATORY CERTIFICATION:\n   - Manufacturer must hold a valid BIS License for marking with the Standard Mark (ISI Mark) under Scheme-I in accordance with the Steel and Steel Products (Quality Control) Order.\n   - Routine testing must include tensile test per IS 1608 (Part 1) and bend/rebend test per IS 1599 from NABL accredited lab.\n   - Every consignment must be accompanied by Manufacturer Test Certificate (MTC) with heat numbers matching physical bar embossings.",
+    "expected_findings": {
+      "standards_referenced": [
+        "IS 1786",
+        "IS 1608 (Part 1)",
+        "IS 1599"
+      ],
+      "qco_compliant": true,
+      "deprecated_standards": [],
+      "compliance_score": 98
+    }
+  },
+  {
+    "tender_id": "GEM/2026/B/543210",
+    "title": "Supply of Structural Steel Beams and Plates for Workshop Fabrication (Trap: Deprecated Standard & Missing QCO)",
+    "department": "Central Public Works Department (CPWD)",
+    "language": "en",
+    "file_name": "cpwd_structural_steel_trap_spec.txt",
+    "category": "Civil & Structural",
+    "raw_text": "NOTICE INVITING TENDER FOR FABRICATION STEEL\nTenderers are invited to supply hot rolled steel plates and rolled joists for industrial shed roof trusses.\nSPECIFICATIONS:\n1. Steel sections shall conform to IS 2062:2006 Grade A.\n2. Mild steel round tie bars shall conform to IS 432 (Part 1) - 1982.\n3. Beams shall be ISMB 300 and ISMB 400.\n4. Material can be supplied from secondary re-rollers without BIS certification provided mill test certificates are furnished.\n5. Invoicing must be on actual weighbridge weight.",
+    "expected_findings": {
+      "standards_referenced": [
+        "IS 2062:2006",
+        "IS 432 (Part 1)"
+      ],
+      "qco_compliant": false,
+      "deprecated_standards": [
+        "IS 2062:2006 (superseded by 2011)",
+        "IS 432 (Part 1) (superseded by IS 1786/IS 2062)"
+      ],
+      "omissions": [
+        "Missing mandatory BIS ISI Mark requirement under Steel QCO 2024",
+        "Missing Charpy impact test method IS 1757",
+        "Missing tensile testing standard IS 1608"
+      ],
+      "compliance_score": 38
+    }
+  },
+  {
+    "tender_id": "GEM/2026/B/112233",
+    "title": "Procurement of Commercial Laptops and Mobile Workstations",
+    "department": "Ministry of Electronics & Information Technology",
+    "language": "en",
+    "file_name": "meity_it_hardware_laptops.txt",
+    "category": "IT Equipment",
+    "raw_text": "TECHNICAL SPECIFICATION FOR COMMERCIAL LAPTOPS (QTY: 500 UNITS)\nProcessor: Intel Core i7 13th Gen or AMD Ryzen 7 PRO series.\nRAM: 16 GB DDR5 4800MHz expandable to 64 GB.\nStorage: 512 GB PCIe NVMe M.2 SSD.\nDisplay: 14.0 inch Full HD IPS Anti-glare display.\nMANDATORY STATUTORY COMPLIANCE:\n1. All equipment must conform to IS 13252 (Part 1):2010 for Information Technology Equipment Safety.\n2. Secondary Lithium-ion battery packs must be certified to IS 16046 (Part 2):2018.\n3. Power adapter must comply with IS 13252 (Part 1) and possess 3-pin plug conforming to IS 1293.\n4. Bidders must upload valid BIS Compulsory Registration Scheme (CRS) R-number for both Laptop and Battery pack at the time of bid submission.",
+    "expected_findings": {
+      "standards_referenced": [
+        "IS 13252 (Part 1)",
+        "IS 16046 (Part 2)",
+        "IS 1293"
+      ],
+      "qco_compliant": true,
+      "deprecated_standards": [],
+      "compliance_score": 100
+    }
+  },
+  {
+    "tender_id": "GEM/2026/B/998877",
+    "title": "Tender for Design Mix Concrete M30 for Multi-Storey Residential Complex",
+    "department": "Delhi Development Authority (DDA)",
+    "language": "en",
+    "file_name": "dda_rmc_concrete_spec.txt",
+    "category": "Civil Construction",
+    "raw_text": "TENDER SPECIFICATION: READY MIX CONCRETE (RMC) M-30 GRADE\n1. Concrete shall be designed in accordance with IS 10262:2019 and IS 456:2000.\n2. Cement used shall be Ordinary Portland Cement 43 Grade conforming to IS 269:2015.\n3. Coarse and fine aggregates shall strictly adhere to IS 383:2016 (Zone-II for sand).\n4. Concrete workability shall be tested at batching plant and site per IS 1199 (Part 1).\n5. Compressive strength shall be determined from 150mm cubes tested at 7 days and 28 days in accordance with IS 516 (Part 1/Sec 1).\n6. Ductile detailing of all beams and columns shall follow IS 13920:2016 for Seismic Zone IV.",
+    "expected_findings": {
+      "standards_referenced": [
+        "IS 10262",
+        "IS 456",
+        "IS 269",
+        "IS 383",
+        "IS 1199 (Part 1)",
+        "IS 516 (Part 1/Sec 1)",
+        "IS 13920"
+      ],
+      "qco_compliant": true,
+      "deprecated_standards": [],
+      "compliance_score": 97
+    }
+  },
+  {
+    "tender_id": "GEM/2026/B/334455",
+    "title": "Supply and Laying of HDPE Potable Water Pipes (Trap: Raw Material Unspecified)",
+    "department": "Public Health Engineering Department (PHED), Rajasthan",
+    "language": "en",
+    "file_name": "phed_water_hdpe_pipe_trap.txt",
+    "category": "Piping & Water Supply",
+    "raw_text": "TENDER FOR HDPE PIPES UNDER JAL JEEVAN MISSION\n1. Supply of 110mm and 160mm OD HDPE Pipes rating PN-10.\n2. Pipes shall comply with IS 4984.\n3. Re-granulated recycled plastic may be blended up to 30% to reduce project costs.\n4. Hydrostatic pressure test must be performed by the contractor.",
+    "expected_findings": {
+      "standards_referenced": [
+        "IS 4984"
+      ],
+      "qco_compliant": false,
+      "deprecated_standards": [],
+      "omissions": [
+        "Violates IS 4984 clause prohibiting recycled polymer blending for drinking water",
+        "Missing mandatory virgin raw material standard IS 7328",
+        "Missing DPIIT/Chemicals QCO mandatory ISI license requirement",
+        "Missing test methods IS 12235 (Part 1 and 2)"
+      ],
+      "compliance_score": 42
+    }
+  },
+  {
+    "tender_id": "GEM/2026/B/776655",
+    "title": "Procurement of 500kVA Distribution Transformers with Star Rating",
+    "department": "Uttar Pradesh Power Corporation Limited (UPPCL)",
+    "language": "en",
+    "file_name": "uppcl_transformer_spec.txt",
+    "category": "Electrical Power",
+    "raw_text": "TECHNICAL SPECIFICATION FOR 500 kVA, 11/0.433 kV OUTDOOR DISTRIBUTION TRANSFORMERS\n1. APPLICABLE STANDARDS: The transformer shall conform to IS 1180 (Part 1):2014 with Energy Efficiency Level-2.\n2. Insulating oil shall conform to IS 335.\n3. CERTIFICATION: The unit must bear the mandatory BIS Standard Mark (ISI Mark) under Scheme-I per the Electric Transformers (Quality Control) Order.\n4. Transformer must also hold BEE 3-Star or higher energy conservation label.\n5. Routine tests shall be witnessed by third-party inspection agency (RITES / CPRI).",
+    "expected_findings": {
+      "standards_referenced": [
+        "IS 1180 (Part 1)",
+        "IS 335"
+      ],
+      "qco_compliant": true,
+      "deprecated_standards": [],
+      "compliance_score": 96
+    }
+  },
+  {
+    "tender_id": "GEM/2026/B/889900",
+    "title": "Industrial Safety Footwear for Thermal Power Station Personnel",
+    "department": "NTPC Limited",
+    "language": "en",
+    "file_name": "ntpc_safety_shoes_spec.txt",
+    "category": "PPE & Safety",
+    "raw_text": "TENDER REQUIREMENT: SAFETY SHOES FOR PLANT OPERATORS\n1. Footwear must provide steel toe protection against 200 Joules impact.\n2. Must strictly comply with IS 15298 (Part 2):2016 for Safety Footwear.\n3. Under DPIIT Footwear QCO, the product must carry an authentic BIS ISI Mark.\n4. Soling material: Double density PU sole, oil and acid resistant, anti-static.",
+    "expected_findings": {
+      "standards_referenced": [
+        "IS 15298 (Part 2)"
+      ],
+      "qco_compliant": true,
+      "deprecated_standards": [],
+      "compliance_score": 100
+    }
+  },
+  {
+    "tender_id": "GEM/2026/B/665544",
+    "title": "Supply of Grid-Connected Solar Rooftop Photovoltaic Modules",
+    "department": "Solar Energy Corporation of India (SECI)",
+    "language": "en",
+    "file_name": "seci_solar_pv_spec.txt",
+    "category": "Renewable Energy",
+    "raw_text": "SPECIFICATION FOR MONOCRYSTALLINE SOLAR PHOTOVOLTAIC MODULES\n1. PV Modules must conform to IS 14286 (Design qualification and type approval).\n2. Construction safety must conform to IS/IEC 61730 (Part 1) and Part 2.\n3. Mandatory MNRE Order: All modules must be registered under BIS Compulsory Registration Scheme (CRS) and enlisted in the Approved List of Models and Manufacturers (ALMM).\n4. Power output warranty: 90% at the end of 10 years, 80% at 25 years.",
+    "expected_findings": {
+      "standards_referenced": [
+        "IS 14286",
+        "IS/IEC 61730 (Part 1)"
+      ],
+      "qco_compliant": true,
+      "deprecated_standards": [],
+      "compliance_score": 98
+    }
+  },
+  {
+    "tender_id": "GEM/2026/B/221100",
+    "title": "Multilingual Tender Spec: कंक्रीट निर्माण के लिए स्टील की छड़ें (Steel rods for concrete construction)",
+    "department": "Madhya Pradesh Public Works Department (MP PWD)",
+    "language": "hi",
+    "file_name": "mp_pwd_hindi_tmt_spec.txt",
+    "category": "Civil & Construction",
+    "raw_text": "निविदा विशिष्टता: भवन निर्माण हेतु उच्च शक्ति टीएमटी स्टील की छड़ें (Fe 500D)\n१. कार्य का विवरण: शासकीय महाविद्यालय भवन निर्माण हेतु कंक्रीट सुदृढीकरण के लिए स्टील छड़ों की आपूर्ति।\n२. तकनीकी मानक: छड़ें अनिवार्य रूप से IS 1786 (नवीनतम संशोधन) के ग्रेड Fe 500D के अनुरूप होनी चाहिए।\n३. अनिवार्य प्रमाणन: इस्पात मंत्रालय के गुणवत्ता नियंत्रण आदेश (QCO) के तहत निर्माता के पास वैध बीआईएस आईएसआई मार्क (BIS ISI Mark) लाइसेंस होना अनिवार्य है।\n४. परीक्षण: प्रत्येक लॉट का तन्यता परीक्षण IS 1608 (Part 1) और मोड़ परीक्षण IS 1599 के अनुसार किया जाएगा।",
+    "expected_findings": {
+      "standards_referenced": [
+        "IS 1786",
+        "IS 1608 (Part 1)",
+        "IS 1599"
+      ],
+      "language_detected": "hi",
+      "qco_compliant": true,
+      "deprecated_standards": [],
+      "compliance_score": 100
+    }
+  },
+  {
+    "tender_id": "GEM/2026/B/445566",
+    "title": "Low Smoke Zero Halogen (FRLS) Power Cables for Underground Metro Station",
+    "department": "Delhi Metro Rail Corporation (DMRC)",
+    "language": "en",
+    "file_name": "dmrc_metro_cables_spec.txt",
+    "category": "Electrical Cables",
+    "raw_text": "TENDER SPECIFICATION: 1.1 kV XLPE INSULATED POWER CABLES\n1. Cables shall conform to IS 7098 (Part 1):1988 with copper conductors complying with IS 8130.\n2. Domestic wiring portions shall conform to IS 694:2010.\n3. Testing for insulation resistance shall follow IS 10810 (Part 43).\n4. All cables must bear the BIS ISI Mark under the Ministry of Heavy Industries Wires and Cables QCO.",
+    "expected_findings": {
+      "standards_referenced": [
+        "IS 7098 (Part 1)",
+        "IS 694",
+        "IS 10810 (Part 43)"
+      ],
+      "qco_compliant": true,
+      "deprecated_standards": [],
+      "compliance_score": 97
+    }
+  },
+  {
+    "tender_id": "GEM/2026/B/771122",
+    "title": "Procurement of Packaged Drinking Water Jars for Government Offices (Trap: Unlicensed Supplier Allowed)",
+    "department": "General Administration Department, Secretariat",
+    "language": "en",
+    "file_name": "gad_packaged_water_trap_spec.txt",
+    "category": "Food & Public Health",
+    "raw_text": "TENDER NOTICE FOR 20-LITRE PACKAGED DRINKING WATER JARS\n1. Daily supply of 200 jars of purified chilled drinking water.\n2. Water should be clean and RO purified.\n3. IS 14543 may be followed as a recommended guideline.\n4. Local reverse osmosis water packaging plants without BIS registration may participate if local municipal health certificate is produced.",
+    "expected_findings": {
+      "standards_referenced": [
+        "IS 14543"
+      ],
+      "qco_compliant": false,
+      "omissions": [
+        "Illegal under Ministry of Consumer Affairs Packaged Water Mandate (ISI mark is legally mandatory under Scheme-I)",
+        "Municipal certificate cannot substitute BIS license",
+        "Non-compliance with BIS Act Section 16"
+      ],
+      "compliance_score": 25
+    }
+  },
+  {
+    "tender_id": "GEM/2026/B/992211",
+    "title": "Procurement of Marine Plywood for Coastal Naval Barracks",
+    "department": "Military Engineer Services (MES)",
+    "language": "en",
+    "file_name": "mes_marine_plywood_spec.txt",
+    "category": "Wood & Interiors",
+    "raw_text": "SPECIFICATION FOR BWP GRADE MARINE PLYWOOD\n1. Plywood shall be 19mm Boiling Water Proof (BWP) conforming to IS 710:2010.\n2. Synthetic resin adhesive shall be unextended phenol formaldehyde.\n3. Under DPIIT Plywood QCO 2024, every sheet must bear the BIS Standard Mark with CM/L license number.\n4. Moisture content shall not exceed 10%.",
+    "expected_findings": {
+      "standards_referenced": [
+        "IS 710"
+      ],
+      "qco_compliant": true,
+      "deprecated_standards": [],
+      "compliance_score": 98
+    }
+  },
+  {
+    "tender_id": "GEM/2026/B/331188",
+    "title": "Procurement of Flame Retardant Protective Suits for Chemical Disaster Response",
+    "department": "National Disaster Response Force (NDRF)",
+    "language": "en",
+    "file_name": "ndrf_flame_suit_spec.txt",
+    "category": "Textiles & PPE",
+    "raw_text": "TECHNICAL SPECIFICATION: HEAT AND FLAME PROTECTIVE APPAREL\n1. Garments must comply with IS 15748:2007 (Protective clothing against heat and flame).\n2. Fabric must exhibit limited flame spread, heat resistance, and tensile strength.\n3. Mandatory Ministry of Textiles QCO compliance with valid BIS license certification.",
+    "expected_findings": {
+      "standards_referenced": [
+        "IS 15748"
+      ],
+      "qco_compliant": true,
+      "deprecated_standards": [],
+      "compliance_score": 96
+    }
+  },
+  {
+    "tender_id": "GEM/2026/B/554433",
+    "title": "Procurement of Electric Motors and Switchgear (Trap: Outdated IEC / IS Standard)",
+    "department": "Irrigation & Water Resources Department, Haryana",
+    "language": "en",
+    "file_name": "irrigation_switchgear_trap_spec.txt",
+    "category": "Electrical Machinery",
+    "raw_text": "TENDER FOR L.T. AIR CIRCUIT BREAKERS AND PLUGS\n1. Power cords with plugs must conform to old IS 1293:1988 standard.\n2. Plugs may have unsheathed live pins.\n3. Breakers shall conform to IS 13947 (superseded standard).\n4. No BIS certification certificate is required if foreign CE certificate is attached.",
+    "expected_findings": {
+      "standards_referenced": [
+        "IS 1293:1988",
+        "IS 13947"
+      ],
+      "qco_compliant": false,
+      "deprecated_standards": [
+        "IS 1293:1988 is superseded by IS 1293:2019",
+        "IS 13947 is superseded by IS/IEC 60947"
+      ],
+      "omissions": [
+        "Violates DPIIT Plugs & Sockets QCO 2021",
+        "CE certificate is legally invalid in place of BIS ISI mark in India",
+        "Unsheathed pins pose serious electrical shock hazard"
+      ],
+      "compliance_score": 20
+    }
+  },
+  {
+    "tender_id": "GEM/2026/B/884422",
+    "title": "Procurement of Industrial Safety Helmets for Municipal Drainage Workers",
+    "department": "Brihanmumbai Municipal Corporation (BMC)",
+    "language": "en",
+    "file_name": "bmc_safety_helmet_spec.txt",
+    "category": "PPE & Safety",
+    "raw_text": "SPECIFICATION FOR INDUSTRIAL SAFETY HELMETS (QTY: 2,500 NOS)\n1. Helmets shall be Type-1 industrial safety helmets conforming to IS 2925:1984.\n2. Shell material: High Density Polyethylene (HDPE) with UV stabilizer.\n3. Must carry BIS ISI Mark embossed on the peak.\n4. Shock absorption test shall be certified by NABL/BIS test house.",
+    "expected_findings": {
+      "standards_referenced": [
+        "IS 2925"
+      ],
+      "qco_compliant": true,
+      "deprecated_standards": [],
+      "compliance_score": 95
+    }
+  }
+]

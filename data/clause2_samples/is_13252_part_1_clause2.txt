@@ -1,0 +1,977 @@
+2 
+
+
+
+Reference 
+
+
+Test 
+impulse 
+
+
+Figure 
+
+
+Ci 
+
+
+C2 
+
+
+R^ 
+
+
+R2 
+
+
+^3 
+
+
+Rs 
+
+
+See 
+
+
+1 " 
+
+
+10/700 ps 
+
+
+N.I 
+
+
+20 pF 
+
+
+0,2 pF 
+
+
+son 
+
+
+i5n 
+
+
+25 n 
+
+
+
+
+1.5.7.3, 2.10.3.9, 
+
+6.2.2.1, 7.4.3 
+
+and item b) of 
+
+Clause G.5 
+
+
+2b 
+
+
+1,2/50 ps 
+
+
+N.I 
+
+
+1 pF 
+
+
+30 nF 
+
+
+76 n 
+
+
+13 n 
+
+
+25 n 
+
+
+— 
+
+
+1.5.7.2, 2.10.3.9 
+
+and item a) of 
+
+Clause G.5 
+
+
+a-^ 
+
+
+- 
+
+
+N.2 
+
+
+1 nF 
+
+
+- 
+
+
+1 kfi 
+
+
+- 
+
+
+- 
+
+
+15 M£l 
+
+
+1.5.7.3 
+and 7.4.2 
+
+
+a Reference 1 impulse is typical of voltages induced into telephone wires and coaxial cables in long outdoor 
+cable runs by nearby lightning strikes to earth. 
+
+b Reference 2 impulse is typical of earth potential rises caused either by lightning strikes to power lines or 
+by power line faults. 
+
+<: Reference 3 impulse is typical of voltages induced into antenna system wiring caused by nearby lightning 
+strikes to earth. 
+
+
+
+231 
+
+
+
+IS13252 (Parti): 2010 
+lEC 60950-1: 2005 
+
+
+
+Annex P 
+
+(normative) 
+
+Normative references 
+
+
+
+The following reference documents are indispensable for the application of this standard. If 
+the date of the reference document is given, only that edition applies, excluding any 
+subsequent corrigenda and amendments. For undated references, the latest edition of the 
+referenced document applies, including any corrigenda and amendments. 
+
+Further information on the reference documents, including how to obtain copies, can be found 
+on the following internet sites: 
+
+http://www.iec.ch 
+
+http://www.iso.org 
+
+http://www.itu.int 
+
+For the locations in the standard where these documents are mentioned, see the Index. 
+
+lEC 60065:2001 :, Audio, video and similar electronic apparatus - Safety requirements 
+Amendment 1^) 
+
+lEC 60068-2-78, Environmental testing - Part 2-78: Tests - Test Cab: Damp heat, steady 
+state 
+
+I EC 60073, Basic and safety principles for man-machine interface, marking and identification 
+- Coding principles for indicators and actuators 
+
+I EC 60083, Plugs and socket-outlets for domestic and similar general use standardized in 
+member countries of lEC 
+
+lEC 60085:2004, Electrical Insulation - Thermal classification 
+
+lEC 60112, Method for determination of the proof and the comparative tracking indices of 
+insulating materials 
+
+lEC 60216-4-1, Guide for the determination of thermal endurance properties of electrical 
+insulating materials - Part 4: Ageing ovens - Section 1: Single-chamber ovens 
+
+lEC 60227 (all parts). Polyvinyl chloride insulated cables of rated voltages up to and including 
+450/750 V 
+
+lEC 60245 (all parts). Rubber insulated cables - Rated voltages up to and including 
+450/750 V 
+
+lEC 60309 (all parts). Plugs, socket-outlets and couplers for industrial purposes 
+
+lEC 60317 (all parts). Specifications for particular types of winding wires 
+
+
+
+^' To be published. 
+
+
+
+232 
+
+
+
+IS13252 (Parti): 2010 
+lEC 60950-1:2005 
+
+
+
+I EC 60317-43, Specifications for particular types of winding wires - Part 43: Aromatic 
+polyimide tape wrapped round copper wire, class 240 
+
+lEC 60320 (all parts), Appliance couplers for household and similar general purposes 
+
+lEC 60364-1:2001, Electrical installations of buildings - Part 1: Fundamental principles, 
+assessment of general characteristics, definitions 
+
+lEC 60384-14:1993, Fixed capacitors for use in electronic equipment - Part 14: Sectional 
+specification: Fixed capacitors for electromagnetic interference suppression and connection to 
+the supply mains 
+Amendment 1 (1995) 
+
+lEC 60417-DB:2002-^), Graphical symbols for use on equipment 
+
+lEC 60664-1:1992, Insulation coordination for equipment within low-voltage systems - Part 1: 
+Principles, requirements and tests^^ 
+Amendment 1 (2000) 
+Amendment 2 (2002) 
+
+lEC 60695-2-11, Fire hazard testing - Part 2-11: Glowing/hot-wire based test methods - 
+Glow-wire flammability test method for end-products 
+
+I EC 60695-2-20, Fire hazard testing - Part 2-20: Glowing/hot wire based test methods - Hot- 
+wire coil ignitability - Apparatus, test method and guidance 
+
+lEC 60695-10-2, Fire hazard testing - Part 10-2: Abnormal heat - Ball pressure test 
+
+lEC 60695-1 1-3, Fire hazard testing - Part 11-3: Test flames - 500 W flames - Apparatus and 
+confirmational test methods 
+
+lEC 60695-1 1-4, Fire hazard testing - Part 11-4: Test flames - 50 W flames - Apparatus and 
+confirmational test methods 
+
+lEC 60695-11-5:2004, Fire hazard testing - Part 11-5: Test flames - Needle-flame test 
+method - Apparatus, confirmatory test arrangement and guidance 
+
+lEC 60695-1 1-10, Fire hazard testing - Part 11-10: Test flames - 50 W horizontal and vertical 
+flame test methods 
+
+lEC 60695-1 1-20, Fire hazard testing - Part 11-20: Test flames - 500 W flame test methods 
+
+lEC 60730-1:1999, Automatic electrical controls for household and similar use - Part 1: 
+General requirements^^ 
+Amendment 1 (2003) 
+
+
+
+3) "DB" refers to the lEC on-line database. 
+
+^) A consolidated edition 1.2 exists, including lEC 60664-1:1992 and its Amendments 1 (2000) and 2 (2002). 
+
+5) A consolidated edition 3.1 exists, including lEC 60730-1:1999 and its Amendment 1 (2003). 
+
+
+
+233 
+
+
+
+IS13252 (Parti): 2010 
+lEC 60950-1: 2005 
+
+
+
+lEC 60747-5-5, ^) Discrete semiconductor devices - Part 5-5: Optoelectronic devices - 
+
+Pliotocouplers, optocouplers 
+
+lEC 60825-1, Safety of laser products - Part 1: Equipment classification, requirements and 
+user's guide 
+
+lEC 60825-2, Safety of laser products - Part 2: Safety of optical fibre communication systems 
+
+I EC 60825-9, Safety of laser products - Part 9: Compilation of maximum permissible 
+exposure to incoherent optical radiation 
+
+lEC 60825-12, Safety of laser products - Part 12: Safety of free space optical communication 
+systems used for transmission of information 
+
+lEC 60851-3:1996, Winding wires - Test methods - Part 3: Mechanical properties^") 
+Amendment 1 (1997) 
+
+lEC 60851-5:1996, Winding wires - Test methods - Part 5: Electrical properties^") 
+Amendment 1 (1997) 
+Amendment 2 (2004) 
+
+lEC 60851-6:1996, Winding wires - Test methods - Part 6: Thermal properties 
+
+lEC 60885-1:1987, Electrical test methods for electric cables - Part 1: Electrical tests for 
+cables, cords and wires for voltages up to and including 450/750 V 
+
+lEC 60906-1, lEC system of plugs and socket-outlets for household and similar purposes - 
+Part 1: Plugs and socket-outlets 16 A 250 V a.c. 
+
+I EC 60906-2, I EC system of plugs and socket-outlets for household and similar purposes - 
+Part 2: Plugs and socket-outlets 15 A 125 V a.c. 
+
+lEC 60947-1 :2004, Low voltage switchgear and control gear - Part 1: General rules 
+
+lEC 60990:1999, Methods of measurement of touch current and protective conductor current 
+
+lEC 61051-2:1991, Varistors for use in electronic equipment - Part 2: Sectional specification 
+for surge suppression varistors 
+
+lEC 61058-1 :2000, Switches for appliances - Part 1: General requirements 
+
+ISO 178, Plastics - Determination of flexural properties 
+
+ISO 179 (all parts). Plastics- Determination of Charpy impact properties 
+
+ISO 180, Plastics - Determination of Izod impact strength 
+
+
+
+6) To be published. 
+
+7) A consolidated edition 2.1 exists, including lEC 60851-3:1996 and its Amendment 1 (1997). 
+
+8) A consolidated edition 3.2 exists, including lEC 60851-5:1996 and its Amendments 1 (1997) and 2 (2004). 
+
+
+
+234 
+
+
+
+IS 13252 (Parti): 2010 
+lEC 60950-1:2005 
+
+
+
+ISO 261 , ISO General-purpose metric screw threads - General plan 
+
+ISO 262, ISO General-purpose metric screw threads - Selected sizes for screws, bolts and 
+nuts 
+
+ISO 527 (all parts), Plastics- Determination of tensile properties 
+
+ISO 3864 (all parts). Graphical symbols - Safety colours and safety signs 
+
+ISO 4892-1, Plastics - Methods of exposure to laboratory light sources - Part 1: General 
+guidance 
+
+ISO 4892-2, Plastics - Methods of exposure to laboratory light sources - Part 2: Xenon-arc 
+sources 
+
+ISO 4892-4, Plastics, Methods of exposure to laboratory light sources - Part 4: Open-flame 
+carbon-arc lamps 
+
+ISO 7000-DB:20049), Graphical symbols for use on equipment - Index and synopsis 
+
+ISO 8256, Plastics - Determination of tensile-impact strength 
+
+ISO 9772, Cellular plastics - Determination of horizontal burning characteristics of small 
+specimens subjected to a small flame 
+
+ISO 9773, Plastics - Determination of burning behaviour of thin flexible vertical specimens in 
+contact with a small-flame ignition source 
+
+ITU-T Recommendation K.44, Resistibility tests for telecommunication equipment exposed to 
+overvoltages and overcurrents - Basic Recommendation 
+
+
+
+9) "DB" refers to the lEC and ISO on-line database. 
+
+
+
+235 
+
+
+
+IS 13252 (Parti): 2010 
+lEC 60950-1:2005 
+
+
+
+Annex Q 
+
+(normative) 
+
+Voltage dependent resistors (VDRs) 
+
+(see 1.5.9.1) 
+
+
+
+A VDR used in a primary circuit shall comply with lEC 61051-2, with the following details. 
+
+a) Preferred climatic categories (2.1.1 of lEC 61051-2) 
+
+Lower category temperature: - 10 °C 
+Upper category temperature: + 85 °C 
+Duration of damp heat, steady state test: 21 days 
+
+b) IVIaximum continuous voltage (2.1.2 of lEC 61051-2) 
+
+The maximum continuous a.c. voltage is selected from the list of preferred voltages and 
+shall be at least 120 % of 
+
+- the RATED VOLTAGE of the equipment or 
+
+- the upper voltage of the rated voltage range of the equipment. 
+
+c) Pulse current (Table I group 1 of lEC 61051-2) 
+
+Combination pulses of 6 kV/3 kA of alternating polarity are used, having a pulse shape of 
+1,2/50 ^JS for voltage and 8/20 IJS for current. 
+
+In addition to the performance requirements of Table I group 1, the clamping voltage after the 
+test shall not have changed by more than 10 % when measured with the manufacturer's 
+specified current. 
+
+
+
+236 
+
+
+
+IS 13252 (Parti): 2010 
+lEC 60950-1:2005 
+
+
+
+Annex R 
+
+(informative) 
+
+Examples of requirements for quality control programmes 
+
+NOTE This annex gives examples of requirements for quality control programmes as specified in 2.10.6.2 for 
+minimum separation distances for coated printed boards and in 2.10.3 and Clause G.2 for reduced clearances. 
+
+
+
+R.I Minimum separation distances for unpopulated coated printed boards 
+
+(see 2.10.6.2) 
+
+A manufacturer wishing to use the reduced separation distances permitted by 2.10.6.2, 
+Table 2Q, shall implement a quality control programme for those features of the boards that 
+are listed in Table R.I. This programme shall include specific quality controls for the tools and 
+materials that affect conductor spacing, adequate inspection of pattern and spacing, 
+cleanliness, coating thickness, electrical tests for short-circuits, insulation resistance and 
+electric withstand voltage. 
+
+The manufacturer shall also identify and plan the protection and, where applicable, 
+installation processes that directly affect quality and shall ensure that these processes are 
+conducted under controlled conditions. Controlled conditions shall include the following: 
+
+- documented work instructions defining process, equipment, environment and manner of 
+production where the absence of such instructions would adversely affect quality, use of 
+suitable production and installation equipment, suitable working environment, compliance 
+with reference standards, specifications and quality plans; 
+
+- monitoring and control of suitable processes and product characteristics during production 
+and installation in the equipment; 
+
+- criteria for workmanship stipulated to the extent necessary in written specifications or by 
+means of representative samples; 
+
+- records maintained for qualified processes, equipment and personnel as appropriate. 
+
+Table R.I provides the sampling plan for attributes and tests necessary to conform to the 
+requirements of 2.10.6.2. The number of samples of production boards shall be based on 
+lEC 60410 or ISO 2859-1 or equivalent national standards. 
+
+
+
+237 
+
+
+
+IS 13252 (Parti): 2010 
+I EC 60950-1:2005 
+
+
+
+Table R.I - Rules for sampling and inspection - coated printed boards 
+
+
+
+Tests 
+
+
+BASIC 
+INSULATION 
+
+
+SUPPLEMENTARY 
+INSULATION 
+
+
+REINFORCED 
+INSULATION 
+
+
+Spacing mm ^ 
+
+
+Sampling 
+S2 AQL 1,0 
+
+
+Sampling 
+S2 AQL 1,0 
+
+
+Sampling 
+S2 AQL 1,0 
+
+
+Electric strength test '' 
+
+
+Sampling 
+S2 AQL 2,5 
+
+
+Sampling 
+S2 AQL 2,5 
+
+
+ROUTINE test; 
+
+one failure requires 
+evaluation for cause 
+
+
+Abrasion resistance 
+
+
+Sampling 
+81 AQL 2,5 
+
+
+Sampling 
+SI AQL 2,5 
+
+
+Sampling 
+SI AQL 2,5 
+
+
+Thermal ageing " 
+
+
+Sampling 
+S3 AQL 4 
+
+
+Sampling 
+S3 AQL 4 
+
+
+Sampling 
+S3 AQL 4 
+
+
+Thermal cycling " 
+
+
+Sampling 
+SI AQL 1,5 
+
+
+Sampling 
+SI AQL 1,5 
+
+
+Sampling 
+SI AQL 1,5 
+
+
+Insulation resistance '' 
+
+
+Sampling 
+S2 AQL 2,5 
+
+
+Sampling 
+S2 AQL 2,5 
+
+
+Sampling 
+S2 AQL 2,5 
+
+
+Visual inspection 
+of coating "^ 
+
+
+ROUTINE TEST 
+
+
+ROUTINE TEST 
+
+
+ROUTINE TEST 
+
+
+a To minimize test and inspection time, it is permitted to replace measurement of separation distances by 
+measurement of breakdown voltage. Initially the breakdown voltage is established for ten uncoated boards for 
+which the correct spacing measurements have been confirmed. The breakdown voltage of subsequent 
+uncoated production boards is then checked against a lower limit equal to the minimum breakdown voltage for 
+the ten initial boards minus 100 V. If breakdown occurs at this lower limit, a board is considered a failure 
+unless direct measurement of the spacing conforms with the requirement. 
+
+^ The electric strength test shall be conducted according to 5.2.2 except that the duration shall be 1 s to 5 s. 
+
+<= The thermal ageing and thermal cycling tests shall be done whenever the type of coating material, printed 
+board material, or the process is changed. It is recommended that it should be done at least once a year. 
+
+d The insulation resistance shall be not less than 1 000 Mn. 
+
+s Visual inspection without optical magnification or automated optical inspection with equivalent resolution shall 
+show no cracks, no bubbles, no pinholes, or detachment of the coating in the area of reduced spacings. Any 
+such defects shall be reason for rejection of the printed board. 
+
+
+
+R.2 Reduced clearances (see 2.10.3) 
+
+A manufacturer wishing to use reduced clearances permitted by 2.10.3, Tables 2J, 2K, 2L 
+and G.2, sinall implement a quality control programme for those features of the construction 
+listed in Table R.2. This programme shall include specific quality controls for the tools and 
+materials that affect clearances. 
+
+The manufacturer shall also identify and plan the protection and, where applicable, 
+installation processes that directly affect quality and shall ensure that these processes are 
+conducted under controlled conditions. Controlled conditions shall include the following: 
+
+
+
+238 
+
+
+
+IS 13252 (Parti): 2010 
+lEC 60950-1:2005 
+
+
+
+- documented work instructions defining process, equipment, environment, and manner of 
+production winere tine absence of sucin instructions would adversely affect quality, suitable 
+working environment, compliance with reference standards or specifications and quality 
+plans; 
+
+- monitoring and control of suitable processes and product characteristics during production 
+and installation in the equipment; 
+
+- criteria for workmanship stipulated to the extent necessary in written specifications or by 
+means of representative samples; 
+
+- records maintained for qualified processes, equipment and personnel as appropriate. 
+
+Table R.2 provides the sampling plan for attributes and tests necessary to conform to the 
+requirements of 2.10.3. The number of samples of production parts or assemblies shall be 
+based on lEC 60410 or ISO 2859-1 or equivalent national standards. 
+
+Table R.2 - Rules for sampling and inspection - reduced clearances 
+
+
+
+Tests 
+
+
+BASIC 
+INSULATION 
+
+
+SUPPLEMENTARY 
+INSULATION 
+
+
+REINFORCED 
+INSULATION 
+
+
+CLEARANCE ° 
+
+
+Sampling 
+S2 AQL4 
+
+
+Sampling 
+S2 AQL 4 
+
+
+Sampling 
+S2 AQL 4 
+
+
+Electric strength test " 
+
+
+No test 
+
+
+No test 
+
+
+ROUTINE test; 
+
+one failure requires 
+evaluation for cause 
+
+
+a To minimize test and inspection time, it is permitted to replace measurement of clearances by 
+measurement of breakdown voltage. Initially the breakdown voltage is established for ten 
+samples for which the correct clearance measurements have been confirmed. The breakdown 
+voltage of subsequent parts or assemblies is then checked against a lower limit equal to the 
+minimum breakdown voltage of the initial ten samples minus 100 V. If breakdown occurs at this 
+lower limit, a part or assembly is considered a failure unless direct measurement of the 
+clearance conforms to the requirement. 
+
+b The electric strength test for reinforced insulation shall consist of one of the following 
+alternatives: 
+
+- six impulses of alternating polarity, using a 1,2/50 ps impulse with a magnitude equal to 
+the peak of the test voltage in accordance with 5.2.2; 
+
+- a three cycle pulse of a.c. power frequency with a magnitude equal to the test voltage in 
+accordance with 5.2.2; 
+
+- six impulses of alternating polarity, using 10 ms d.c. impulses with a magnitude equal to 
+the peak of the test voltage in accordance with 5.2.2. 
+
+
+
+239 
+
+
+
+IS 13252 (Parti): 2010 
+lEC 60950-1: 2005 
+
+
+
+Annex S 
+
+(informative) 
+
+Procedure for impulse testing 
+
+(see 6.2.2.3) 
+
+
+
+5.1 Test equipment 
+
+Impulse generator according to Annex N. 
+
+Storage oscilloscope with a bandwidth of a few MHz. 
+
+High voltage probe with compensating elements. 
+
+5.2 Test procedure 
+
+Apply the required number of impulses to the equipment under test and record the waveform 
+patterns. 
+
+Examples are given in S.3 to assist in judging whether or not a surge suppressor has 
+operated or insulation has broken down. 
+
+5.3 Examples of waveforms during impulse testing 
+
+
+
+u t 
+
+
+
+2kV 
+
+
+
+
+1 000 i^s t 
+
+
+
+Consecutive impulses are identical in their waveforms. 
+
+
+
+Figure S.I - Waveform on insulation without surge suppressors and no breakdown 
+
+
+
+240 
+
+
+
+IS 13252 (Parti): 2010 
+lEC 60950-1:2005 
+
+
+
+
+Consecutive impulses are not identical in their waveforms. The pulse shape changes from pulse to pulse until a 
+stable resistance path through the insulation is established. Breakdown can be seen clearly on the shape of the 
+pulse voltage oscillogram. 
+
+Figure S.2 - Waveforms on insulation during breakdown without surge suppressors 
+
+
+
+
+5 i^s t 
+
+
+
+
+1 000 us t 
+
+
+
+1 - gas discharge type 
+
+2 - semiconductor type 
+
+3 - metal oxide type 
+Consecutive impulses are identical in their waveforms. 
+
+Figure S.3 - Waveforms on insulation with surge suppressors in operation 
+
+
+
+u t 
+
+
+
+
+Figure S.4 - Waveform on short-circuited surge suppressor and insulation 
+
+
+
+241 
+
+
+
+IS 13252 (Parti): 2010 
+lEC 60950-1:2005 
+
+
+
+Annex T 
+
+(informative) 
+
+Guidance on protection against ingress of water 
+
+(see 1.1.2) 
+
+
+
+When the intended application is such that ingress of water is possible, an appropriate degree 
+of protection other than IPXO should be selected by the manufacturer from lEC 60529, an 
+extract from which is included in this annex. 
+
+Additional design features should then be included to ensure that ingress of water does not 
+affect insulation. 
+
+lEC 60529 gives test conditions for each degree of protection other than IPXO. The conditions 
+appropriate to the selected degree of protection should be applied to the equipment, 
+immediately followed by an electric strength test as specified in 5.2.2 on any insulation that 
+may have become wet, and inspection should show that water has not created a risk of 
+personal injury or fire. In particular, there should be no trace of water on insulation that is not 
+designed to operate when wet. 
+
+If the equipment is provided with drain holes, inspection should show that any water that 
+enters does not accumulate and that it drains away without affecting compliance. 
+
+If the equipment is not provided with drain holes, account should be taken of the possibility of 
+build-up of water. 
+
+Where equipment is only partly exposed to water, for example, when it is to be installed 
+through an opening in an outside wall, only the exposed parts should be subjected to the 
+lEC 60529 test conditions. For these tests, such equipment should be installed in an 
+appropriate test assembly, simulating actual conditions of installation according to the 
+installation instructions, including the use of a kit of sealing parts where required. 
+
+It should not be possible to remove, without the aid of a tool, parts that ensure the required 
+degree of protection against ingress of water. 
+
+The information in Table T.I is extracted from lEC 60529. 
+
+
+
+242 
+
+
+
+IS 13252 (Parti): 2010 
+lEC 60950-1:2005 
+
+
+
+Table T.1 - Extract from lEC 60529 
+
+
+
+Second 
+
+characteristic 
+
+numeral 
+
+
+Degree of protection 
+
+
+Brief description 
+
+
+Definition 
+
+
+
+
+
+Non-protected 
+
+
+- 
+
+
+1 
+
+
+Protected against vertically falling 
+water drops 
+
+
+Vertically falling water drops shall have no harmful 
+effects 
+
+
+2 
+
+
+Protected against vertically falling 
+water drops when enclosure tilted 
+up to 15° 
+
+
+Vertically falling drops shall have no harmful effects 
+when the enclosure is tilted at any angle up to 15° on 
+either side of the vertical

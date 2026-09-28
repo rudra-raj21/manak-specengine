@@ -1,0 +1,58 @@
+[
+  {
+    "is_number": "IS 2062",
+    "title": "Hot Rolled Medium and High Tensile Structural Steel",
+    "archive_id": "gov.in.is.2062.2011",
+    "clause2_file": "data/clause2_samples/is_2062_clause2.txt",
+    "extracted_refs_sample": []
+  },
+  {
+    "is_number": "IS 1786",
+    "title": "High Strength Deformed Steel Bars and Wires for Concrete Reinforcement",
+    "archive_id": "gov.in.is.1786.2008",
+    "clause2_file": "data/clause2_samples/is_1786_clause2.txt",
+    "extracted_refs_sample": []
+  },
+  {
+    "is_number": "IS 456",
+    "title": "Plain and Reinforced Concrete - Code of Practice",
+    "archive_id": "gov.in.is.456.2000",
+    "clause2_file": "data/clause2_samples/is_456_clause2.txt",
+    "extracted_refs_sample": []
+  },
+  {
+    "is_number": "IS 13252 (Part 1)",
+    "title": "Information Technology Equipment - Safety - Part 1 General Requirements",
+    "archive_id": "gov.in.is.13252.1.2010",
+    "clause2_file": "data/clause2_samples/is_13252_part_1_clause2.txt",
+    "extracted_refs_sample": [
+      "IS 13252 (Parti): 2010"
+    ]
+  },
+  {
+    "is_number": "IS 4984",
+    "title": "High Density Polyethylene Pipes for Potable Water Supplies",
+    "archive_id": "gov.in.is.4984.1995",
+    "clause2_file": "data/clause2_samples/is_4984_clause2.txt",
+    "extracted_refs_sample": []
+  },
+  {
+    "is_number": "IS 694",
+    "title": "Polyvinyl Chloride Insulated Unsheathed and Sheathed Cables",
+    "archive_id": "gov.in.is.694.2010",
+    "clause2_file": "data/clause2_samples/is_694_clause2.txt",
+    "extracted_refs_sample": [
+      "IS 694  :  2010"
+    ]
+  },
+  {
+    "is_number": "IS 2925",
+    "title": "Specification for Industrial Safety Helmets",
+    "archive_id": "gov.in.is.2925.1984",
+    "clause2_file": "data/clause2_samples/is_2925_clause2.txt",
+    "extracted_refs_sample": [
+      "IS 2925  (1984)",
+      "IS 2925  :  1984"
+    ]
+  }
+]

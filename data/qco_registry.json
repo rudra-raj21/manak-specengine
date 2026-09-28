@@ -1,0 +1,177 @@
+[
+  {
+    "order_name": "Steel and Steel Products (Quality Control) Order, 2024",
+    "ministry": "Ministry of Steel",
+    "gazette_no": "S.O. 2240(E)",
+    "effective_date": "2024-06-01",
+    "mandatory_scheme": "Scheme-I",
+    "applicable_standards": [
+      "IS 2062",
+      "IS 1786",
+      "IS 808",
+      "IS 1852",
+      "IS 8910"
+    ],
+    "penal_clause": "Mandatory conformity to Indian Standards with BIS Standard Mark (ISI Mark). Under Section 16 & 17 of BIS Act 2016, manufacturing, storing, or selling without valid BIS license attracts penalty and imprisonment.",
+    "scope_summary": "Covers all structural steel, TMT rebars, carbon steel plates, sections, wire rods, and input raw materials used for manufacturing covered steel products."
+  },
+  {
+    "order_name": "Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021",
+    "ministry": "Ministry of Electronics and Information Technology (MeitY)",
+    "gazette_no": "S.O. 1230(E)",
+    "effective_date": "2021-10-01",
+    "mandatory_scheme": "Scheme-II (CRS)",
+    "applicable_standards": [
+      "IS 13252 (Part 1)",
+      "IS 16046 (Part 1)",
+      "IS 16046 (Part 2)",
+      "IS 616",
+      "IS 302-2-25",
+      "IS 15885 (Part 2/Sec 13)",
+      "IS 16102 (Part 1)"
+    ],
+    "penal_clause": "Goods must be registered under BIS Compulsory Registration Scheme (CRS) and bear the Standard Mark with registration number before import, distribution, or sale.",
+    "scope_summary": "Laptops, tablets, visual display units, power adapters, secondary Li-ion cells, microwave ovens, LED drivers, and smart consumer electronics."
+  },
+  {
+    "order_name": "Solar Photovoltaics, Systems, Devices and Components Goods (Requirement for Compulsory Registration) Order, 2017",
+    "ministry": "Ministry of New and Renewable Energy (MNRE)",
+    "gazette_no": "S.O. 2920(E)",
+    "effective_date": "2018-04-16",
+    "mandatory_scheme": "Scheme-II (CRS)",
+    "applicable_standards": [
+      "IS 14286",
+      "IS/IEC 61730 (Part 1)",
+      "IS 16221 (Part 2)"
+    ],
+    "penal_clause": "Mandatory registration with BIS under CRS. Non-registered solar modules and inverters are barred from public tenders and import clearance.",
+    "scope_summary": "Crystalline silicon terrestrial PV modules, thin-film modules, and grid-connected PV inverters."
+  },
+  {
+    "order_name": "Safety of Toys (Quality Control) Order, 2020",
+    "ministry": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+    "gazette_no": "S.O. 850(E)",
+    "effective_date": "2021-01-01",
+    "mandatory_scheme": "Scheme-I",
+    "applicable_standards": [
+      "IS 9873 (Part 1)",
+      "IS 15644"
+    ],
+    "penal_clause": "Toys cannot be manufactured, imported, distributed, or sold without bearing the BIS ISI Mark under Scheme-I.",
+    "scope_summary": "All electric and non-electric toys intended for use by children under 14 years of age."
+  },
+  {
+    "order_name": "Footwear made from Leather and other materials (Quality Control) Order, 2020",
+    "ministry": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+    "gazette_no": "S.O. 3840(E)",
+    "effective_date": "2023-07-01",
+    "mandatory_scheme": "Scheme-I",
+    "applicable_standards": [
+      "IS 15298 (Part 2)"
+    ],
+    "penal_clause": "Mandatory BIS certification (ISI Mark) for all industrial safety footwear.",
+    "scope_summary": "Industrial safety shoes, protective boots, and leather footwear."
+  },
+  {
+    "order_name": "Plywood and Wooden Flush Door Shutters (Quality Control) Order, 2024",
+    "ministry": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+    "gazette_no": "S.O. 1102(E)",
+    "effective_date": "2024-08-28",
+    "mandatory_scheme": "Scheme-I",
+    "applicable_standards": [
+      "IS 303",
+      "IS 710"
+    ],
+    "penal_clause": "Mandatory ISI marking under Scheme-I for all commercial and marine plywood.",
+    "scope_summary": "General-purpose plywood (MR/BWR) and marine plywood (BWP)."
+  },
+  {
+    "order_name": "Plugs and Socket-Outlets (Quality Control) Order, 2021",
+    "ministry": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+    "gazette_no": "S.O. 4519(E)",
+    "effective_date": "2022-06-01",
+    "mandatory_scheme": "Scheme-I",
+    "applicable_standards": [
+      "IS 1293"
+    ],
+    "penal_clause": "Domestic plugs and socket-outlets must bear the ISI mark under Scheme-I.",
+    "scope_summary": "Plugs and socket-outlets up to 250V and 16A."
+  },
+  {
+    "order_name": "Polyethylene Material for Moulding and Extrusion (Quality Control) Order, 2022",
+    "ministry": "Ministry of Chemicals and Petrochemicals",
+    "gazette_no": "S.O. 724(E)",
+    "effective_date": "2022-04-03",
+    "mandatory_scheme": "Scheme-I",
+    "applicable_standards": [
+      "IS 7328",
+      "IS 4984",
+      "IS 4985"
+    ],
+    "penal_clause": "Polyethylene moulding raw materials and plastic pipes must strictly conform to BIS specifications.",
+    "scope_summary": "HDPE pipe materials, virgin polymers, and water piping systems."
+  },
+  {
+    "order_name": "Caustic Soda (Quality Control) Order, 2018",
+    "ministry": "Ministry of Chemicals and Petrochemicals",
+    "gazette_no": "S.O. 1481(E)",
+    "effective_date": "2018-12-18",
+    "mandatory_scheme": "Scheme-I",
+    "applicable_standards": [
+      "IS 252"
+    ],
+    "penal_clause": "Caustic soda manufactured or imported must carry the BIS standard mark.",
+    "scope_summary": "Solid, flaked, and lye sodium hydroxide for industrial applications."
+  },
+  {
+    "order_name": "Electric Transformers (Quality Control) Order, 2023",
+    "ministry": "Ministry of Heavy Industries",
+    "gazette_no": "S.O. 521(E)",
+    "effective_date": "2023-11-01",
+    "mandatory_scheme": "Scheme-I",
+    "applicable_standards": [
+      "IS 1180 (Part 1)"
+    ],
+    "penal_clause": "Mandatory ISI mark and BEE energy performance compliance under Scheme-I.",
+    "scope_summary": "Outdoor oil-immersed distribution transformers up to 2500 kVA, 33 kV."
+  },
+  {
+    "order_name": "Wires and Cables (Quality Control) Order, 2023",
+    "ministry": "Ministry of Heavy Industries",
+    "gazette_no": "S.O. 1892(E)",
+    "effective_date": "2024-03-01",
+    "mandatory_scheme": "Scheme-I",
+    "applicable_standards": [
+      "IS 694",
+      "IS 1554 (Part 1)",
+      "IS 7098 (Part 1)"
+    ],
+    "penal_clause": "Manufacture, import, or distribution without BIS ISI certification is punishable under law.",
+    "scope_summary": "PVC insulated flexible cords, power cables up to 1.1 kV, and XLPE cables."
+  },
+  {
+    "order_name": "Helmets for riders of Two Wheeler Motor Vehicles (Quality Control) Order, 2020",
+    "ministry": "Ministry of Road Transport and Highways",
+    "gazette_no": "S.O. 4252(E)",
+    "effective_date": "2021-06-01",
+    "mandatory_scheme": "Scheme-I",
+    "applicable_standards": [
+      "IS 4151"
+    ],
+    "penal_clause": "Sale or manufacture of non-ISI marked two-wheeler helmets is illegal across India.",
+    "scope_summary": "Protective helmets for motorcycle and two-wheeler riders."
+  },
+  {
+    "order_name": "Packaged Water (Quality Control) Mandate",
+    "ministry": "Ministry of Consumer Affairs, Food and Public Distribution",
+    "gazette_no": "S.O. 982(E)",
+    "effective_date": "2001-03-29",
+    "mandatory_scheme": "Scheme-I",
+    "applicable_standards": [
+      "IS 14543",
+      "IS 13428"
+    ],
+    "penal_clause": "Packaged drinking water cannot be bottled or sold without a valid BIS license (ISI Mark).",
+    "scope_summary": "Packaged drinking water and natural mineral water in sealed bottles and containers."
+  }
+]

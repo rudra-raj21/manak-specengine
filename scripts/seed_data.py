@@ -1,0 +1,867 @@
+"""
+Seed Data Generator for Manak-SpecEngine.
+Compiles 50 canonical Indian Standards and 10 active Quality Control Orders (QCOs)
+and validates each record against Pydantic v2 schemas.
+Outputs to data/seed_data.json.
+"""
+
+import json
+import sys
+from pathlib import Path
+
+# Add project root to sys.path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from typing import List, Dict, Any
+from backend.app.models.standard import IndianStandard, QCOOrder
+
+
+STANDARDS_FIXTURES: List[Dict[str, Any]] = [
+    # ---------------- 1. Construction & Civil Infrastructure (15 standards) ----------------
+    {
+        "is_number": "IS 2062",
+        "title": "Hot Rolled Medium and High Tensile Structural Steel - Specification",
+        "year": 2011,
+        "amendments": [1, 2, 3],
+        "status": "ACTIVE",
+        "scope": "Covers requirements for hot-rolled medium and high tensile structural steel grades E250, E275, E300, E350, E410, E450, E550, E650 for bridges, buildings, and general engineering purposes.",
+        "committee": "CED 54",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 228", "IS 808", "IS 1599", "IS 1608:2005", "IS 1730", "IS 1757", "IS 1852", "IS 8910"],
+        "test_standards": ["IS 1599", "IS 1608:2005", "IS 1757", "IS 228"],
+        "keywords": ["structural steel", "hot rolled", "e250", "e350", "yield strength", "plates", "beams", "angles", "channels"],
+        "historical_revisions": ["IS 2062:1962", "IS 2062:1969", "IS 2062:1980", "IS 2062:1984", "IS 2062:1992", "IS 2062:1999", "IS 2062:2006"]
+    },
+    {
+        "is_number": "IS 1786",
+        "title": "High Strength Deformed Steel Bars and Wires for Concrete Reinforcement - Specification",
+        "year": 2008,
+        "amendments": [1, 2, 3],
+        "status": "ACTIVE",
+        "scope": "Specifies requirements for high strength deformed steel bars and wires for concrete reinforcement in grades Fe 415, Fe 415D, Fe 500, Fe 500D, Fe 550, Fe 550D, Fe 600, Fe 650.",
+        "committee": "CED 54",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 228", "IS 1387", "IS 1599", "IS 1608:2005", "IS 2062", "IS 2770 (Part 1)", "IS 9417"],
+        "test_standards": ["IS 1599", "IS 1608:2005", "IS 2770 (Part 1)", "IS 228"],
+        "keywords": ["tmt bars", "rebar", "reinforcement", "fe 500d", "fe 415", "fe 550d", "concrete", "ribbed bars"],
+        "historical_revisions": ["IS 1786:1966", "IS 1786:1979", "IS 1786:1985"]
+    },
+    {
+        "is_number": "IS 456",
+        "title": "Plain and Reinforced Concrete - Code of Practice",
+        "year": 2000,
+        "amendments": [1, 2, 3, 4, 5],
+        "status": "ACTIVE",
+        "scope": "Deals with the general structural use of plain and reinforced concrete in buildings, bridges, and general structures. Specifies design procedures, durability requirements, and material properties.",
+        "committee": "CED 2",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 269", "IS 383", "IS 432 (Part 1)", "IS 516", "IS 1199", "IS 1786", "IS 2062", "IS 2386", "IS 8112", "IS 12269"],
+        "test_standards": ["IS 516", "IS 1199", "IS 2386"],
+        "keywords": ["concrete", "rcc", "reinforcement", "compressive strength", "slump test", "durability", "curing", "cement", "aggregates"],
+        "historical_revisions": ["IS 456:1953", "IS 456:1964", "IS 456:1978"]
+    },
+    {
+        "is_number": "IS 269",
+        "title": "Ordinary Portland Cement - Specification",
+        "year": 2015,
+        "amendments": [1, 2],
+        "status": "ACTIVE",
+        "scope": "Covers manufacture and chemical/physical requirements of 33, 43, and 53 grades of ordinary Portland cement for concrete, mortar, and grouts.",
+        "committee": "CED 2",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 4031", "IS 4032"],
+        "test_standards": ["IS 4031", "IS 4032"],
+        "keywords": ["cement", "opc", "portland", "opc 43", "opc 53", "compressive strength", "soundness", "setting time"],
+        "historical_revisions": ["IS 269:1951", "IS 269:1958", "IS 269:1967", "IS 269:1976", "IS 269:1989"]
+    },
+    {
+        "is_number": "IS 8112",
+        "title": "43 Grade Ordinary Portland Cement - Specification",
+        "year": 2013,
+        "amendments": [1, 2, 3],
+        "status": "ACTIVE",
+        "scope": "Covers manufacture and chemical and physical requirements of 43 grade ordinary Portland cement.",
+        "committee": "CED 2",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 269", "IS 4031", "IS 4032"],
+        "test_standards": ["IS 4031", "IS 4032"],
+        "keywords": ["opc 43", "cement", "portland", "masonry", "construction"],
+        "historical_revisions": ["IS 8112:1976", "IS 8112:1989"]
+    },
+    {
+        "is_number": "IS 12269",
+        "title": "53 Grade Ordinary Portland Cement - Specification",
+        "year": 2013,
+        "amendments": [1, 2, 3],
+        "status": "ACTIVE",
+        "scope": "Covers manufacture, chemical and physical requirements of 53 grade ordinary Portland cement for high-strength concrete applications.",
+        "committee": "CED 2",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 269", "IS 4031", "IS 4032"],
+        "test_standards": ["IS 4031", "IS 4032"],
+        "keywords": ["opc 53", "high strength cement", "pre-stressed concrete", "bridges", "high rise"],
+        "historical_revisions": ["IS 12269:1987"]
+    },
+    {
+        "is_number": "IS 383",
+        "title": "Coarse and Fine Aggregate for Concrete - Specification",
+        "year": 2016,
+        "amendments": [1],
+        "status": "ACTIVE",
+        "scope": "Covers chemical and physical requirements for naturally sourced and manufactured coarse and fine aggregates for concrete, including recycled aggregates.",
+        "committee": "CED 2",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 2386", "IS 460 (Part 1)"],
+        "test_standards": ["IS 2386", "IS 460 (Part 1)"],
+        "keywords": ["aggregates", "sand", "gravel", "crushed stone", "sieve analysis", "fineness modulus", "recycled concrete"],
+        "historical_revisions": ["IS 383:1952", "IS 383:1963", "IS 383:1970"]
+    },
+    {
+        "is_number": "IS 4984",
+        "title": "High Density Polyethylene Pipes for Potable Water Supplies - Specification",
+        "year": 2016,
+        "amendments": [1, 2],
+        "status": "ACTIVE",
+        "scope": "Covers requirements for high density polyethylene (HDPE) pipes of sizes 16 mm to 1000 mm for potable water supplies, sewage, and industrial effluents.",
+        "committee": "CED 50",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 2530", "IS 4905", "IS 7328", "IS 9845", "IS 10141", "IS 10146"],
+        "test_standards": ["IS 2530", "IS 9845", "IS 4905"],
+        "keywords": ["hdpe pipe", "polyethylene", "potable water", "pe 80", "pe 100", "hydrostatic pressure", "water supply"],
+        "historical_revisions": ["IS 4984:1968", "IS 4984:1972", "IS 4984:1978", "IS 4984:1987", "IS 4984:1995"]
+    },
+    {
+        "is_number": "IS 1161",
+        "title": "Steel Tubes for Structural Purposes - Specification",
+        "year": 2014,
+        "amendments": [1, 2],
+        "status": "ACTIVE",
+        "scope": "Covers requirements for hot finished and cold formed seamless and welded steel tubes for structural applications like trusses, columns, and space frames.",
+        "committee": "MTD 19",
+        "department": "Metallurgical Engineering",
+        "normative_references": ["IS 1608:2005", "IS 2328", "IS 2329"],
+        "test_standards": ["IS 1608:2005", "IS 2328", "IS 2329"],
+        "keywords": ["steel tubes", "hollow sections", "circular hollow sections", "structural tubing", "welded tubes"],
+        "historical_revisions": ["IS 1161:1958", "IS 1161:1963", "IS 1161:1968", "IS 1161:1979", "IS 1161:1998"]
+    },
+    {
+        "is_number": "IS 1239 (Part 1)",
+        "title": "Steel Tubes, Tubulars and Other Wrought Steel Fittings - Part 1: Steel Tubes",
+        "year": 2004,
+        "amendments": [1, 2, 3, 4],
+        "status": "ACTIVE",
+        "scope": "Covers requirements for welded and seamless steel tubes suitable for screwing to pipe threads, intended for water, gas, steam, and compressed air.",
+        "committee": "MTD 19",
+        "department": "Metallurgical Engineering",
+        "normative_references": ["IS 1387", "IS 1608:2005", "IS 2328", "IS 4736"],
+        "test_standards": ["IS 1608:2005", "IS 2328", "IS 4736"],
+        "keywords": ["gi pipe", "galvanized pipe", "ms pipe", "mild steel tube", "plumbing", "gas distribution"],
+        "historical_revisions": ["IS 1239:1958", "IS 1239:1964", "IS 1239:1968", "IS 1239:1973", "IS 1239:1979", "IS 1239:1990"]
+    },
+    {
+        "is_number": "IS 808",
+        "title": "Dimensions for Hot Rolled Steel Beam, Column, Channel and Angle Sections",
+        "year": 1989,
+        "amendments": [1, 2],
+        "status": "ACTIVE",
+        "scope": "Specifies nominal dimensions, mass, and sectional properties of hot-rolled steel beam, column, channel, and angle sections.",
+        "committee": "CED 54",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 1852"],
+        "test_standards": ["IS 1852"],
+        "keywords": ["isemb", "isjb", "iswb", "ishb", "channels", "i-beam", "h-beam", "joists"],
+        "historical_revisions": ["IS 808:1957", "IS 808:1964", "IS 808:1973"]
+    },
+    {
+        "is_number": "IS 516",
+        "title": "Method of Tests for Strength of Concrete",
+        "year": 1959,
+        "amendments": [1, 2, 3],
+        "status": "ACTIVE",
+        "scope": "Covers tests for determination of compressive strength, flexural strength, and modulus of elasticity of concrete cube and cylinder specimens.",
+        "committee": "CED 2",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 1199"],
+        "test_standards": ["IS 1199"],
+        "keywords": ["compressive test", "cube testing", "flexural test", "concrete testing", "modulus of elasticity"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS 1199",
+        "title": "Methods of Sampling and Analysis of Concrete",
+        "year": 1959,
+        "amendments": [1, 2],
+        "status": "ACTIVE",
+        "scope": "Prescribes procedures for sampling of fresh concrete, measurement of workability (slump, compacting factor), and determination of air content.",
+        "committee": "CED 2",
+        "department": "Civil Engineering",
+        "normative_references": [],
+        "test_standards": [],
+        "keywords": ["slump test", "sampling concrete", "compacting factor", "air content", "workability"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS 1608:2005",
+        "title": "Metallic Materials - Tensile Testing at Ambient Temperature",
+        "year": 2005,
+        "amendments": [1],
+        "status": "ACTIVE",
+        "scope": "Specifies the method for tensile testing of metallic materials and defines the mechanical properties which can be determined at ambient temperature.",
+        "committee": "MTD 3",
+        "department": "Metallurgical Engineering",
+        "normative_references": [],
+        "test_standards": [],
+        "keywords": ["tensile test", "yield strength", "ultimate tensile strength", "elongation", "reduction of area", "proof stress"],
+        "historical_revisions": ["IS 1608:1960", "IS 1608:1972", "IS 1608:1995"]
+    },
+    {
+        "is_number": "IS 1599",
+        "title": "Metallic Materials - Bend Test",
+        "year": 2012,
+        "amendments": [],
+        "status": "ACTIVE",
+        "scope": "Specifies the method for determining the ability of metallic materials to undergo plastic deformation in bending.",
+        "committee": "MTD 3",
+        "department": "Metallurgical Engineering",
+        "normative_references": [],
+        "test_standards": [],
+        "keywords": ["bend test", "ductility", "rebend test", "mandrel", "cold bending"],
+        "historical_revisions": ["IS 1599:1960", "IS 1599:1974", "IS 1599:1985"]
+    },
+
+    # ---------------- 2. IT, Telecommunications & Electronics (15 standards) ----------------
+    {
+        "is_number": "IS 13252 (Part 1)",
+        "title": "Information Technology Equipment - Safety - Part 1: General Requirements",
+        "year": 2010,
+        "amendments": [1, 2, 3],
+        "status": "ACTIVE",
+        "scope": "Applies to mains-powered or battery-powered information technology equipment, including electrical business equipment and associated equipment, with a rated voltage not exceeding 600 V.",
+        "committee": "LITD 6",
+        "department": "Electronics and Information Technology",
+        "normative_references": ["IS 302", "IS 616", "IS 9873", "IS/IEC 60950-1"],
+        "test_standards": ["IS 302", "IS/IEC 60950-1"],
+        "keywords": ["it equipment", "laptops", "servers", "power adapter", "electrical safety", "crs", "printers", "scanners"],
+        "historical_revisions": ["IS 13252:1992", "IS 13252:2003"]
+    },
+    {
+        "is_number": "IS 16046 (Part 1)",
+        "title": "Secondary Cells and Batteries Containing Alkaline or Other Non-Acid Electrolytes - Safety Requirements: Part 1 Nickel Systems",
+        "year": 2018,
+        "amendments": [1],
+        "status": "ACTIVE",
+        "scope": "Specifies requirements and tests for the safe operation of portable sealed secondary nickel cells and batteries.",
+        "committee": "ETD 11",
+        "department": "Electrotechnical",
+        "normative_references": ["IS 16046 (Part 2)"],
+        "test_standards": ["IS 16046 (Part 2)"],
+        "keywords": ["nickel batteries", "rechargeable battery", "cells", "portable electronics"],
+        "historical_revisions": ["IS 16046:2012", "IS 16046:2015"]
+    },
+    {
+        "is_number": "IS 16046 (Part 2)",
+        "title": "Secondary Cells and Batteries Containing Alkaline or Other Non-Acid Electrolytes - Safety Requirements: Part 2 Lithium Systems",
+        "year": 2018,
+        "amendments": [1, 2],
+        "status": "ACTIVE",
+        "scope": "Specifies requirements and tests for the safe operation of portable sealed secondary lithium cells and batteries containing non-acid electrolyte, under intended use and reasonably foreseeable misuse.",
+        "committee": "ETD 11",
+        "department": "Electrotechnical",
+        "normative_references": [],
+        "test_standards": [],
+        "keywords": ["lithium ion", "li-ion battery", "power bank", "smartphones", "laptop battery", "overcharge test", "thermal abuse"],
+        "historical_revisions": ["IS 16046:2012", "IS 16046:2015"]
+    },
+    {
+        "is_number": "IS 616",
+        "title": "Audio, Video and Similar Electronic Apparatus - Safety Requirements",
+        "year": 2017,
+        "amendments": [1],
+        "status": "ACTIVE",
+        "scope": "Applies to electronic apparatus designed to be fed from mains, from supply apparatus, from batteries or from remote power feeding and intended for reception, generation, recording or reproduction of audio, video and associated signals.",
+        "committee": "LITD 6",
+        "department": "Electronics and Information Technology",
+        "normative_references": ["IS 302", "IS 13252 (Part 1)"],
+        "test_standards": ["IS 302"],
+        "keywords": ["smart tv", "television", "amplifier", "speakers", "soundbar", "home theatre", "audio safety"],
+        "historical_revisions": ["IS 616:1957", "IS 616:1981", "IS 616:2003", "IS 616:2010"]
+    },
+    {
+        "is_number": "IS 302 (Part 1)",
+        "title": "Safety of Household and Similar Electrical Appliances - Part 1: General Requirements",
+        "year": 2008,
+        "amendments": [1, 2, 3],
+        "status": "ACTIVE",
+        "scope": "Deals with the safety of electrical appliances for household and similar purposes, their rated voltage being not more than 250 V for single-phase appliances and 480 V for other appliances.",
+        "committee": "ETD 32",
+        "department": "Electrotechnical",
+        "normative_references": ["IS 694", "IS 1293", "IS 3854"],
+        "test_standards": ["IS 694", "IS 1293"],
+        "keywords": ["home appliances", "geyser", "microwave", "electric iron", "mixer grinder", "leakage current", "insulation resistance"],
+        "historical_revisions": ["IS 302:1951", "IS 302:1960", "IS 302:1973", "IS 302:1979"]
+    },
+    {
+        "is_number": "IS 16242 (Part 1)",
+        "title": "Uninterruptible Power Systems (UPS) - Part 1: General and Safety Requirements for UPS",
+        "year": 2014,
+        "amendments": [1],
+        "status": "ACTIVE",
+        "scope": "Applies to movable, stationary and fixed UPS for use in low-voltage distribution systems and that are intended to be installed in any operator accessible area.",
+        "committee": "LITD 6",
+        "department": "Electronics and Information Technology",
+        "normative_references": ["IS 13252 (Part 1)"],
+        "test_standards": ["IS 13252 (Part 1)"],
+        "keywords": ["ups", "inverter", "backup power", "datacenter", "surge protection", "crs"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS 1293",
+        "title": "Plugs and Socket-Outlets for Related Voltages up to and Including 250 Volts and Rated Current up to and Including 16 Amperes - Specification",
+        "year": 2019,
+        "amendments": [1],
+        "status": "ACTIVE",
+        "scope": "Applies to plugs and fixed or portable socket-outlets for a.c. only, with or without earthing contact, with a rated voltage above 50 V but not exceeding 250 V and a rated current not exceeding 16 A.",
+        "committee": "ETD 14",
+        "department": "Electrotechnical",
+        "normative_references": ["IS 302", "IS 694"],
+        "test_standards": ["IS 694"],
+        "keywords": ["plug", "socket", "power strip", "16a socket", "6a plug", "earthing", "electrical fittings"],
+        "historical_revisions": ["IS 1293:1958", "IS 1293:1967", "IS 1293:1988", "IS 1293:2005"]
+    },
+    {
+        "is_number": "IS 16102 (Part 1)",
+        "title": "Self-Ballasted LED Lamps for General Lighting Services - Part 1: Safety Requirements",
+        "year": 2012,
+        "amendments": [1, 2],
+        "status": "ACTIVE",
+        "scope": "Specifies the safety and interchangeability requirements, together with the test methods and conditions required to show compliance of LED lamps with integrated means for controlling.",
+        "committee": "ETD 23",
+        "department": "Electrotechnical",
+        "normative_references": ["IS 16101", "IS 16103"],
+        "test_standards": ["IS 16103"],
+        "keywords": ["led bulb", "led lamp", "lighting", "energy efficiency", "luminaire", "ballast"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS 16102 (Part 2)",
+        "title": "Self-Ballasted LED Lamps for General Lighting Services - Part 2: Performance Requirements",
+        "year": 2012,
+        "amendments": [1],
+        "status": "ACTIVE",
+        "scope": "Specifies performance requirements for self-ballasted LED lamps for general lighting services, including luminous flux, efficacy, color temperature, and life.",
+        "committee": "ETD 23",
+        "department": "Electrotechnical",
+        "normative_references": ["IS 16102 (Part 1)"],
+        "test_standards": ["IS 16102 (Part 1)"],
+        "keywords": ["lumens", "luminous efficacy", "cri", "color rendering", "led performance"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS 10322 (Part 5/Sec 1)",
+        "title": "Luminaires - Part 5: Particular Requirements - Section 1: Fixed General Purpose Luminaires",
+        "year": 2012,
+        "amendments": [1],
+        "status": "ACTIVE",
+        "scope": "Specifies requirements for fixed general purpose luminaires for use with tungsten filament, tubular fluorescent and other discharge lamps on supply voltages not exceeding 1000 V.",
+        "committee": "ETD 23",
+        "department": "Electrotechnical",
+        "normative_references": ["IS 10322 (Part 1)"],
+        "test_standards": ["IS 10322 (Part 1)"],
+        "keywords": ["luminaire", "light fixture", "street light", "flood light", "indoor lighting"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS 14286",
+        "title": "Crystalline Silicon Terrestrial Photovoltaic (PV) Modules - Design Qualification and Type Approval",
+        "year": 2010,
+        "amendments": [],
+        "status": "ACTIVE",
+        "scope": "Lays down requirements for the design qualification and type approval of terrestrial crystalline silicon photovoltaic modules suitable for long-term operation in general open-air climates.",
+        "committee": "ETD 28",
+        "department": "Electrotechnical",
+        "normative_references": ["IS/IEC 61215", "IS/IEC 61730"],
+        "test_standards": ["IS/IEC 61215"],
+        "keywords": ["solar panel", "pv module", "crystalline silicon", "solar power", "mnre qco", "photovoltaic"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS/IEC 61730 (Part 1)",
+        "title": "Photovoltaic (PV) Module Safety Qualification - Part 1: Requirements for Construction",
+        "year": 2004,
+        "amendments": [],
+        "status": "ACTIVE",
+        "scope": "Describes the fundamental construction requirements for photovoltaic modules in order to provide safe electrical and mechanical operation during their expected lifetime.",
+        "committee": "ETD 28",
+        "department": "Electrotechnical",
+        "normative_references": ["IS/IEC 61730 (Part 2)"],
+        "test_standards": ["IS/IEC 61730 (Part 2)"],
+        "keywords": ["solar safety", "pv construction", "fire rating", "insulation", "solar modules"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS 694",
+        "title": "Polyvinyl Chloride Insulated Unsheathed and Sheathed Cables/Cords with Rigid and Flexible Conductor for Rated Voltages up to and Including 450/750 V",
+        "year": 2010,
+        "amendments": [1, 2],
+        "status": "ACTIVE",
+        "scope": "Specifies requirements for PVC insulated single-core and multi-core cables with copper or aluminium conductors for electric power and lighting.",
+        "committee": "ETD 9",
+        "department": "Electrotechnical",
+        "normative_references": ["IS 10810"],
+        "test_standards": ["IS 10810"],
+        "keywords": ["pvc wire", "house wire", "copper cable", "insulated cable", "wiring", "electrical cable"],
+        "historical_revisions": ["IS 694:1960", "IS 694:1965", "IS 694:1977", "IS 694:1990"]
+    },
+    {
+        "is_number": "IS 1554 (Part 1)",
+        "title": "PVC Insulated (Heavy Duty) Electric Cables - Part 1: For Working Voltages up to and Including 1100 V",
+        "year": 1988,
+        "amendments": [1, 2, 3, 4],
+        "status": "ACTIVE",
+        "scope": "Covers requirements for PVC insulated and PVC sheathed armoured and unarmoured cables for electricity supply up to 1100 V.",
+        "committee": "ETD 9",
+        "department": "Electrotechnical",
+        "normative_references": ["IS 8130", "IS 10810"],
+        "test_standards": ["IS 10810"],
+        "keywords": ["armoured cable", "underground cable", "heavy duty cable", "lt cable", "power distribution"],
+        "historical_revisions": ["IS 1554:1961", "IS 1554:1976"]
+    },
+    {
+        "is_number": "IS 7098 (Part 1)",
+        "title": "Crosslinked Polyethylene Insulated Thermoplastic Sheathed Cables - Specification: Part 1 For Working Voltage up to and Including 1100 V",
+        "year": 1988,
+        "amendments": [1, 2, 3],
+        "status": "ACTIVE",
+        "scope": "Specifies requirements of XLPE insulated, PVC sheathed cables for electricity supply systems up to 1.1 kV.",
+        "committee": "ETD 9",
+        "department": "Electrotechnical",
+        "normative_references": ["IS 8130", "IS 10810"],
+        "test_standards": ["IS 10810"],
+        "keywords": ["xlpe cable", "crosslinked polyethylene", "power cable", "lt cable"],
+        "historical_revisions": []
+    },
+
+    # ---------------- 3. Textiles, PPE & Protective Equipment (10 standards) ----------------
+    {
+        "is_number": "IS 2925",
+        "title": "Specification for Industrial Safety Helmets",
+        "year": 1984,
+        "amendments": [1, 2, 3, 4],
+        "status": "ACTIVE",
+        "scope": "Specifies requirements for industrial safety helmets providing protection to the wearer against falling objects and other mechanical hazards in construction, mining, and manufacturing.",
+        "committee": "TXD 32",
+        "department": "Textiles",
+        "normative_references": ["IS 1065", "IS 15298"],
+        "test_standards": ["IS 1065"],
+        "keywords": ["safety helmet", "hard hat", "ppe", "head protection", "shock absorption", "penetration resistance"],
+        "historical_revisions": ["IS 2925:1964", "IS 2925:1975"]
+    },
+    {
+        "is_number": "IS 15298 (Part 2)",
+        "title": "Personal Protective Equipment - Part 2: Safety Footwear",
+        "year": 2016,
+        "amendments": [1],
+        "status": "ACTIVE",
+        "scope": "Specifies basic and additional (optional) requirements for safety footwear used for general purpose, including mechanical risks, slip resistance, thermal risks, and ergonomic behavior.",
+        "committee": "TXD 32",
+        "department": "Textiles",
+        "normative_references": ["IS 15298 (Part 1)"],
+        "test_standards": ["IS 15298 (Part 1)"],
+        "keywords": ["safety shoes", "safety boots", "steel toe", "protective footwear", "slip resistant", "toe cap impact"],
+        "historical_revisions": ["IS 15298:2002"]
+    },
+    {
+        "is_number": "IS 9473",
+        "title": "Respiratory Protective Devices - Filtering Half Masks to Protect Against Particles - Specification",
+        "year": 2002,
+        "amendments": [1, 2],
+        "status": "ACTIVE",
+        "scope": "Specifies minimum requirements for filtering half masks as respiratory protective devices to protect against particles (FFP1, FFP2, FFP3).",
+        "committee": "TXD 32",
+        "department": "Textiles",
+        "normative_references": [],
+        "test_standards": [],
+        "keywords": ["n95 mask", "respirator", "ffp2 mask", "particulate mask", "dust mask", "filtration efficiency"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS 15748",
+        "title": "Textiles - Requirements for Clothing to Protect Against Heat and Flame",
+        "year": 2007,
+        "amendments": [],
+        "status": "ACTIVE",
+        "scope": "Specifies performance requirements for garments made from flexible materials which are designed to protect the wearer's body from heat and/or flame.",
+        "committee": "TXD 32",
+        "department": "Textiles",
+        "normative_references": ["IS 15742"],
+        "test_standards": ["IS 15742"],
+        "keywords": ["fire retardant", "flame resistant suit", "protective clothing", "heat shield", "molten splash"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS 15742",
+        "title": "Textiles - Requirements for Protective Clothing for Workers Exposed to Radiant Heat and Molten Metal Splashes",
+        "year": 2007,
+        "amendments": [],
+        "status": "ACTIVE",
+        "scope": "Specifies requirements for performance of protective clothing worn by operators in foundries, steel plants, and blast furnaces.",
+        "committee": "TXD 32",
+        "department": "Textiles",
+        "normative_references": [],
+        "test_standards": [],
+        "keywords": ["molten metal protection", "foundry suit", "furnace apron", "radiant heat suit"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS 3521 (Part 1)",
+        "title": "Industrial Safety Belts and Harnesses - Part 1: Full Body Harness",
+        "year": 1999,
+        "amendments": [1, 2],
+        "status": "ACTIVE",
+        "scope": "Specifies requirements, testing and marking for full body harnesses used as personal fall arrest systems.",
+        "committee": "TXD 32",
+        "department": "Textiles",
+        "normative_references": [],
+        "test_standards": [],
+        "keywords": ["safety harness", "safety belt", "fall protection", "lanyard", "carabiner", "working at heights"],
+        "historical_revisions": ["IS 3521:1965", "IS 3521:1983", "IS 3521:1989"]
+    },
+    {
+        "is_number": "IS 15841",
+        "title": "Industrial Safety Gloves - Leather Gloves - Specification",
+        "year": 2009,
+        "amendments": [],
+        "status": "ACTIVE",
+        "scope": "Specifies requirements for leather safety gloves intended to provide hand protection against mechanical risks and abrasion.",
+        "committee": "TXD 32",
+        "department": "Textiles",
+        "normative_references": [],
+        "test_standards": [],
+        "keywords": ["safety gloves", "leather gloves", "welding gloves", "cut resistant", "hand protection"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS 5983",
+        "title": "Specification for Eye-Protectors",
+        "year": 1980,
+        "amendments": [1, 2],
+        "status": "ACTIVE",
+        "scope": "Covers functional requirements for eye-protectors (safety spectacles, goggles, face shields) to protect against optical radiation and flying particles.",
+        "committee": "TXD 32",
+        "department": "Textiles",
+        "normative_references": [],
+        "test_standards": [],
+        "keywords": ["safety glasses", "goggles", "face shield", "eye protection", "welding shield"],
+        "historical_revisions": ["IS 5983:1971"]
+    },
+    {
+        "is_number": "IS 8519",
+        "title": "Guide for Selection of Industrial Safety Equipment for Body Protection",
+        "year": 1977,
+        "amendments": [],
+        "status": "ACTIVE",
+        "scope": "Provides guidance on selection of suitable protective equipment for protecting the torso and limbs against various hazards in industrial work environments.",
+        "committee": "TXD 32",
+        "department": "Textiles",
+        "normative_references": [],
+        "test_standards": [],
+        "keywords": ["body protection", "apron", "overalls", "safety suit", "ppe selection"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS 9873 (Part 1)",
+        "title": "Safety Aspects Related to Mechanical and Physical Properties of Toys",
+        "year": 2019,
+        "amendments": [],
+        "status": "ACTIVE",
+        "scope": "Applies to all toys, including all products designed or intended, whether or not exclusively, for use in play by children under 14 years of age.",
+        "committee": "PCD 12",
+        "department": "Petroleum, Coal and Related Products",
+        "normative_references": ["IS 9873 (Part 2)", "IS 9873 (Part 3)"],
+        "test_standards": ["IS 9873 (Part 2)"],
+        "keywords": ["toy safety", "choking hazard", "sharp edges", "toys qco", "child safety", "mechanical tests"],
+        "historical_revisions": ["IS 9873:1981", "IS 9873:2001", "IS 9873:2012"]
+    },
+
+    # ---------------- 4. Chemicals, Polymers, Fire & Mechanical (10 standards) ----------------
+    {
+        "is_number": "IS 10146",
+        "title": "Polyethylene for Its Safe Use in Contact with Foodstuffs, Pharmaceuticals and Drinking Water - Specification",
+        "year": 1982,
+        "amendments": [1, 2],
+        "status": "ACTIVE",
+        "scope": "Specifies requirements and methods of sampling and test for polyethylene plastic materials for manufacture of containers, closures, and wrappings coming in contact with foodstuffs.",
+        "committee": "PCD 12",
+        "department": "Petroleum, Coal and Related Products",
+        "normative_references": ["IS 2530", "IS 9845", "IS 10141"],
+        "test_standards": ["IS 2530", "IS 9845"],
+        "keywords": ["food grade polymer", "polyethylene", "drinking water contact", "leaching test", "overall migration"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS 10141",
+        "title": "Positive List of Constituents of Polyethylene in Contact with Foodstuffs, Pharmaceuticals and Drinking Water",
+        "year": 1982,
+        "amendments": [],
+        "status": "ACTIVE",
+        "scope": "Lists polymers, additives, catalysts and emulsifying agents which may be safely used in the manufacture of polyethylene materials intended for food contact.",
+        "committee": "PCD 12",
+        "department": "Petroleum, Coal and Related Products",
+        "normative_references": [],
+        "test_standards": [],
+        "keywords": ["positive list", "food contact additives", "non-toxic additives", "polymer safety"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS 2530",
+        "title": "Methods of Test for Polyethylene Moulding Materials and Polyethylene Compounds",
+        "year": 1963,
+        "amendments": [1, 2, 3],
+        "status": "ACTIVE",
+        "scope": "Prescribes methods of test for density, melt flow index, carbon black content, and environmental stress crack resistance of polyethylene compounds.",
+        "committee": "PCD 12",
+        "department": "Petroleum, Coal and Related Products",
+        "normative_references": [],
+        "test_standards": [],
+        "keywords": ["density test", "melt flow rate", "mfi", "carbon black test", "escr test"],
+        "historical_revisions": []
+    },
+    {
+        "is_number": "IS 9845",
+        "title": "Determination of Overall Migration of Constituents of Plastics Materials and Articles Intended to Come into Contact with Foodstuffs - Method of Analysis",
+        "year": 1998,
+        "amendments": [1],
+        "status": "ACTIVE",
+        "scope": "Prescribes methods of analysis for determination of overall migration from plastics materials and articles into various food simulants like water, heptane, and alcohol.",
+        "committee": "PCD 12",
+        "department": "Petroleum, Coal and Related Products",
+        "normative_references": [],
+        "test_standards": [],
+        "keywords": ["migration test", "food simulant", "overall migration limit", "toxicology"],
+        "historical_revisions": ["IS 9845:1981", "IS 9845:1986"]
+    },
+    {
+        "is_number": "IS 15683",
+        "title": "Portable Fire Extinguishers - Performance and Construction - Specification",
+        "year": 2018,
+        "amendments": [1],
+        "status": "ACTIVE",
+        "scope": "Specifies requirements for design, construction, testing and performance of portable fire extinguishers of water, foam, powder, and clean agent types.",
+        "committee": "CED 22",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 2190"],
+        "test_standards": ["IS 2190"],
+        "keywords": ["fire extinguisher", "fire safety", "abc dry powder", "co2 extinguisher", "hydrostatic test"],
+        "historical_revisions": ["IS 15683:2006"]
+    },
+    {
+        "is_number": "IS 2190",
+        "title": "Selection, Installation and Maintenance of First-Aid Fire Extinguishers - Code of Practice",
+        "year": 2010,
+        "amendments": [1],
+        "status": "ACTIVE",
+        "scope": "Covers recommendations for the selection, installation, maintenance and testing of first-aid portable and wheeled fire extinguishers.",
+        "committee": "CED 22",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 15683"],
+        "test_standards": ["IS 15683"],
+        "keywords": ["fire protection", "fire audit", "maintenance of extinguishers", "hydro testing"],
+        "historical_revisions": ["IS 2190:1962", "IS 2190:1971", "IS 2190:1979", "IS 2190:1992"]
+    },
+    {
+        "is_number": "IS 303",
+        "title": "Plywood for General Purposes - Specification",
+        "year": 1989,
+        "amendments": [1, 2, 3, 4, 5, 6],
+        "status": "ACTIVE",
+        "scope": "Covers requirements of different grades of plywood for general purposes manufactured from timbers.",
+        "committee": "CED 20",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 1734"],
+        "test_standards": ["IS 1734"],
+        "keywords": ["plywood", "commercial plywood", "mr grade", "bwr grade", "moisture resistant", "bonding test"],
+        "historical_revisions": ["IS 303:1951", "IS 303:1960", "IS 303:1975"]
+    },
+    {
+        "is_number": "IS 710",
+        "title": "Marine Plywood - Specification",
+        "year": 2010,
+        "amendments": [1],
+        "status": "ACTIVE",
+        "scope": "Specifies requirements for marine plywood manufactured from superior quality wood veneers bonded with unextended phenol formaldehyde synthetic resin.",
+        "committee": "CED 20",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 1734"],
+        "test_standards": ["IS 1734"],
+        "keywords": ["marine plywood", "bwp grade", "boiling water proof", "boat building", "kitchen cabinets"],
+        "historical_revisions": ["IS 710:1957", "IS 710:1976"]
+    },
+    {
+        "is_number": "IS 2202 (Part 1)",
+        "title": "Wooden Flush Door Shutters (Solid Core Type) - Part 1: Plywood Face Panels",
+        "year": 1999,
+        "amendments": [1, 2, 3],
+        "status": "ACTIVE",
+        "scope": "Specifies requirements for solid core wooden flush door shutters with plywood face panels for residential and commercial buildings.",
+        "committee": "CED 20",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 303", "IS 1003"],
+        "test_standards": ["IS 1003"],
+        "keywords": ["flush door", "solid core door", "plywood shutters", "internal doors", "timber doors"],
+        "historical_revisions": ["IS 2202:1962", "IS 2202:1973", "IS 2202:1991"]
+    },
+    {
+        "is_number": "IS 14846",
+        "title": "Sluice Valves for Water Works Purposes (50 to 1200 mm Size) - Specification",
+        "year": 2000,
+        "amendments": [1, 2, 3],
+        "status": "ACTIVE",
+        "scope": "Covers requirements for non-rising spindle and rising spindle sluice valves up to 1200 mm nominal bore for water supply works.",
+        "committee": "CED 3",
+        "department": "Civil Engineering",
+        "normative_references": ["IS 1538", "IS 210"],
+        "test_standards": ["IS 210"],
+        "keywords": ["sluice valve", "water valve", "gate valve", "cast iron valve", "water distribution"],
+        "historical_revisions": ["IS 780:1984", "IS 2906:1984"]
+    }
+]
+
+
+QCO_FIXTURES: List[Dict[str, Any]] = [
+    {
+        "order_name": "Steel and Steel Products (Quality Control) Order, 2020",
+        "ministry": "Ministry of Steel",
+        "gazette_no": "S.O. 1673(E)",
+        "effective_date": "2020-05-22",
+        "mandatory_scheme": "Scheme-I",
+        "applicable_standards": ["IS 2062", "IS 1786", "IS 1161", "IS 1239 (Part 1)", "IS 808"],
+        "penal_clause": "Prohibits the manufacture, import, distribution, sale, or storage of listed steel products without BIS Standard Mark (ISI). Violations attract prosecution under Section 29 of the Bureau of Indian Standards Act, 2016.",
+        "scope_summary": "All hot-rolled structural steel plates, sections, high-strength deformed rebar for RCC, and hollow steel tubes."
+    },
+    {
+        "order_name": "Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021",
+        "ministry": "Ministry of Electronics and Information Technology (MeitY)",
+        "gazette_no": "S.O. 1248(E)",
+        "effective_date": "2021-03-18",
+        "mandatory_scheme": "Scheme-II (CRS)",
+        "applicable_standards": ["IS 13252 (Part 1)", "IS 16046 (Part 1)", "IS 16046 (Part 2)", "IS 616", "IS 16242 (Part 1)"],
+        "penal_clause": "No person shall manufacture, store for sale, import or distribute goods without self-declaration of conformity and registration under BIS Compulsory Registration Scheme (CRS).",
+        "scope_summary": "Laptops, notebook computers, tablets, secondary lithium batteries, mobile phones, audio/video apparatus, and UPS systems."
+    },
+    {
+        "order_name": "Footwear made from Leather and other Materials (Quality Control) Order, 2022",
+        "ministry": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+        "gazette_no": "S.O. 2240(E)",
+        "effective_date": "2023-07-01",
+        "mandatory_scheme": "Scheme-I",
+        "applicable_standards": ["IS 15298 (Part 2)", "IS 15841"],
+        "penal_clause": "Mandatory conformity to Indian Standards with BIS ISI Mark under Section 16 of the BIS Act, 2016.",
+        "scope_summary": "Industrial safety footwear, protective footwear, and industrial leather protective equipment."
+    },
+    {
+        "order_name": "Toys (Quality Control) Order, 2020",
+        "ministry": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+        "gazette_no": "S.O. 858(E)",
+        "effective_date": "2021-01-01",
+        "mandatory_scheme": "Scheme-I",
+        "applicable_standards": ["IS 9873 (Part 1)"],
+        "penal_clause": "Toys manufactured or imported for children up to 14 years must bear the BIS Standard Mark under Scheme-I.",
+        "scope_summary": "All physical, mechanical and non-electric toys manufactured or imported into India."
+    },
+    {
+        "order_name": "Solar Photovoltaics, Systems, Devices and Components Goods (Requirements for Compulsory Registration) Order, 2017",
+        "ministry": "Ministry of New and Renewable Energy (MNRE)",
+        "gazette_no": "S.O. 2920(E)",
+        "effective_date": "2018-04-16",
+        "mandatory_scheme": "Scheme-II (CRS)",
+        "applicable_standards": ["IS 14286", "IS/IEC 61730 (Part 1)"],
+        "penal_clause": "Prohibits the storage, sale, or deployment of non-certified terrestrial PV modules in grid-connected or off-grid solar projects.",
+        "scope_summary": "Crystalline silicon terrestrial photovoltaic modules, thin-film modules, and grid-tied inverters."
+    },
+    {
+        "order_name": "Polyethylene Material for Moulding and Extrusion (Quality Control) Order, 2022",
+        "ministry": "Department of Chemicals and Petrochemicals",
+        "gazette_no": "S.O. 1120(E)",
+        "effective_date": "2022-04-01",
+        "mandatory_scheme": "Scheme-I",
+        "applicable_standards": ["IS 10146", "IS 4984"],
+        "penal_clause": "Conformity to Indian Standard mandatory under Scheme-I with BIS ISI mark for all virgin and processed polymer resins.",
+        "scope_summary": "High density polyethylene, low density polyethylene compounds for water pipes and food-contact packaging."
+    },
+    {
+        "order_name": "Electrical Wires, Cables and Appliances (Quality Control) Order, 2023",
+        "ministry": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+        "gazette_no": "S.O. 3401(E)",
+        "effective_date": "2024-01-01",
+        "mandatory_scheme": "Scheme-I",
+        "applicable_standards": ["IS 694", "IS 1554 (Part 1)", "IS 7098 (Part 1)", "IS 302 (Part 1)", "IS 1293"],
+        "penal_clause": "Mandatory conformity assessment and BIS standard mark for all low-voltage building wires, plugs, sockets, and heavy-duty distribution cables.",
+        "scope_summary": "PVC insulated copper wires, power distribution cables, and domestic wall plugs and sockets."
+    },
+    {
+        "order_name": "Cement (Quality Control) Order, 2003",
+        "ministry": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+        "gazette_no": "S.O. 191(E)",
+        "effective_date": "2003-02-17",
+        "mandatory_scheme": "Scheme-I",
+        "applicable_standards": ["IS 269", "IS 8112", "IS 12269"],
+        "penal_clause": "Prohibits manufacturing, bagging, distributing or importing any type of cement without valid BIS Certification Mark.",
+        "scope_summary": "Ordinary Portland Cement (Grades 33, 43, 53), Portland Pozzolana Cement, and Portland Slag Cement."
+    },
+    {
+        "order_name": "Personal Protective Equipment - Industrial Helmets (Quality Control) Order, 2021",
+        "ministry": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+        "gazette_no": "S.O. 4502(E)",
+        "effective_date": "2022-03-01",
+        "mandatory_scheme": "Scheme-I",
+        "applicable_standards": ["IS 2925", "IS 3521 (Part 1)"],
+        "penal_clause": "All safety helmets and full body harnesses supplied to industrial, mining, and construction sites must be BIS certified.",
+        "scope_summary": "Industrial safety helmets, harnesses, and fall arresters."
+    },
+    {
+        "order_name": "Wood and Wood Products (Plywood and Wooden Flush Doors) Quality Control Order, 2023",
+        "ministry": "Department for Promotion of Industry and Internal Trade (DPIIT)",
+        "gazette_no": "S.O. 3855(E)",
+        "effective_date": "2024-02-28",
+        "mandatory_scheme": "Scheme-I",
+        "applicable_standards": ["IS 303", "IS 710", "IS 2202 (Part 1)"],
+        "penal_clause": "No person shall manufacture, import, distribute or sell plywood or flush door shutters without BIS standard mark.",
+        "scope_summary": "General-purpose plywood, marine plywood, and solid core wooden flush door shutters."
+    }
+]
+
+
+def generate_seed_data(output_path: Path) -> Dict[str, Any]:
+    """Validates fixtures with Pydantic v2 models and writes to JSON."""
+    validated_standards = []
+    for item in STANDARDS_FIXTURES:
+        std = IndianStandard.model_validate(item)
+        validated_standards.append(std.model_dump())
+
+    validated_qcos = []
+    for qco_item in QCO_FIXTURES:
+        qco = QCOOrder.model_validate(qco_item)
+        validated_qcos.append(qco.model_dump())
+
+    payload = {
+        "metadata": {
+            "version": "1.0",
+            "total_standards": len(validated_standards),
+            "total_qco_orders": len(validated_qcos),
+            "description": "Manak-SpecEngine canonical seed dataset validated via Pydantic v2"
+        },
+        "standards": validated_standards,
+        "qco_orders": validated_qcos
+    }
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2, ensure_ascii=False)
+
+    print(f"Successfully generated {len(validated_standards)} standards and {len(validated_qcos)} QCOs to {output_path}")
+    return payload
+
+
+if __name__ == "__main__":
+    out_file = Path(__file__).resolve().parent.parent / "data" / "seed_data.json"
+    generate_seed_data(out_file)

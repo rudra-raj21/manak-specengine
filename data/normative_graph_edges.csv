@@ -1,0 +1,97 @@
+source,source_type,target,target_type,relation,description
+IS 2062,Standard,IS 808,Standard,NORMATIVE_REF,Structural dimensions specified in IS 808
+IS 2062,Standard,IS 1852,Standard,NORMATIVE_REF,Rolling tolerances specified in IS 1852
+IS 2062,Standard,IS 8910,Standard,NORMATIVE_REF,Technical delivery conditions specified in IS 8910
+IS 2062,Standard,IS 228 (Part 1),Standard,NORMATIVE_REF,Chemical composition testing per IS 228
+IS 1786,Standard,IS 228 (Part 1),Standard,NORMATIVE_REF,Chemical analysis per IS 228
+IS 1786,Standard,IS 2062,Standard,NORMATIVE_REF,Complementary structural steel provisions
+IS 456,Standard,IS 1786,Standard,NORMATIVE_REF,Reinforcement steel bars mandated by IS 456
+IS 456,Standard,IS 269,Standard,NORMATIVE_REF,OPC cement provisions
+IS 456,Standard,IS 383,Standard,NORMATIVE_REF,Aggregate specifications for concrete
+IS 456,Standard,IS 1489 (Part 1),Standard,NORMATIVE_REF,Pozzolana cement specifications
+IS 800,Standard,IS 2062,Standard,NORMATIVE_REF,Structural steel grades mandated by IS 800
+IS 800,Standard,IS 808,Standard,NORMATIVE_REF,Section dimensions mandated by IS 800
+IS 10262,Standard,IS 456,Standard,NORMATIVE_REF,Mix design compliance with IS 456
+IS 10262,Standard,IS 383,Standard,NORMATIVE_REF,Aggregate grading criteria for mix design
+IS 13920,Standard,IS 456,Standard,NORMATIVE_REF,Base concrete code of practice
+IS 13920,Standard,IS 1786,Standard,NORMATIVE_REF,Ductile reinforcement steel bar provisions
+IS 13920,Standard,IS 1893 (Part 1),Standard,NORMATIVE_REF,Seismic loading parameters
+IS 4984,Standard,IS 7328,Standard,NORMATIVE_REF,Raw material granules per IS 7328
+IS 13252 (Part 1),Standard,IS 616,Standard,NORMATIVE_REF,Audio/video safety harmonized references
+IS 13252 (Part 1),Standard,IS 1293,Standard,NORMATIVE_REF,Power plug and cord safety conformity
+IS 14286,Standard,IS/IEC 61730 (Part 1),Standard,NORMATIVE_REF,PV module construction safety qualification
+IS 2062,Standard,IS 1608 (Part 1),TestStandard,TESTED_BY,Tensile testing at room temperature
+IS 2062,Standard,IS 1599,TestStandard,TESTED_BY,Bend testing for ductility
+IS 2062,Standard,IS 1757 (Part 1),TestStandard,TESTED_BY,Charpy impact testing for notch toughness
+IS 1786,Standard,IS 1608 (Part 1),TestStandard,TESTED_BY,Proof stress and elongation tensile testing
+IS 1786,Standard,IS 1599,TestStandard,TESTED_BY,Bend and rebend testing
+IS 456,Standard,IS 516 (Part 1/Sec 1),TestStandard,TESTED_BY,Compressive and flexural strength of concrete
+IS 456,Standard,IS 1199 (Part 1),TestStandard,TESTED_BY,Sampling and workability slump testing
+IS 383,Standard,IS 2386 (Part 1),TestStandard,TESTED_BY,Particle size sieve analysis
+IS 269,Standard,IS 4031 (Part 5),TestStandard,TESTED_BY,Initial and final setting times
+IS 1077,Standard,IS 3495 (Part 1),TestStandard,TESTED_BY,Compressive strength of burnt clay bricks
+IS 694,Standard,IS 10810 (Part 43),TestStandard,TESTED_BY,Insulation resistance testing of cables
+IS 4984,Standard,IS 12235 (Part 1),TestStandard,TESTED_BY,Dimensional measurement and wall thickness
+IS 4984,Standard,IS 12235 (Part 2),TestStandard,TESTED_BY,Density determination of polyethylene
+IS 15298 (Part 2),Standard,IS 15298 (Part 2),TestStandard,TESTED_BY,Toe cap 200J impact and 15kN compression tests
+IS 1786,Standard,IS 432 (Part 1),Standard,SUPERSEDES,Supersedes mild steel plain bars for high-strength rebar
+IS 2062,Standard,IS 432 (Part 1),Standard,SUPERSEDES,Supersedes general structural use of plain mild steel
+IS 1608 (Part 1),Standard,IS 1608:2005,Standard,SUPERSEDES,Adopts ISO 6892-1 ambient tensile test methods
+IS 2062,Standard,"Steel and Steel Products (Quality Control) Order, 2024",QCO,MANDATED_BY,"Covered under Steel and Steel Products (Quality Control) Order, 2024 (Scheme-I)"
+IS 1786,Standard,"Steel and Steel Products (Quality Control) Order, 2024",QCO,MANDATED_BY,"Covered under Steel and Steel Products (Quality Control) Order, 2024 (Scheme-I)"
+IS 808,Standard,"Steel and Steel Products (Quality Control) Order, 2024",QCO,MANDATED_BY,"Covered under Steel and Steel Products (Quality Control) Order, 2024 (Scheme-I)"
+IS 1852,Standard,"Steel and Steel Products (Quality Control) Order, 2024",QCO,MANDATED_BY,"Covered under Steel and Steel Products (Quality Control) Order, 2024 (Scheme-I)"
+IS 8910,Standard,"Steel and Steel Products (Quality Control) Order, 2024",QCO,MANDATED_BY,"Covered under Steel and Steel Products (Quality Control) Order, 2024 (Scheme-I)"
+"Steel and Steel Products (Quality Control) Order, 2024",QCO,Ministry of Steel,Ministry,ISSUED_BY,Enacted by Ministry of Steel
+"Steel and Steel Products (Quality Control) Order, 2024",QCO,Scheme-I,Scheme,REQUIRES_SCHEME,Mandates compliance under Scheme-I
+IS 13252 (Part 1),Standard,"Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021",QCO,MANDATED_BY,"Covered under Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021 (Scheme-II (CRS))"
+IS 16046 (Part 1),Standard,"Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021",QCO,MANDATED_BY,"Covered under Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021 (Scheme-II (CRS))"
+IS 16046 (Part 2),Standard,"Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021",QCO,MANDATED_BY,"Covered under Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021 (Scheme-II (CRS))"
+IS 616,Standard,"Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021",QCO,MANDATED_BY,"Covered under Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021 (Scheme-II (CRS))"
+IS 302-2-25,Standard,"Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021",QCO,MANDATED_BY,"Covered under Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021 (Scheme-II (CRS))"
+IS 15885 (Part 2/Sec 13),Standard,"Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021",QCO,MANDATED_BY,"Covered under Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021 (Scheme-II (CRS))"
+IS 16102 (Part 1),Standard,"Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021",QCO,MANDATED_BY,"Covered under Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021 (Scheme-II (CRS))"
+"Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021",QCO,Ministry of Electronics and Information Technology (MeitY),Ministry,ISSUED_BY,Enacted by Ministry of Electronics and Information Technology (MeitY)
+"Electronics and Information Technology Goods (Requirement for Compulsory Registration) Order, 2021",QCO,Scheme-II (CRS),Scheme,REQUIRES_SCHEME,Mandates compliance under Scheme-II (CRS)
+IS 14286,Standard,"Solar Photovoltaics, Systems, Devices and Components Goods (Requirement for Compulsory Registration) Order, 2017",QCO,MANDATED_BY,"Covered under Solar Photovoltaics, Systems, Devices and Components Goods (Requirement for Compulsory Registration) Order, 2017 (Scheme-II (CRS))"
+IS/IEC 61730 (Part 1),Standard,"Solar Photovoltaics, Systems, Devices and Components Goods (Requirement for Compulsory Registration) Order, 2017",QCO,MANDATED_BY,"Covered under Solar Photovoltaics, Systems, Devices and Components Goods (Requirement for Compulsory Registration) Order, 2017 (Scheme-II (CRS))"
+IS 16221 (Part 2),Standard,"Solar Photovoltaics, Systems, Devices and Components Goods (Requirement for Compulsory Registration) Order, 2017",QCO,MANDATED_BY,"Covered under Solar Photovoltaics, Systems, Devices and Components Goods (Requirement for Compulsory Registration) Order, 2017 (Scheme-II (CRS))"
+"Solar Photovoltaics, Systems, Devices and Components Goods (Requirement for Compulsory Registration) Order, 2017",QCO,Ministry of New and Renewable Energy (MNRE),Ministry,ISSUED_BY,Enacted by Ministry of New and Renewable Energy (MNRE)
+"Solar Photovoltaics, Systems, Devices and Components Goods (Requirement for Compulsory Registration) Order, 2017",QCO,Scheme-II (CRS),Scheme,REQUIRES_SCHEME,Mandates compliance under Scheme-II (CRS)
+IS 9873 (Part 1),Standard,"Safety of Toys (Quality Control) Order, 2020",QCO,MANDATED_BY,"Covered under Safety of Toys (Quality Control) Order, 2020 (Scheme-I)"
+IS 15644,Standard,"Safety of Toys (Quality Control) Order, 2020",QCO,MANDATED_BY,"Covered under Safety of Toys (Quality Control) Order, 2020 (Scheme-I)"
+"Safety of Toys (Quality Control) Order, 2020",QCO,Department for Promotion of Industry and Internal Trade (DPIIT),Ministry,ISSUED_BY,Enacted by Department for Promotion of Industry and Internal Trade (DPIIT)
+"Safety of Toys (Quality Control) Order, 2020",QCO,Scheme-I,Scheme,REQUIRES_SCHEME,Mandates compliance under Scheme-I
+IS 15298 (Part 2),Standard,"Footwear made from Leather and other materials (Quality Control) Order, 2020",QCO,MANDATED_BY,"Covered under Footwear made from Leather and other materials (Quality Control) Order, 2020 (Scheme-I)"
+"Footwear made from Leather and other materials (Quality Control) Order, 2020",QCO,Department for Promotion of Industry and Internal Trade (DPIIT),Ministry,ISSUED_BY,Enacted by Department for Promotion of Industry and Internal Trade (DPIIT)
+"Footwear made from Leather and other materials (Quality Control) Order, 2020",QCO,Scheme-I,Scheme,REQUIRES_SCHEME,Mandates compliance under Scheme-I
+IS 303,Standard,"Plywood and Wooden Flush Door Shutters (Quality Control) Order, 2024",QCO,MANDATED_BY,"Covered under Plywood and Wooden Flush Door Shutters (Quality Control) Order, 2024 (Scheme-I)"
+IS 710,Standard,"Plywood and Wooden Flush Door Shutters (Quality Control) Order, 2024",QCO,MANDATED_BY,"Covered under Plywood and Wooden Flush Door Shutters (Quality Control) Order, 2024 (Scheme-I)"
+"Plywood and Wooden Flush Door Shutters (Quality Control) Order, 2024",QCO,Department for Promotion of Industry and Internal Trade (DPIIT),Ministry,ISSUED_BY,Enacted by Department for Promotion of Industry and Internal Trade (DPIIT)
+"Plywood and Wooden Flush Door Shutters (Quality Control) Order, 2024",QCO,Scheme-I,Scheme,REQUIRES_SCHEME,Mandates compliance under Scheme-I
+IS 1293,Standard,"Plugs and Socket-Outlets (Quality Control) Order, 2021",QCO,MANDATED_BY,"Covered under Plugs and Socket-Outlets (Quality Control) Order, 2021 (Scheme-I)"
+"Plugs and Socket-Outlets (Quality Control) Order, 2021",QCO,Department for Promotion of Industry and Internal Trade (DPIIT),Ministry,ISSUED_BY,Enacted by Department for Promotion of Industry and Internal Trade (DPIIT)
+"Plugs and Socket-Outlets (Quality Control) Order, 2021",QCO,Scheme-I,Scheme,REQUIRES_SCHEME,Mandates compliance under Scheme-I
+IS 7328,Standard,"Polyethylene Material for Moulding and Extrusion (Quality Control) Order, 2022",QCO,MANDATED_BY,"Covered under Polyethylene Material for Moulding and Extrusion (Quality Control) Order, 2022 (Scheme-I)"
+IS 4984,Standard,"Polyethylene Material for Moulding and Extrusion (Quality Control) Order, 2022",QCO,MANDATED_BY,"Covered under Polyethylene Material for Moulding and Extrusion (Quality Control) Order, 2022 (Scheme-I)"
+IS 4985,Standard,"Polyethylene Material for Moulding and Extrusion (Quality Control) Order, 2022",QCO,MANDATED_BY,"Covered under Polyethylene Material for Moulding and Extrusion (Quality Control) Order, 2022 (Scheme-I)"
+"Polyethylene Material for Moulding and Extrusion (Quality Control) Order, 2022",QCO,Ministry of Chemicals and Petrochemicals,Ministry,ISSUED_BY,Enacted by Ministry of Chemicals and Petrochemicals
+"Polyethylene Material for Moulding and Extrusion (Quality Control) Order, 2022",QCO,Scheme-I,Scheme,REQUIRES_SCHEME,Mandates compliance under Scheme-I
+IS 252,Standard,"Caustic Soda (Quality Control) Order, 2018",QCO,MANDATED_BY,"Covered under Caustic Soda (Quality Control) Order, 2018 (Scheme-I)"
+"Caustic Soda (Quality Control) Order, 2018",QCO,Ministry of Chemicals and Petrochemicals,Ministry,ISSUED_BY,Enacted by Ministry of Chemicals and Petrochemicals
+"Caustic Soda (Quality Control) Order, 2018",QCO,Scheme-I,Scheme,REQUIRES_SCHEME,Mandates compliance under Scheme-I
+IS 1180 (Part 1),Standard,"Electric Transformers (Quality Control) Order, 2023",QCO,MANDATED_BY,"Covered under Electric Transformers (Quality Control) Order, 2023 (Scheme-I)"
+"Electric Transformers (Quality Control) Order, 2023",QCO,Ministry of Heavy Industries,Ministry,ISSUED_BY,Enacted by Ministry of Heavy Industries
+"Electric Transformers (Quality Control) Order, 2023",QCO,Scheme-I,Scheme,REQUIRES_SCHEME,Mandates compliance under Scheme-I
+IS 694,Standard,"Wires and Cables (Quality Control) Order, 2023",QCO,MANDATED_BY,"Covered under Wires and Cables (Quality Control) Order, 2023 (Scheme-I)"
+IS 1554 (Part 1),Standard,"Wires and Cables (Quality Control) Order, 2023",QCO,MANDATED_BY,"Covered under Wires and Cables (Quality Control) Order, 2023 (Scheme-I)"
+IS 7098 (Part 1),Standard,"Wires and Cables (Quality Control) Order, 2023",QCO,MANDATED_BY,"Covered under Wires and Cables (Quality Control) Order, 2023 (Scheme-I)"
+"Wires and Cables (Quality Control) Order, 2023",QCO,Ministry of Heavy Industries,Ministry,ISSUED_BY,Enacted by Ministry of Heavy Industries
+"Wires and Cables (Quality Control) Order, 2023",QCO,Scheme-I,Scheme,REQUIRES_SCHEME,Mandates compliance under Scheme-I
+IS 4151,Standard,"Helmets for riders of Two Wheeler Motor Vehicles (Quality Control) Order, 2020",QCO,MANDATED_BY,"Covered under Helmets for riders of Two Wheeler Motor Vehicles (Quality Control) Order, 2020 (Scheme-I)"
+"Helmets for riders of Two Wheeler Motor Vehicles (Quality Control) Order, 2020",QCO,Ministry of Road Transport and Highways,Ministry,ISSUED_BY,Enacted by Ministry of Road Transport and Highways
+"Helmets for riders of Two Wheeler Motor Vehicles (Quality Control) Order, 2020",QCO,Scheme-I,Scheme,REQUIRES_SCHEME,Mandates compliance under Scheme-I
+IS 14543,Standard,Packaged Water (Quality Control) Mandate,QCO,MANDATED_BY,Covered under Packaged Water (Quality Control) Mandate (Scheme-I)
+IS 13428,Standard,Packaged Water (Quality Control) Mandate,QCO,MANDATED_BY,Covered under Packaged Water (Quality Control) Mandate (Scheme-I)
+Packaged Water (Quality Control) Mandate,QCO,"Ministry of Consumer Affairs, Food and Public Distribution",Ministry,ISSUED_BY,"Enacted by Ministry of Consumer Affairs, Food and Public Distribution"
+Packaged Water (Quality Control) Mandate,QCO,Scheme-I,Scheme,REQUIRES_SCHEME,Mandates compliance under Scheme-I
