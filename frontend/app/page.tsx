@@ -37,7 +37,7 @@ import {
 import GraphCanvas, { GraphData, GraphNode } from "./components/GraphCanvas";
 import AudioRecorder, { TranscriptionResult } from "./components/AudioRecorder";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:8000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE || "https://sprint-richards-civil-instead.trycloudflare.com";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"finder" | "auditor" | "qcos" | "graph">("finder");

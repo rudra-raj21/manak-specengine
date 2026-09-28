@@ -41,7 +41,7 @@ interface AudioRecorderProps {
 }
 
 export default function AudioRecorder({
-  apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000",
+  apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || "https://sprint-richards-civil-instead.trycloudflare.com",
   onTranscriptionComplete,
   selectedLanguage,
   onLanguageChange,
