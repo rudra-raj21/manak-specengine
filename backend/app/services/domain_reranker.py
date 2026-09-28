@@ -5,7 +5,7 @@ and query-to-standard token MaxSim scoring to re-rank candidate standards.
 """
 
 import re
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any, List, Tuple, Optional
 
 
 class DomainReranker:
@@ -79,24 +79,19 @@ class DomainReranker:
 
             # 3. Slot-guided bonuses from ConstraintSlotService
             if slots.get("requires_crs") and "IS_1786" in sid:
-                score += 0.25
+                score += 0.15
             if slots.get("requires_ductility") and "IS_1786" in sid:
-                score += 0.20
+                score += 0.10
             if slots.get("requires_ductility") and "IS_13920" in sid:
-                score += 0.30
+                score += 0.15
 
             # 4. Mandatory QCO Weight
             if item.get("is_mandatory_qco"):
-                score += 0.15
+                score += 0.08
 
-            item["score"] = round(max(0.01, score), 4)
+            item["score"] = round(min(0.99, max(0.01, score)), 4)
 
-        # Sort descending by re-ranked score
+        # Sort descending by calibrated re-ranked score
         candidates.sort(key=lambda x: x["score"], reverse=True)
-
-        # Re-normalize to 1.0 maximum
-        max_score = candidates[0]["score"] if candidates else 1.0
-        for item in candidates:
-            item["score"] = round(min(1.0, item["score"] / max_score), 4)
 
         return candidates

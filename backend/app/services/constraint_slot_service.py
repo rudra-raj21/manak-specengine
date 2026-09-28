@@ -6,7 +6,7 @@ to guide precision standard and grade recommendation.
 """
 
 import re
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, Tuple
 
 
 class ConstraintSlotService:
@@ -127,44 +127,98 @@ class ConstraintSlotService:
         }
 
     @classmethod
-    def evaluate_constraint_bonus(cls, standard_id: str, doc_title: str, doc_scope: str, slots: Dict[str, Any]) -> float:
+    def evaluate_constraint_bonus_with_rules(
+        cls,
+        standard_id: str,
+        doc_title: str,
+        doc_scope: str,
+        slots: Dict[str, Any]
+    ) -> Tuple[float, List[Dict[str, str]]]:
         """
-        Calculates an additive or multiplicative score adjustment based on whether
+        Calculates an evidence-grounded score adjustment based on whether
         the candidate standard satisfies the extracted environmental and engineering constraints.
+        Returns (bonus_score, applied_rules_list) with specific clause citations.
         """
         bonus = 0.0
+        applied_rules: List[Dict[str, str]] = []
         sid_norm = standard_id.upper()
         content = (doc_title + " " + doc_scope).lower()
 
-        # Constraint 1: Rebar in Coastal / Seismic Zone V
+        # Constraint 1: Rebar in Coastal / High Exposure or High Seismic Zone
         if "IS_1786" in sid_norm:
             if slots.get("requires_crs"):
-                bonus += 0.40  # Boost IS 1786 because it governs Fe 500D CRS
+                bonus += 0.35
+                applied_rules.append({
+                    "rule_name": "Corrosion Resistant Steel (CRS)",
+                    "clause_citation": "IS 1786:2008 Cl. 4.2 & IS 456:2000 Cl. 8.2.2",
+                    "reason": "Coastal or severe exposure requires corrosion resistant TMT rebar (Fe 500D CRS)"
+                })
             if slots.get("requires_ductility"):
-                bonus += 0.35  # IS 1786 specifies high elongation 'D' grades
-        
-        # Constraint 2: Ductile Detailing code in Seismic Zone IV / V
+                bonus += 0.30
+                applied_rules.append({
+                    "rule_name": "High Ductility Elongation ('D' Grade)",
+                    "clause_citation": "IS 13920:2016 Cl. 5.1 & IS 1786:2008 Table 3",
+                    "reason": "Seismic Zone IV/V or high-rise structures mandate high uniform elongation (min 16% for 'D' grade)"
+                })
+
+        # Constraint 2: Ductile Detailing companion code
         if "IS_13920" in sid_norm and slots.get("requires_ductility"):
-            bonus += 0.60
+            bonus += 0.40
+            applied_rules.append({
+                "rule_name": "Ductile Detailing Code of Practice",
+                "clause_citation": "IS 13920:2016 Cl. 1.1",
+                "reason": "Mandatory companion standard for earthquake resistant reinforced concrete structures"
+            })
 
         # Constraint 3: Plain and Reinforced Concrete code in severe environments
         if "IS_456" in sid_norm and (slots.get("exposure_class") or slots.get("infrastructure_type") in ["bridge", "high_rise"]):
-            bonus += 0.30
+            bonus += 0.25
+            applied_rules.append({
+                "rule_name": "Durability and Concrete Cover Code",
+                "clause_citation": "IS 456:2000 Table 16",
+                "reason": "Governs minimum cement content, maximum water-cement ratio, and nominal concrete cover"
+            })
 
         # Constraint 4: Potable Water vs Sewerage for pipes
         if slots.get("infrastructure_type") == "water_supply":
             if "IS_4984" in sid_norm or "IS_8329" in sid_norm:
-                bonus += 0.50  # HDPE / DI pipes are prime potable water standards
+                bonus += 0.40
+                applied_rules.append({
+                    "rule_name": "Potable Water Transmission Pipe",
+                    "clause_citation": "IS 4984:2016 Cl. 4.1 / IS 8329:2000 Cl. 3.2",
+                    "reason": "Prescribed standard for drinking water supply networks"
+                })
             elif "IS_458" in sid_norm or "sewer" in content:
-                bonus -= 0.50  # Penalize concrete sewer pipe for drinking water
+                bonus -= 0.50
+                applied_rules.append({
+                    "rule_name": "Non-potable Pipe Penalty",
+                    "clause_citation": "IS 458:2021 Scope",
+                    "reason": "Concrete sewer/drainage pipe is not suitable for pressurized potable drinking water"
+                })
         elif slots.get("infrastructure_type") == "sewerage_drainage":
             if "IS_458" in sid_norm or "IS_14333" in sid_norm:
-                bonus += 0.50  # Precast concrete sewer or sewerage HDPE
+                bonus += 0.40
+                applied_rules.append({
+                    "rule_name": "Sewerage and Industrial Effluent Conduit",
+                    "clause_citation": "IS 458:2021 / IS 14333:1996",
+                    "reason": "Prescribed standard for non-pressure and gravity sewerage/drainage pipelines"
+                })
             elif "potable" in content:
                 bonus -= 0.30
 
         # Constraint 5: Structural Steel Grade E350 for bridges / high fatigue
         if "IS_2062" in sid_norm and slots.get("infrastructure_type") in ["bridge", "high_rise"]:
-            bonus += 0.30
+            bonus += 0.25
+            applied_rules.append({
+                "rule_name": "High Tensile Structural Steel",
+                "clause_citation": "IS 2062:2011 Table 1 (Grade E350 / E410)",
+                "reason": "Bridge and high-rise structural frameworks require high yield strength steel with guaranteed impact resistance"
+            })
 
+        return bonus, applied_rules
+
+    @classmethod
+    def evaluate_constraint_bonus(cls, standard_id: str, doc_title: str, doc_scope: str, slots: Dict[str, Any]) -> float:
+        """Backwards compatible evaluation returning scalar score bonus."""
+        bonus, _ = cls.evaluate_constraint_bonus_with_rules(standard_id, doc_title, doc_scope, slots)
         return bonus

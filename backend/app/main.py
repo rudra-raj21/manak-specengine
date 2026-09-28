@@ -151,17 +151,37 @@ async def recommend_standards(req: RecommendRequest) -> Dict[str, Any]:
     # Combine domain-expanded query from IndicNormalizer with Sarvam normalized query
     search_query = f"{indic_info['normalized_query']} {normalized_q}".strip() or req.query
 
-    # 3. Hybrid Retrieval (BM25 + Dense + RRF + QCO boost)
+    # 2.5. Pre-Ranking Standard Status & Supersession Resolution (Principle A)
+    # Check if the query specifically cites a standard (especially obsolete/superseded/withdrawn)
+    supersession_info = graph_svc.resolve_supersession(
+        query_or_id=req.query,
+        context_query=f"{req.query} {translated_en} {search_query}"
+    )
+
+    # If query cited an obsolete standard, route retrieval to the verified active replacement!
+    active_search_query = search_query
+    if supersession_info.get("is_superseded") and supersession_info.get("current_replacements"):
+        primary_replacement = supersession_info["current_replacements"][0]
+        rep_is_num = primary_replacement.get("standard", {}).get("is_number", "")
+        if rep_is_num:
+            active_search_query = f"{rep_is_num} {search_query}"
+
+    # 3. Hybrid Retrieval with Strict Active-Standard Policy
     results = retriever_svc.search(
-        query=search_query,
+        query=active_search_query,
         top_k=req.top_k,
         department_filter=req.department,
+        allow_superseded=False,  # Enforce active standards for recommendations
         apply_qco_boost=True
     )
 
     if not results:
         # Fallback to translated or raw query
-        results = retriever_svc.search(query=translated_en or req.query, top_k=req.top_k)
+        results = retriever_svc.search(
+            query=translated_en or req.query,
+            top_k=req.top_k,
+            allow_superseded=False
+        )
 
     if not results:
         raise HTTPException(status_code=404, detail="No matching Indian Standards found for this specification.")
@@ -180,7 +200,7 @@ async def recommend_standards(req: RecommendRequest) -> Dict[str, Any]:
     neighbors_1hop = graph_svc.get_1hop_neighbors(sid)
     normative_refs = [n["is_number"] for n in neighbors_1hop.get("normative_references", [])]
     test_methods = [n["is_number"] for n in neighbors_1hop.get("test_methods", [])]
-    qco_mandate = graph_svc.check_qco_mandate(sid)
+    qco_mandate = graph_svc.evaluate_qco_applicability(sid)
 
     # 5. Synthesize Legal Tender Clause
     clause_payload = synthesizer_svc.synthesize_tender_clause(
@@ -196,7 +216,9 @@ async def recommend_standards(req: RecommendRequest) -> Dict[str, Any]:
     graph_viz = graph_svc.get_2hop_neighborhood(sid, max_nodes=35)
 
     # 7. Enterprise Recommender Intelligence Layer
-    slots = ConstraintSlotService.extract_slots(req.query)
+    # Use multilingual and translated text for accurate engineering slot extraction
+    combined_query_for_slots = f"{req.query} {translated_en} {search_query}"
+    slots = ConstraintSlotService.extract_slots(combined_query_for_slots)
     standard_bom = StandardBOMService.generate_bom(sid, graph_service=graph_svc)
     schedule_grounding = ScheduleOfRatesService.ground_query(req.query, top_standard_id=sid)
     value_engineering = ValueEngineeringService.get_value_engineering_matrix(sid)
@@ -204,6 +226,27 @@ async def recommend_standards(req: RecommendRequest) -> Dict[str, Any]:
     litigation_risk = LitigationRiskService.analyze_tender_risk(
         clause_payload.get("raw_clause_text", "") + " " + req.query
     )
+
+    top_score = top_match.get("score", 0.0)
+    has_sufficient_confidence = top_match.get("has_sufficient_confidence", top_score >= 0.20)
+    confidence_assessment = {
+        "score": top_score,
+        "confidence_level": top_match.get("confidence_level", "MEDIUM"),
+        "has_sufficient_confidence": has_sufficient_confidence,
+        "abstention_notice": None if has_sufficient_confidence else (
+            "The query does not contain sufficient technical specifications or product details to make an authoritative recommendation with high confidence. Please provide additional constraints (e.g. grade, exposure class, application, dimensions)."
+        )
+    }
+
+    evidence_explanation = {
+        "match_rationale": f"Selected as the most relevant Indian Standard matching product type and application context.",
+        "matched_constraints": top_match.get("applied_constraints", []),
+        "grade_selection": slots.get("grade_hint") or "Standard default grade",
+        "standard_status": primary_std.get("status", "ACTIVE"),
+        "supersession_details": supersession_info if supersession_info.get("is_cited") else None,
+        "qco_applicability": qco_mandate,
+        "confidence": confidence_assessment
+    }
 
     return {
         "input_query": req.query,
@@ -223,7 +266,11 @@ async def recommend_standards(req: RecommendRequest) -> Dict[str, Any]:
         "schedule_of_rates": schedule_grounding,
         "value_engineering": value_engineering,
         "disambiguation": ambiguity_dialogue,
-        "litigation_risk": litigation_risk
+        "litigation_risk": litigation_risk,
+        # Core Correctness & Provenance Additions
+        "supersession_resolution": supersession_info,
+        "confidence_assessment": confidence_assessment,
+        "evidence_explanation": evidence_explanation
     }
 
 

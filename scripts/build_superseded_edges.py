@@ -71,7 +71,9 @@ def run_build_supersedes():
                     
                     year = s.get("year")
                     status = s.get("status", "ACTIVE")
-                    base = normalize_is(is_num.split(":")[0].strip())
+                    # Preserve full Part and Section hierarchy before revision year
+                    cleaned_no_year = re.sub(r':\s*\d{4}.*$', '', is_num).strip()
+                    base = normalize_is(cleaned_no_year)
                     
                     standards_info[clean_id(is_num)] = {
                         "is_number": is_num,

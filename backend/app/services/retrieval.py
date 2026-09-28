@@ -179,16 +179,18 @@ class HybridRetriever:
         top_k: int = 10,
         department_filter: Optional[str] = None,
         status_filter: Optional[str] = None,
+        allow_superseded: bool = False,
         rrf_k: int = 60,
         apply_qco_boost: bool = True
     ) -> List[Dict[str, Any]]:
         """
-        Executes complete hybrid search pipeline:
+        Executes hybrid search pipeline:
         1. BM25 Sparse Search
-        2. Dense Semantic Vector Search
+        2. TF-IDF Character/Word N-Gram Vector Search
         3. Reciprocal Rank Fusion (RRF)
         4. Exact Standard Number / Grade Match Boost
-        5. Statutory QCO Regulatory Prioritization
+        5. Temporal Statutory QCO Regulatory Prioritization
+        By default (allow_superseded=False), filters out superseded and withdrawn records.
         """
         if not query.strip():
             return []
@@ -211,9 +213,12 @@ class HybridRetriever:
         scored_results = []
         for idx in all_candidate_indices:
             doc = self.documents[idx]
+            doc_status = doc.get("status", "ACTIVE")
 
-            # Filters
-            if status_filter and doc.get("status") != status_filter:
+            # Status Policy: exclude superseded and withdrawn standards from primary recommendations
+            if not allow_superseded and doc_status in ("SUPERSEDED", "WITHDRAWN"):
+                continue
+            if status_filter and doc_status != status_filter:
                 continue
             if department_filter and department_filter.lower() not in doc.get("department", "").lower():
                 continue
@@ -226,34 +231,34 @@ class HybridRetriever:
             rrf_dense = 1.0 / (rrf_k + r_dense) if r_dense <= 100 else 0.0
             base_rrf_score = rrf_sparse + rrf_dense
 
-            # Regulatory QCO Mandate Check & Boost
+            # 1. Base Retrieval Component (Scaled RRF: max ~0.033 scaled by 12 gives ~0.40)
+            score = min(0.40, base_rrf_score * 12.0)
+
+            # 2. Exact standard code match (e.g., user entered 'IS 2062' or 'IS 1786')
             sid = doc["id"]
-            qco_mandate = self.graph_service.check_qco_mandate(sid)
-            is_mandatory = qco_mandate is not None
-
-            score = base_rrf_score
-
-            # Boost factor: mandatory QCO orders receive 30% boost in public procurement
-            if apply_qco_boost and is_mandatory:
-                score *= 1.30
-
-            # Constraint & Environmental slot bonus
-            c_bonus = ConstraintSlotService.evaluate_constraint_bonus(
-                sid, doc.get("title", ""), doc.get("scope", ""), slots
-            )
-            score += c_bonus
-
-            # Exact standard code match (e.g., user entered 'IS 2062' or 'IS 1786')
             doc_is_num = doc.get("is_number", "").upper()
             if exact_is_match_id and sid == exact_is_match_id:
-                score += 2.0
-            elif doc_is_num and doc_is_num in q_clean:
-                score += 1.5
+                score += 0.35
+            elif doc_is_num and (doc_is_num in q_clean or sid in q_clean):
+                score += 0.25
 
-            # Material grade matches: e.g. 'Fe 500D' in IS 1786, 'E250' in IS 2062
+            # 3. Material grade matches: e.g. 'Fe 500D' in IS 1786, 'E250' in IS 2062
             for kw in doc.get("keywords", []):
                 if len(kw) >= 3 and kw.upper() in q_clean:
-                    score += 0.25
+                    score += 0.08
+
+            # 4. Constraint & Environmental slot bonus with verified clause citations
+            c_bonus, applied_rules = ConstraintSlotService.evaluate_constraint_bonus_with_rules(
+                sid, doc.get("title", ""), doc.get("scope", ""), slots
+            )
+            score += min(0.20, c_bonus * 0.30)
+
+            # 5. Regulatory QCO Mandate Check & Boost (only for active in-force QCOs)
+            qco_eval = self.graph_service.evaluate_qco_applicability(sid)
+            is_mandatory = bool(qco_eval and qco_eval.get("is_mandatory"))
+
+            if apply_qco_boost and is_mandatory:
+                score += 0.08
 
             scored_results.append({
                 "doc_idx": idx,
@@ -263,8 +268,25 @@ class HybridRetriever:
                 "dense_rank": r_dense if r_dense <= 100 else None,
                 "base_rrf": base_rrf_score,
                 "is_mandatory_qco": is_mandatory,
-                "qco_mandate": qco_mandate
+                "qco_eval": qco_eval,
+                "applied_rules": applied_rules
             })
+
+        # If no active standards matched and allow_superseded is False, fallback to all records
+        if not scored_results and not allow_superseded:
+            fallback_results = self.search(
+                query=query,
+                top_k=top_k,
+                department_filter=department_filter,
+                status_filter=status_filter,
+                allow_superseded=True,
+                rrf_k=rrf_k,
+                apply_qco_boost=apply_qco_boost
+            )
+            for res in fallback_results:
+                res["is_historical_fallback"] = True
+                res["warning"] = "No active Indian Standard matched. Returning historical record for audit/reference."
+            return fallback_results
 
         # Sort by final fused score descending
         scored_results.sort(key=lambda x: x["score"], reverse=True)
@@ -273,19 +295,29 @@ class HybridRetriever:
         if not top_results:
             return []
 
-        # Normalize top score to 1.0 scale
-        max_score = max(r["score"] for r in top_results) or 1.0
-
         formatted_matches: List[Dict[str, Any]] = []
         q_tokens = DomainTokenizer.tokenize(query)
 
         for res in top_results:
             d = res["doc"]
-            norm_score = round(min(1.0, res["score"] / max_score), 4)
+            # Calibrated score without artificial 1.0 inflation
+            calibrated_score = round(min(0.99, max(0.01, res["score"])), 4)
+
+            # Calibrated confidence rating
+            if calibrated_score >= 0.65:
+                confidence_level = "HIGH"
+            elif calibrated_score >= 0.40:
+                confidence_level = "MEDIUM"
+            elif calibrated_score >= 0.20:
+                confidence_level = "LOW"
+            else:
+                confidence_level = "INSUFFICIENT"
 
             # Find matching terms
             doc_tokens = set(self.tokenized_corpus[res["doc_idx"]])
             matched_terms = [t for t in q_tokens if t in doc_tokens]
+
+            qco_mandate = res["qco_eval"]
 
             match_payload = {
                 "standard_id": d["id"],
@@ -295,13 +327,18 @@ class HybridRetriever:
                 "status": d.get("status", "ACTIVE"),
                 "department": d.get("department", ""),
                 "committee": d.get("committee", ""),
-                "score": norm_score,
+                "score": calibrated_score,
+                "confidence_level": confidence_level,
+                "has_sufficient_confidence": calibrated_score >= 0.20,
                 "sparse_rank": res["sparse_rank"],
                 "dense_rank": res["dense_rank"],
                 "is_mandatory_qco": res["is_mandatory_qco"],
-                "mandatory_scheme": res["qco_mandate"]["mandatory_scheme"] if res["qco_mandate"] else None,
-                "qco_order_name": res["qco_mandate"]["order_name"] if res["qco_mandate"] else None,
-                "qco_effective_date": res["qco_mandate"].get("effective_date") if res["qco_mandate"] else None,
+                "mandatory_scheme": qco_mandate["mandatory_scheme"] if qco_mandate else None,
+                "qco_order_name": qco_mandate["order_name"] if qco_mandate else None,
+                "qco_effective_date": qco_mandate.get("effective_date") if qco_mandate else None,
+                "qco_temporal_status": qco_mandate.get("temporal_status") if qco_mandate else None,
+                "qco_notes": qco_mandate.get("notes") if qco_mandate else None,
+                "applied_constraints": res["applied_rules"],
                 "matched_terms": matched_terms
             }
             formatted_matches.append(match_payload)

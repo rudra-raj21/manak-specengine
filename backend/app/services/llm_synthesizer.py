@@ -140,14 +140,24 @@ class LLMSynthesizer:
         year = primary_standard.get("year", "Latest Revision")
         dept = primary_standard.get("department", "Engineering")
 
-        test_stds_str = ", ".join(test_standards[:4]) if test_standards else "IS 1608 (Tensile), IS 1599 (Bend)"
-        norm_stds_str = ", ".join(normative_references[:5]) if normative_references else "IS 228, IS 808"
+        test_stds_str = (
+            ", ".join(test_standards[:4])
+            if test_standards
+            else f"Refer to testing and sampling clauses of {is_num} (standard-specific testing methods)"
+        )
+        norm_stds_str = (
+            ", ".join(normative_references[:5])
+            if normative_references
+            else f"Refer to normative reference clause of {is_num}"
+        )
 
         has_qco = qco_mandate is not None
+        is_qco_active = bool(qco_mandate and qco_mandate.get("is_mandatory", True))
         qco_name = qco_mandate.get("order_name", "Statutory Quality Control Order") if has_qco else None
         qco_ministry = qco_mandate.get("ministry", qco_mandate.get("ministry_id", "Government of India")) if has_qco else None
         qco_scheme = qco_mandate.get("mandatory_scheme", "Scheme-I") if has_qco else None
         qco_date = qco_mandate.get("effective_date", "Currently in Force") if has_qco else None
+        qco_temp_status = qco_mandate.get("temporal_status", "MANDATORY_IN_FORCE") if has_qco else None
 
         # Build prompt for Gemini or offline generator
         prompt = self._build_synthesis_prompt(
@@ -185,9 +195,12 @@ class LLMSynthesizer:
                 year=year,
                 test_stds=test_stds_str,
                 has_qco=has_qco,
+                is_qco_active=is_qco_active,
                 qco_name=qco_name,
                 qco_ministry=qco_ministry,
                 qco_scheme=qco_scheme,
+                qco_date=qco_date,
+                qco_temp_status=qco_temp_status,
                 tender_type=tender_type
             )
         else:
@@ -257,18 +270,33 @@ Format the output cleanly in four numbered sections:
         year: Any,
         test_stds: str,
         has_qco: bool,
+        is_qco_active: bool,
         qco_name: Optional[str],
         qco_ministry: Optional[str],
         qco_scheme: Optional[str],
+        qco_date: Optional[str],
+        qco_temp_status: Optional[str],
         tender_type: str
     ) -> str:
-        qco_legal_text = (
-            f"The offered product is subject to mandatory quality control under the '{qco_name}' issued by {qco_ministry}. "
-            f"Bidders MUST hold a valid BIS certification license under {qco_scheme} bearing the standard mark (ISI Mark/CRS Registration). "
-            f"Any supply without valid BIS marking constitutes a cognizable offense punishable under Section 29 of the Bureau of Indian Standards Act, 2016."
-            if has_qco else
-            f"Materials shall conform strictly to {is_num}:{year} with valid factory test certificates."
-        )
+        if has_qco and is_qco_active:
+            qco_legal_text = (
+                f"The offered product is subject to mandatory statutory quality control under '{qco_name}' issued by {qco_ministry} "
+                f"(enforcement in force since {qco_date}). Bidders MUST hold a valid BIS certification license under {qco_scheme} "
+                f"bearing the standard mark (ISI Mark/CRS Registration). Any supply without valid BIS marking constitutes a cognizable "
+                f"offense punishable under Section 29 of the Bureau of Indian Standards Act, 2016."
+            )
+        elif has_qco and qco_temp_status == "PENDING_FUTURE_DATE":
+            qco_legal_text = (
+                f"A statutory Quality Control Order ('{qco_name}') has been published by {qco_ministry}, with mandatory enforcement "
+                f"scheduled to take effect on {qco_date}. Prior to that date, voluntary conformity with {is_num}:{year} is recommended."
+            )
+        elif has_qco:
+            qco_legal_text = (
+                f"A statutory QCO reference ('{qco_name}') exists in the regulatory catalog, but effective date must be confirmed "
+                f"against the Official Gazette prior to enforcing mandatory licensing conditions."
+            )
+        else:
+            qco_legal_text = f"Materials shall conform strictly to {is_num}:{year} with valid factory test certificates."
 
         return (
             f"### SPECIAL TERMS & CONDITIONS (STC) - {tender_type.upper()} PROCUREMENT CLAUSE\n\n"
